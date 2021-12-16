@@ -1,7 +1,7 @@
 const express = require('express')
 const bodyParser = require('body-parser')
 const app = express()
-const route = require('./rbc')
+const route = require('./route')
 const path = require('path');
 const port = 4000
 
@@ -11,21 +11,15 @@ app.use(
         extended: true,
     })
 )
-
-
-
-
 app.get('/', (request, response) => {
-    response.sendFile(path.join(__dirname, 'botIndex.html'));
+    response.sendFile(path.join(__dirname, 'index.html'));
 })
 
-app.get('/index.js', (request, response) => {
+app.get('/script', (request, response) => {
     response.sendFile(path.join(__dirname, 'index.js'));
 })
 
-
-
-app.post('/sendInt',route.sendIntent )
+app.post('/sendInt',route.sendIntent)
 
 // default listening
 app.listen(port, () => {

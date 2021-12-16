@@ -8,7 +8,6 @@ function sendIte() {
 // insert a new node before the first list item
 form.insertBefore(li2,form.firstChild);
 
-   
     $.ajax({
         url: "/sendInt",
         type: "POST",
@@ -16,24 +15,15 @@ form.insertBefore(li2,form.firstChild);
         data: {
             'text' : question 
         },
-        
-        
-        success: function (data) {
-            
 
-               
-            
- 
+        success: function (data) {
+
             let li = document.createElement('p');
             li.textContent = "bot: "+data;
 
         // insert a new node before the first list item
         form.insertBefore(li,form.firstChild);
                 console.log(data)
-       
-        
-
         }
-        
     });
 };

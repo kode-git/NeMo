@@ -1,19 +1,7 @@
-
-
-
-
-
-
- var http = require('http');
-
+var http = require('http');
 var botResponse=""
-
-
-
-//predictor of the interested intent
+// predictor of the interested intent
 function sendIntPost(data,resp){
-
-
     postBody = JSON.stringify({
         'text' : data.text 
     });
@@ -28,13 +16,9 @@ function sendIntPost(data,resp){
             'Content-Length': Buffer.byteLength(postBody, 'utf8')
         }
     }
-
-
-
-        // create request
+    // create request
     const req = http.request(options, res => {
         //console.log(res)
-        
         res.setEncoding('utf8');
         res.on('data', function (chunk) {
             console.log("the user says: "+JSON.parse(postBody).text)
@@ -54,18 +38,9 @@ function sendIntPost(data,resp){
     req.write(postBody)
     // send and close channel
     req.end()
-
-
-
-
-
 }
-
-
-//////// getting the response given the best predicted intent
+// getting the response given the best predicted intent
 function getResponseFromInt(intentName,response){
-
-
     postBody = JSON.stringify({
         "name": intentName.toString(),
         "entities": {
@@ -84,9 +59,7 @@ function getResponseFromInt(intentName,response){
         }
     }
 
-
-
-        // create request
+    // create request
     const req = http.request(options, res => {
         //console.log(res)
         
@@ -97,44 +70,25 @@ function getResponseFromInt(intentName,response){
         botResponse=JSON.parse(chunk).messages[0].text
         response.status(200).json(botResponse)
 
-
-
         });
     })
-
     // managing in case of error
     req.on('error', error => {
         console.error(error)
     })
-
     // write data in the request
     req.write(postBody)
     // send and close channel
     req.end()
 
-
 }
-
-
-
-
-
-
-
 const sendIntent = (request, response) => {
     sendIntPost(request.body,response)
     //response.status(200).json(botResponse)
     
 }
 
-
-
-
-
-
-
 // Exports module for app.js
-
 module.exports = {
     sendIntent,
    
