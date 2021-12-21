@@ -15,9 +15,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+import debug_toolbar
 
 # extension of the urlpatterns from the apps
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('jarvis/', include('jarvis.urls'))
+    path('jarvis/', include('jarvis.urls')),
+    path('__debug__/', include(debug_toolbar.urls))
 ]
