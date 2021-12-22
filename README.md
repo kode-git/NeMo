@@ -21,7 +21,7 @@ Project integrates NeMo framework with the Rasa NLU. Rasa helps you build contex
 <li>NVIDIA GPU for training</li>
 </ul>
 
-## What to run
+## Step-to-Step Guide
 
 In the future version, we will provide some additional information to run using Docker containers. At the moment, we can follow only these steps: <br>
 - <b>Step 1</b>: Running `sh init.sh`
