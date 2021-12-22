@@ -18,6 +18,7 @@ from django.urls import path, include
 import debug_toolbar
 
 # extension of the urlpatterns from the apps
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('jarvis/', include('jarvis.urls')),

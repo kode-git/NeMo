@@ -3,5 +3,6 @@ from . import views
 
 # URL configurations
 urlpatterns = [
-    path('index/', views.index)
+    path('index/', views.index),
+    path('sendMessage/', views.sendMessage, name="sendMessage")
 ]
