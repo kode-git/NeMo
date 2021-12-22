@@ -21,6 +21,18 @@ Project integrates NeMo framework with the Rasa NLU. Rasa helps you build contex
 <li>NVIDIA GPU for training</li>
 </ul>
 
+## What to run
+
+In the future version, we will provide some additional information to run using Docker containers. At the moment, we can follow only these steps: <br>
+- <b>Step 1</b>: Running `sh init.sh`
+- <b>Step 2</b>: Set the current environment to the virtual env with `source venv/bin/activate` 
+- <b>(Optional)</b>: In case of _Windows Distributions_: `.\venv\bin\activate`
+- <b>Step 3</b>: `cd /nlu && rasa run --enable-api`
+- <b>Step 4</b>: Open a second shell and digit `python manage.py runserver 9000`
+- <b>Step 5</b>: Open the browser and go to the url _http://locahost:9000/jarvis/index_ to interact with the Jarvis AI
+
+If you have troubles with dependencies open an issue here and be sure to follow each step of https://rasa.com/docs/rasa/installation/. For more information about the modelling on the _Natural Language Understanding_, visits the previous link.
+
 ## Contributors
 - Andrea Gurioli (@andreagurioli1995)
 - Giovanni Pietrucci (@giovanniPi997)
