@@ -1,3 +1,4 @@
+from os import truncate
 import soundfile as sf
 from nemo.collections.tts.models.base import SpectrogramGenerator, Vocoder
 import time
@@ -5,15 +6,17 @@ import time
 spec_generator = None
 vocoder = None
 
-def download_model(model_spec = "tts_en_fastpitch", model_vocoder = "tts_higigan"):
-    spec_generator = SpectrogramGenerator.from_pretrained(model_name=model_spec).cuda()
-    vocoder = Vocoder.from_pretrained(model_name=model_vocoder).cuda()
+def download_model(model_spec = "tts_en_fastpitch", model_vocoder = "tts_hifigan"):
+   global spec_generator 
+   spec_generator = SpectrogramGenerator.from_pretrained(model_name=model_spec)
+   global vocoder
+   vocoder = Vocoder.from_pretrained(model_name=model_vocoder)
 
 # you must have NVIDIA driver to support the Pytorch Lightning dependencies
 def text_to_speech(text : str):
     if spec_generator is None or vocoder is None:
         download_model()
-    parsed = spec_generator(parse(text))
+    parsed = spec_generator.parse(text)
     spectrogram = spec_generator.generate_spectrogram(tokens=parsed)
     audio = vocoder.convert_spectrogram_to_audio(spec=spectrogram)
     sf.write("speech.wav", audio.to('cpu').detach().numpy()[0], 22050)
