@@ -2,6 +2,7 @@ from os import truncate
 import soundfile as sf
 from nemo.collections.tts.models.base import SpectrogramGenerator, Vocoder
 import time
+import os
 
 spec_generator = None
 vocoder = None
@@ -20,6 +21,8 @@ def text_to_speech(text : str):
     spectrogram = spec_generator.generate_spectrogram(tokens=parsed)
     audio = vocoder.convert_spectrogram_to_audio(spec=spectrogram)
     sf.write("speech.wav", audio.to('cpu').detach().numpy()[0], 22050)
+    # temporal instruction for testing phase
+    os.system('play speech.wav')
 
 if __name__ == '__main__':
     print(f'Execution time: {time.time()}')
