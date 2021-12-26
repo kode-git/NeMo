@@ -18,7 +18,6 @@ Project integrates NeMo framework with the Rasa NLU. Rasa helps you build contex
 <ul>
 <li>Python 3.6, 3.7 or 3.8</li>
 <li>Pytorch 1.10.0 or above</li>
-<li>NVIDIA GPU for training</li>
 </ul>
 
 ## Step-to-Step Guide
@@ -32,6 +31,13 @@ In the future version, we will provide some additional information to run using 
 - <b>Step 5</b>: Open the browser and go to the url _http://locahost:9000/jarvis/index_ to interact with the Jarvis AI
 
 If you have troubles with dependencies open an issue here and be sure to follow each step of https://rasa.com/docs/rasa/installation/. For more information about the modelling on the _Natural Language Understanding_, visits the previous link.
+
+## Docker setup for development use SERVER
+
+For an easy setup of the dipendencies, build and run the image from the Dockerfile following these steps: <br>
+- <b>Step 1</b>: Go into the folder with the Dockerfile and type `docker image build -t jaspimg2 .`
+- <b>Step 2</b>: Step backward into the path with `cd..` and type `docker run -it -p 9000:9000 --mount "type=bind,source=$(pwd)/NeMo-virtual-assistant,target=/app" jaspimg`
+- <b>Step 4</b>: Follow the above steps to run the server service
 
 ## Contributors
 - Andrea Gurioli (@andreagurioli1995)
