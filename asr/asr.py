@@ -15,7 +15,6 @@ def load_checkpoint():
 
 if __name__ == '__main__':
     print(f'Execution time: {time.time()}')
-    dependencies_asr()
     decision = input('Do you want to import asr model locally? Y for yes | other keys for no\n')
     if decision == 'Y' or decision == 'y':
         import_asr_locally()
