@@ -5,5 +5,6 @@ RUN pip install Cython
 RUN pip install nemo_toolkit[tts]
 RUN pip install nemo_toolkit[asr]
 RUN pip install django
+RUN pip install debug_toolbar
 RUN pip install soundfile   
 CMD ["bash"]
