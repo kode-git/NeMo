@@ -35,8 +35,8 @@ If you have troubles with dependencies open an issue here and be sure to follow 
 ## Docker setup for development use SERVER
 
 For an easy setup of the dipendencies, build and run the image from the Dockerfile following these steps: <br>
-- <b>Step 1</b>: Go into the folder with the Dockerfile and type `docker image build -t jaspimg2 .`
-- <b>Step 2</b>: Step backward into the path with `cd..` and type `docker run -it -p 9000:9000 --mount "type=bind,source=$(pwd)/NeMo-virtual-assistant,target=/app" jaspimg`
+- <b>Step 1</b>: Go into the main project folder with the Dockerfile and type `docker image build -t jaspimg2 .`
+- <b>Step 2</b>: Step backward into the path with `cd ..` and type `docker run -it -p 9000:9000 --mount "type=bind,source=$(pwd)/NeMo-virtual-assistant,target=/app" jaspimg`
 - <b>Step 3</b>: Follow the above steps to run the server service
 
 ## Contributors
