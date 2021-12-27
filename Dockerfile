@@ -7,4 +7,5 @@ RUN pip install nemo_toolkit[asr]
 RUN pip install django
 RUN pip install django-debug-toolbar
 RUN pip install soundfile   
+RUN pip install onnxruntime
 CMD ["bash"]
