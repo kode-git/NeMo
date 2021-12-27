@@ -1,26 +1,46 @@
 import time
 import nemo.collections.asr as nemo_asr
 import os
+import pickle
+import onnxruntime
 
 
-def import_asr_locally():
-    quartzNet = nemo_asr.models.EncDecCTCModel.from_pretrained(model_name="QuartzNet15x5Base-En")
-    quartzNet.save_to('quartzNet_checkpoint.nemo')
+QUARTZNET_MODEL = "QuartzNet15x5Base-En"
+
+class ASR:
 
 
-def load_checkpoint():
-    quartzNet = nemo_asr.models.EncDecCTCModel.restore_from(restore_path='quartzNet_checkpoint.nemo')
-    print(f'{quartzNet.summarize()}')
+    def __init__(self):
+        self.model_name = "QuartzNet15x5Base-En"
+        self.model = None
+
+    def getModelName(self):
+        return self.model_name
 
 
-if __name__ == '__main__':
-    print(f'Execution time: {time.time()}')
-    decision = input('Do you want to import asr model locally? Y for yes | other keys for no\n')
-    if decision == 'Y' or decision == 'y':
-        import_asr_locally()
+    def getModel(self):
+        return self.model
 
-    decision = input('Do you want to restore model? Y for yes | other keys for no\n')
-    if decision == 'Y' or decision == 'y':
-        load_checkpoint()
 
-    print(f'Process finished at: {time.time()}')
+    def setModel(self, model):
+        self.model = model
+
+
+    def downloadModel(self, name):
+        self.model = nemo_asr.models.EncDecCTCModel.from_pretrained(model_name=name)
+
+
+    def exportModel(self, filename):
+        if self.model == None:
+            self.downloadModel(self.getModelName())
+        self.model.export(filename + ".onnx")
+
+    def importModel(self, filename):
+        onnxruntime.InferenceSession(filename + ".onnx")
+
+
+if __name__ == "__main__":
+    asr_model = ASR()
+    # asr_model.exportModel(asr_model.getModelName())
+    # asr_model.importModel("quartzNet_model")
+

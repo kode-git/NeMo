@@ -4,6 +4,12 @@ from django.views.decorators.csrf import csrf_exempt
 import json 
 import requests
 from requests import status_codes
+from asr import asr
+from tts import tts
+
+
+asr = asr.ASR()
+asr_model = asr.importModel(asr.getModelName())
 
 # main invoke
 def index(request):
