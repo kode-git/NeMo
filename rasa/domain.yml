@@ -1,0 +1,88 @@
+version: '2.0'
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: true
+intents:
+- greet
+- affirm
+- deny
+- mood_great
+- mood_unhappy
+- mailing 
+- give_time
+- inform_quota_code
+- inform_source_airport
+
+- mail_recipient:
+    use_entities:
+      - senderemail
+    
+- mail_content:
+    use_entities:
+      - containermail
+
+- ask_weather:
+    use_entities:
+      - cityname
+
+responses:
+  utter_greet:
+  - text: Hey! How are you?
+  utter_cheer_up:
+  - text: 'Here is something to cheer you up:'
+    image: https://i.imgur.com/nGF1K8f.jpg
+  utter_did_that_help:
+  - text: Did that help you?
+  utter_happy:
+  - text: Great, carry on!
+  utter_goodbye:
+  - text: Bye
+  utter_iamabot:
+  - text: I am a bot, powered by Rasa.
+  utter_ask_email:
+  - text: Ok, please tell me the recipient.
+  utter_ask_mail_content:
+  - text: Please write the content of the mail.
+  utter_mail_confirmed:
+  - text: I will send the mail \'{containermail}\' to {senderemail}
+actions:
+- utter_greet
+- utter_iamabot
+- validate_register_form
+- register_form
+- validate_mail_content_form
+- mail_content_form
+- action_show_time
+- action_mail_sender
+- utter_mail_confirmed
+- validate_weather_form
+- weather_form
+- inform_source_airport
+- action_weather
+
+entities:
+- senderemail
+- containermail
+- cityname
+- city
+form:
+ register_form:
+  senderemail:
+   - type: from_text 
+  containermail:
+   - type: from_text
+  cityname:
+   - type: from_text
+
+slots:
+  senderemail:
+    type: text
+    influence_conversation: false
+  containermail:
+    type: text
+    influence_conversation: false
+  cityname:
+    type: text
+    influence_conversation: false
+  city:
+    type: text

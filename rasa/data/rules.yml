@@ -1,0 +1,75 @@
+version: "2.0"
+rules:
+- rule: Say goodbye anytime the user says goodbye
+  steps:
+  - intent: goodbye
+  - action: utter_goodbye
+
+- rule: Say 'I am a bot' anytime the user challenges
+  steps:
+  - intent: bot_challenge
+  - action: utter_iamabot
+
+
+
+- rule: Sender form
+  steps:
+  - intent: mail_recipient
+  - action: register_form
+  - active_loop: register_form
+
+- rule: Submit Project form
+  condition:
+  # Condition that form is active.
+  - active_loop: register_form
+  steps:
+  # Form is deactivated
+  - action: register_form
+  - active_loop: null
+  - slot_was_set:
+    - senderemail: null
+  # The actions we want to run when the form is submitted.
+  - action: utter_ask_mail_content
+  
+
+  
+- rule: Mail content form
+  steps:
+  - intent: mail_content
+  - action: mail_content_form
+  - active_loop: mail_content_form
+
+- rule: Write content form
+  condition:
+  # Condition that form is active.
+  - active_loop: mail_content_form
+  steps:
+  # Form is deactivated
+  - action: mail_content_form
+  - active_loop: null
+  - slot_was_set:
+    - containermail: null
+  # The actions we want to run when the form is submitted.
+  - action: utter_mail_confirmed
+
+
+
+- rule: weather form
+  steps:
+  - intent: ask_weather
+  - action: weather_form
+  - active_loop: weather_form
+
+- rule: Active weather form
+  condition:
+  # Condition that form is active.
+  - active_loop: weather_form
+  steps:
+  # Form is deactivated
+  - action: weather_form
+  - active_loop: null
+  - slot_was_set:
+    - cityname: null
+
+#
+
