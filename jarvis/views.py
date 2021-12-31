@@ -7,9 +7,12 @@ from requests import status_codes
 from asr import asr
 from tts import tts
 
-
+# Import ASR and TTS modules
 asr = asr.ASR()
+tts = tts.TTS()
 asr_model = asr.importModel(asr.getModelName())
+tts.setSpectogramGenerator(tts.importModel(tts.getSpectGenName()))
+tts.setVocoder(tts.importModel(tts.getVocoderName()))
 
 # main invoke
 def index(request):

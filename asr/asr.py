@@ -10,17 +10,19 @@ QUARTZNET_MODEL = "QuartzNet15x5Base-En"
 class ASR:
 
 
-    def __init__(self):
-        self.model_name = "QuartzNet15x5Base-En"
+    def __init__(self, name="QuartzNet15x5Base-En"):
+        self.model_name = name
         self.model = None
 
     def getModelName(self):
         return self.model_name
 
+    def setModelName(self, name):
+        self.model_name = name
+
 
     def getModel(self):
         return self.model
-
 
     def setModel(self, model):
         self.model = model
@@ -33,10 +35,10 @@ class ASR:
     def exportModel(self, filename):
         if self.model == None:
             self.downloadModel(self.getModelName())
-        self.model.export(filename + ".onnx")
+        self.model.export(f"{filename}.onnx")
 
     def importModel(self, filename):
-        onnxruntime.InferenceSession(filename + ".onnx")
+        onnxruntime.InferenceSession(f"{filename}.onnx")
 
 
 if __name__ == "__main__":
