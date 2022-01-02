@@ -1,7 +1,11 @@
 version: "2.0"
 nlu:
 
-    
+- lookup: city
+  examples: |
+    - Salto
+
+
 - intent: greet
   examples: |
     - hey
@@ -89,39 +93,55 @@ nlu:
 - intent: mailing
   examples: |
     - i want to send an email
-
 - intent: mail_recipient
   examples: |
-    - [giovi@gmail.com]{"entity":"senderemail","value":"giovi@gmail.com"}
-    - [mario@gmail.com]{"entity":"senderemail","value":"mario@gmail.com"}
-    - [andrea@gmail.com]{"entity":"senderemail","value":"andrea@gmail.com"}
-
+    - [giovi@gmail.com](senderemail)
+    - [mario@gmail.com](senderemail)
+    - [andrea@gmail.com](senderemail)
 - intent: mail_content
   examples: |
-    - [meeting at 9am]{"entity":"containermail","value":"meeting at 9am"}
-    - [finish the project]{"entity":"containermail","value":"finish the project"}
-
+    - [meeting at 9am](containermail)
+    - [finish the project](containermail)
 - intent: give_time
   examples: |
     - show time
 
 - intent: ask_weather
   examples: |
-    - whats the weather in [Fano]{"entity":"cityname","value":"fano"}
-    - whats the weather in [Berlin]{"entity":"cityname","value":"berlin"}
-    - whats the weather in [London]{"entity":"cityname","value":"london"}
-    - whats the weather in [Dubai]{"entity":"cityname","value":"dubai"}
-    - whats the weather in [Rome]{"entity":"cityname","value":"rome"}
-    - whats the weather in [Chicago]{"entity":"cityname","value":"chicago"}
-    - whats the weather in [Dubai]{"entity":"cityname","value":"dubai"}
+    - whats the tempo in [Fano]{"entity": "cityname", "value": "fano"}
 
-- intent: inform_source_airport
+
+- intent: inform_weather
   examples: |
-    - tell me the tempo in [Pesaro](city)
-    - tell me the tempo in [Ravenna](city)
+    - tell me the weather in [Pesaro](city)
+    - tell me the weather in [Ravenna](city)
+    - tell me the weather in [Catanzaro](city)
+    - tell me the weather in [Catania](city)
+    - tell me the weather in [Palermo](city)
+    - tell me the weather in [Prague](city)
+    - tell me the weather in [Milano](city)
+    - tell me the weather in [Torino](city)
+    - tell me the weather in [Venezia](city)
+    - tell me the weather in [Bari](city)
+    - hows in [Perugia](city) the weather?
+    - hows in [Mascara](city) the weather?
+    - i want to know the weather in [Berazategui](city)
+    - i want to know the weather in [Cordoba](city)
+    - tell me the weather in [Geelong](city)
+    - tell me the weather in [Bloomsbury](city)
+    - tell me the weather in [Los Angeles](city)
+    - tell me the weather in [New York](city)
+    - tell me the weather in [Amsterdam](city)
+    - tell me the weather in [Rio Cuarto](city)
+    - tell me the weather in [Rosario](city)
+    - tell me the weather in [Las Vegaso](city)
+    - tell me the weather in [Austinville](city)
+    - tell me the weather in [Chacabuco](city)
+    - tell me the weather in [Ferrara] (city)
+    - tell me the weather in [San Francisco] (city)
+    - tell me the weather in [Santiago del Estero] (city)
+    - tell me the weather in [Kyoto] (city)
+    - tell me the weather in [Moskov](city)
 
-    - tell me the tempo in [Cavani](city)
-    - tell me the tempo in [Capperi](city)
-    
-    - tell me the tempo in [Salame](city)
-    - tell me the tempo in [Provola](city)
+
+

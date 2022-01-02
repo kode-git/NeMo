@@ -111,5 +111,45 @@ stories:
 
 - story: city_test
   steps:
-  - intent: inform_source_airport
+  - intent: inform_weather
+  - slot_was_set:
+        - city: Rimini
+  - action: action_weather
+
+
+  
+- story: city_test1
+  steps:
+  - intent: inform_weather
+    entities:
+    - city: Rimini
+  - slot_was_set:
+    - city: Rimini
+  - action: action_weather
+  
+- story: city_test2
+  steps:
+  - intent: inform_weather
+    entities:
+    - city: Cattolica
+  - slot_was_set:
+    - city: Cattolica
+  - action: action_weather
+  
+- story: city_test3
+  steps:
+  - intent: inform_weather
+    entities:
+    - city: Pinamar
+  - slot_was_set:
+    - city: Pinamar
+  - action: action_weather
+
+- story: city_test4
+  steps:
+  - intent: inform_weather
+    entities:
+    - city: Geelong
+  - slot_was_set:
+    - city: Geelong
   - action: action_weather

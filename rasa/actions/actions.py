@@ -10,11 +10,15 @@ import json
 import requests 
 from rasa_sdk import Action, Tracker
 from rasa_sdk.executor import CollectingDispatcher
+from rasa_sdk.events import SlotSet
+import rasa_sdk.events
 import smtplib
 import os
 email=""
 mail=""
-city="Ravenna"
+city=""
+
+#
 
 class ActionShowTime(Action):
 
@@ -29,15 +33,17 @@ class ActionShowTime(Action):
         for e in entities:
             if e['entity']=='cityname':
                 loc = e['value']
+                print(e['value'])
         location = loc
         complete_api_link = "https://api.openweathermap.org/data/2.5/weather?q="+location+"&APPID=dbd3b02d8958d62185d02e944cd5f522"
+        
         api_link = requests.get(complete_api_link)
         api_data = api_link.json()
         
         temp_city = ((api_data['main']['temp'])-273.15)
         weather_desc = api_data['weather'][0]['description']
       
-        dispatcher.utter_message(text=f"{'The weather in ' + location + ' is '+ weather_desc + ' and the temperature is '+ str(round(temp_city,1)) +'°'}")
+        dispatcher.utter_message(text=f"{'The weather in ' + city + ' is '+ weather_desc + ' and the temperature is '+ str(round(temp_city,1)) +'°'}")
         
         return []
 
@@ -48,22 +54,25 @@ class ActionShowWheater(Action):
         return "action_weather"
 
     def run(self, dispatcher,tracker,domain):
-        print("FROM ACTION_WEATHER")
+        print("FROM ACTION_WEATHER" )
+         
         entities = tracker.latest_message['entities']
         for e in entities:
-            e['value']
+            city=e['value']
               
  
         complete_api_link = "https://api.openweathermap.org/data/2.5/weather?q="+city+"&APPID=dbd3b02d8958d62185d02e944cd5f522"
         api_link = requests.get(complete_api_link)
         api_data = api_link.json()
         
-        temp_city = ((api_data['main']['temp'])-273.15)
-        weather_desc = api_data['weather'][0]['description']
-      
-        dispatcher.utter_message(text=f"{'The weather in ' + city + ' is '+ weather_desc + ' and the temperature is '+ str(round(temp_city,1)) +'°'}")
+        if(api_data== '{"cod":"404","message":"city not found"}'):
+            return [SlotSet("city", 'NONE')]
+        else:
+            temp_city = ((api_data['main']['temp'])-273.15)
+            weather_desc = api_data['weather'][0]['description']
+            print(tracker.slots['city'])
+            dispatcher.utter_message(text=f"{'The weather in ' + city + ' is '+ weather_desc + ' and the temperature is '+ str(round(temp_city,1)) +'°'}")
         
-
         return []
 
 

@@ -3,31 +3,45 @@ session_config:
   session_expiration_time: 60
   carry_over_slots_to_new_session: true
 intents:
+- inform_weather
 - greet
 - affirm
 - deny
 - mood_great
 - mood_unhappy
-- mailing 
+- mailing
 - give_time
 - inform_quota_code
-- inform_source_airport
-
 - mail_recipient:
     use_entities:
-      - senderemail
-    
+    - senderemail
 - mail_content:
     use_entities:
-      - containermail
-
+    - containermail
 - ask_weather:
     use_entities:
-      - cityname
-
+    - cityname
+entities:
+- city
+- cityname
+- containermail
+- senderemail
+slots:
+  senderemail:
+    type: text
+    influence_conversation: false
+  containermail:
+    type: text
+    influence_conversation: false
+  cityname:
+    type: text
+    influence_conversation: false
+  city:
+    type: text
+    influence_conversation: true
 responses:
   utter_greet:
-  - text: Hey! How are you?
+  - text: Hey! How ?
   utter_cheer_up:
   - text: 'Here is something to cheer you up:'
     image: https://i.imgur.com/nGF1K8f.jpg
@@ -45,44 +59,20 @@ responses:
   - text: Please write the content of the mail.
   utter_mail_confirmed:
   - text: I will send the mail \'{containermail}\' to {senderemail}
+  utter_invalid_city:
+  - text: I'm sorry, that city doesn't exist. Please retry :(
 actions:
+- action_mail_sender
+- action_show_time
+- action_weather
+- inform_weather
+- mail_content_form
+- register_form
 - utter_greet
 - utter_iamabot
-- validate_register_form
-- register_form
-- validate_mail_content_form
-- mail_content_form
-- action_show_time
-- action_mail_sender
+- utter_invalid_city
 - utter_mail_confirmed
+- validate_mail_content_form
+- validate_register_form
 - validate_weather_form
 - weather_form
-- inform_source_airport
-- action_weather
-
-entities:
-- senderemail
-- containermail
-- cityname
-- city
-form:
- register_form:
-  senderemail:
-   - type: from_text 
-  containermail:
-   - type: from_text
-  cityname:
-   - type: from_text
-
-slots:
-  senderemail:
-    type: text
-    influence_conversation: false
-  containermail:
-    type: text
-    influence_conversation: false
-  cityname:
-    type: text
-    influence_conversation: false
-  city:
-    type: text
