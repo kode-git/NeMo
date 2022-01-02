@@ -3,12 +3,12 @@ from nemo.collections.tts.models.base import SpectrogramGenerator, Vocoder
 import os
 import onnxruntime
 
-spec_generator = None
-vocoder = None
+_specGenerator = "tts_en_tacotron2"
+_vocoderName = "tts_hifigan"
 
 class TTS:
 
-    def __init__(self, vocoderName="tts_hifigan", spectGenName="tts_en_fastpitch"):
+    def __init__(self, vocoderName=_vocoderName, spectGenName=_specGenerator):
         self.vocoder = None
         self.spectogramGenerator = None
         self.vocoderName = vocoderName
@@ -78,9 +78,7 @@ if __name__ == "__main__":
     tts = TTS()
     tts.downloadSpectogramGenerator()
     tts.downloadVocoder()
-    tts.exportSpectogramGenerator("spectogramGen")
-    tts.exportVocoder("vocoder")
-    tts.textToSpeech('Hello World', "audio")
+    tts.textToSpeech('The weather in Bologna is 39 celsius, sir', "audio")
     audio = tts.textToSpeech('Hello World', "audio")
     os.system(f"play {audio}")
     

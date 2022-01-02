@@ -9,7 +9,6 @@ QUARTZNET_MODEL = "QuartzNet15x5Base-En"
 
 class ASR:
 
-
     def __init__(self, name="QuartzNet15x5Base-En"):
         self.model_name = name
         self.model = None

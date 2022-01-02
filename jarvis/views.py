@@ -11,8 +11,8 @@ from tts import tts
 asr = asr.ASR()
 tts = tts.TTS()
 asr_model = asr.importModel(asr.getModelName())
-tts.setSpectogramGenerator(tts.importModel(tts.getSpectGenName()))
-tts.setVocoder(tts.importModel(tts.getVocoderName()))
+tts.downloadSpectogramGenerator()
+tts.downloadVocoder()
 
 # main invoke
 def index(request):
