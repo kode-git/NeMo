@@ -51,4 +51,15 @@ def sendMessage(request):
     return JsonResponse(client_response, safe=False)
 
 
-    
+# sending Record with Rasa response, given a text, return the audio and text of output from Rasa
+@csrf_exempt
+def sendRecord():
+    pass
+
+
+
+# This function invoke the ASR to write text from speech on the input
+@csrf_exempt
+def speechTranslator():
+    pass
+
