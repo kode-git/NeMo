@@ -12,6 +12,16 @@ intents:
 - mailing
 - give_time
 - inform_quota_code
+- ask_todo
+
+- add_todo:
+    use_entities:
+    - task
+
+- complete_todo:
+    use_entities:
+    - task
+
 - mail_recipient:
     use_entities:
     - senderemail
@@ -26,6 +36,7 @@ entities:
 - cityname
 - containermail
 - senderemail
+- task
 slots:
   senderemail:
     type: text
@@ -39,6 +50,10 @@ slots:
   city:
     type: text
     influence_conversation: true
+  task:
+    type: text
+    influence_conversation: true
+
 responses:
   utter_greet:
   - text: Hey! How ?
@@ -65,6 +80,8 @@ actions:
 - action_mail_sender
 - action_show_time
 - action_weather
+- action_add_todo
+- action_complete_todo
 - inform_weather
 - mail_content_form
 - register_form
@@ -76,3 +93,4 @@ actions:
 - validate_register_form
 - validate_weather_form
 - weather_form
+- action_ask_todo

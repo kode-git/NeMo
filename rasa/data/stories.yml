@@ -36,6 +36,176 @@ stories:
   - intent: bot_challenge
   - action: utter_iamabot
 
+#-------------ADD TODO-------------------------
+
+- story: add_todo_list story_1
+  steps:
+  - intent: add_todo
+  - action: action_add_todo
+  - slot_was_set:
+    - requested_slot: task
+  - slot_was_set:
+    - task: buy gold apple
+  - action: action_listen
+
+
+- story: add_todo_list story_2
+  steps:
+  - intent: add_todo
+  - action: action_add_todo
+  - slot_was_set:
+    - requested_slot: task
+  - slot_was_set:
+    - task: meeting related to project
+  - action: action_listen
+
+
+- story: add_todo_list story_3
+  steps:
+  - intent: add_todo
+  - action: action_add_todo
+  - slot_was_set:
+    - requested_slot: task
+  - slot_was_set:
+    - task: wash hair clothes
+  - action: action_listen
+
+
+- story: add_todo_list story_4
+  steps:
+  - intent: add_todo
+  - action: action_add_todo
+  - slot_was_set:
+    - requested_slot: task
+  - slot_was_set:
+    - task: pay rent
+  - action: action_listen
+
+
+- story: add_todo_list story_5
+  steps:
+  - intent: add_todo
+  - action: action_add_todo
+  - slot_was_set:
+    - requested_slot: task
+  - slot_was_set:
+    - task: read bible
+  - action: action_listen
+
+
+- story: add_todo_list story_6
+  steps:
+  - intent: add_todo
+  - action: action_add_todo
+  - slot_was_set:
+    - requested_slot: task
+  - slot_was_set:
+    - task: wash dogs
+  - action: action_listen
+
+#--------------COMPLETE TODO--------------------------
+
+
+- story: complete_todo_list story_1
+  steps:
+  - intent: complete_todo
+  - action: action_complete_todo
+  - slot_was_set:
+    - requested_slot: task
+  - slot_was_set:
+    - task: buy car
+  - action: action_listen
+
+- story: complete_todo_list story_2
+  steps:
+  - intent: complete_todo
+  - action: action_complete_todo
+  - slot_was_set:
+    - requested_slot: task
+  - slot_was_set:
+    - task: go to market
+  - action: action_listen
+
+- story: complete_todo_list story_3
+  steps:
+  - intent: complete_todo
+  - action: action_complete_todo
+  - slot_was_set:
+    - requested_slot: task
+  - slot_was_set:
+    - task: complete homework
+  - action: action_listen
+
+- story: complete_todo_list story_4
+  steps:
+  - intent: complete_todo
+  - action: action_complete_todo
+  - slot_was_set:
+    - requested_slot: task
+  - slot_was_set:
+    - task: buy ipad
+  - action: action_listen
+  
+- story: complete_todo_list story_5
+  steps:
+  - intent: complete_todo
+  - action: action_complete_todo
+  - slot_was_set:
+    - requested_slot: task
+  - slot_was_set:
+    - task: buy milk
+  - action: action_listen
+
+- story: complete_todo_list story_6
+  steps:
+  - intent: complete_todo
+  - action: action_complete_todo
+  - slot_was_set:
+    - requested_slot: task
+  - slot_was_set:
+    - task: take a photo of my document
+  - action: action_listen
+
+#---------------ASK TODO-------------------------
+
+
+- story: ask_todo_list story_1
+  steps:
+  - intent: ask_todo
+  - action: action_ask_todo
+  - action: action_listen
+  
+- story: ask_todo_list story_2
+  steps:
+  - intent: ask_todo
+  - action: action_ask_todo
+  - action: action_listen
+  
+- story: ask_todo_list story_3
+  steps:
+  - intent: ask_todo
+  - action: action_ask_todo
+  - action: action_listen
+
+
+- story: ask_todo_list story_4
+  steps:
+  - intent: ask_todo
+  - action: action_ask_todo
+  - action: action_listen
+  
+- story: ask_todo_list story_5
+  steps:
+  - intent: ask_todo
+  - action: action_ask_todo
+  - action: action_listen
+  
+- story: ask_todo_list story_6
+  steps:
+  - intent: ask_todo
+  - action: action_ask_todo
+  - action: action_listen
+#----------------------------------------
 
 
 - story: interactive_story_2
@@ -62,18 +232,6 @@ stories:
   - action: utter_mail_confirmed
   
   
-- story: city_story_1
-  steps:
-  - intent: ask_weather
-  - action: weather_form
-  - active_loop: weather_form
-  - slot_was_set:
-    - requested_slot: cityname
-  - slot_was_set:
-    - cityname: Milan
-  - active_loop: null
-
-  
 - story: city_story_2
   steps:
   - intent: ask_weather
@@ -84,38 +242,6 @@ stories:
   - slot_was_set:
     - cityname: Madrid
   - active_loop: null
-
-  
-- story: city_story_3
-  steps:
-  - intent: ask_weather
-  - action: weather_form
-  - active_loop: weather_form
-  - slot_was_set:
-    - requested_slot: cityname
-  - slot_was_set:
-    - cityname: Turin
-  - active_loop: null
-  
-  
-- story: city_story_4
-  steps:
-  - intent: ask_weather
-  - action: weather_form
-  - active_loop: weather_form
-  - slot_was_set:
-    - requested_slot: cityname
-  - slot_was_set:
-    - cityname: Abudabi
-  - active_loop: null
-
-- story: city_test
-  steps:
-  - intent: inform_weather
-  - slot_was_set:
-        - city: Rimini
-  - action: action_weather
-
 
   
 - story: city_test1

@@ -6,6 +6,7 @@ nlu:
     - Salto
 
 
+
 - intent: greet
   examples: |
     - hey
@@ -113,35 +114,93 @@ nlu:
 
 - intent: inform_weather
   examples: |
-    - tell me the weather in [Pesaro](city)
-    - tell me the weather in [Ravenna](city)
-    - tell me the weather in [Catanzaro](city)
-    - tell me the weather in [Catania](city)
-    - tell me the weather in [Palermo](city)
-    - tell me the weather in [Prague](city)
-    - tell me the weather in [Milano](city)
-    - tell me the weather in [Torino](city)
-    - tell me the weather in [Venezia](city)
     - tell me the weather in [Bari](city)
     - hows in [Perugia](city) the weather?
     - hows in [Mascara](city) the weather?
     - i want to know the weather in [Berazategui](city)
     - i want to know the weather in [Cordoba](city)
-    - tell me the weather in [Geelong](city)
-    - tell me the weather in [Bloomsbury](city)
     - tell me the weather in [Los Angeles](city)
     - tell me the weather in [New York](city)
-    - tell me the weather in [Amsterdam](city)
     - tell me the weather in [Rio Cuarto](city)
-    - tell me the weather in [Rosario](city)
     - tell me the weather in [Las Vegaso](city)
-    - tell me the weather in [Austinville](city)
-    - tell me the weather in [Chacabuco](city)
-    - tell me the weather in [Ferrara] (city)
     - tell me the weather in [San Francisco] (city)
     - tell me the weather in [Santiago del Estero] (city)
-    - tell me the weather in [Kyoto] (city)
-    - tell me the weather in [Moskov](city)
 
 
+- intent: add_todo
+  examples: |
+    - add [buy coffe](task) to my list
+    - add [wash hand](task) to my list
+    - add [pay the rent every first of the month](task) to my list
+    - add [wash hair](task) to my list
+    - add [meeting in via Riva di Reno](task) to my list
+    - add [buy apple](task) to my list
+    - add [dentist tomorrow](task) to my list
+    - add [mom birthday gift](task) to my list
+    - add [go to the hospital](task) to my list
+    - add [organize halloween](task) to my list
+    - add [visit granpa to the hospital](task) to my list
+    - add [buy sanitizer](task) to my list
+    - add [organize Andrea's party](task) to my list
+    - add [change your look ](task) to my list
+    - add [go to a new restaurant](task) to my list
+    - add [try a new food](task) to my list
+    - add [try a new drink](task) to my list
+    - add [try cooking a new dish](task) to my list
+    - add [read a new book](task) to my list
+    - add [water the plant](task) to my list
+    - add [root a three](task) to my list
+    - add [read crypto documents](task) to my list
+    - add [add new commit on github](task) to my list
+    - add [study for nlp exam](task) to my list
+    - add [watch chelsea on tv](task) to my list
+    - add [buy new book](task) to my list
+    - add [buy new computer](task) to my list
+    - add [ask money to mom](task) to my list
+    
+    
+
+- intent: complete_todo
+  examples: |
+    - complete [buy coffe](task)
+    - complete [wash hand](task)
+    - complete [pay the rent every first of the month](task)
+    - complete [wash hair](task) 
+    - complete [meeting in via Riva di Reno](task) 
+    - complete [buy apple](task) 
+    - complete [dentist tomorrow](task)
+    - complete [mom birthday gift](task)
+    - complete [go to the hospital](task) 
+    - complete [organize halloween](task) 
+    - complete [visit granpa to the hospital](task) 
+    - complete [buy sanitizer](task) 
+    - complete [organize Andrea's party](task) 
+    - complete [change your look ](task)
+    - complete [go to a new restaurant](task) 
+    - complete [try a new food](task) 
+    - complete [try a new drink](task) 
+    - complete [try cooking a new dish](task) 
+    - complete [read a new book](task) 
+    - complete [water the plant](task) 
+    - complete [root a three](task) 
+    - complete [read crypto documents](task) 
+    - complete [add new commit on github](task) 
+    - complete [study for nlp exam](task) 
+    - complete [watch chelsea on tv](task)
+    - complete [buy new book](task) 
+    - complete [buy new computer](task) 
+    - complete [ask money to mom](task) 
+    
+    
+- intent: ask_todo
+  examples: |
+    - what's in my list?
+    - tell me about my list
+    - how's my list?
+    - i want to see my list
+    - what's inside my todo list
+    - todo list
+    
+
+    
 
