@@ -39,6 +39,13 @@ For an easy setup of the dependencies, build and run the image from the Dockerfi
 - <b>Step 2</b>: Step backward into the path with `cd ..` and type `docker run -it -p 9000:9000 --network my-project --mount "type=bind,source=$(pwd)/,target=/app" jaspimg`
 - <b>Step 3</b>: Follow the above steps to run the server service with `python manage.py runserver 0.0.0.0:9000`
 
+For the rasa setup
+- <b>Step 0</b>: Type `docker network create my-project`
+- <b>Step 1</b>: Go into the rasa project folder with the Dockerfile and type `docker image build -f Dockerfile_actions -t rasaactions .
+- <b>Step 2</b>: Go into the rasa project folder with the Dockerfile and type `docker image build -f Dockerfile_shell -t rasashell .
+- <b>Step 3</b>: Type `docker run -it -p 5055:5055 --network my-project --mount "type=bind,source=$(pwd)/,target=/app" rasaactions`
+- <b>Step 3</b>: Type `docker run -it -p 5005:5005 --network my-project --mount "type=bind,source=$(pwd)/,target=/app" rasashell`
+
 ## Contributors
 - Andrea Gurioli (@andreagurioli1995)
 - Giovanni Pietrucci (@giovanniPi997)
