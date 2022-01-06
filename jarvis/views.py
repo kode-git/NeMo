@@ -28,7 +28,7 @@ def sendMessage(request):
     # request Rasa Server for the intent with highest level of confidence
     payload = {'text': str(question)}
     headers = {'content-type': 'application/json'}
-    url = 'http://localhost:5005/model/parse'
+    url = 'http://0.0.0.0:5005/model/parse'
     prediction = requests.post(url, json=payload, headers=headers)
     print(f"Status code: {prediction.status_code} for url response on {url}")
     prediction = prediction.json()
@@ -42,7 +42,7 @@ def sendMessage(request):
             "temperature": "high"
         },
     }
-    url = 'http://localhost:5005/conversations/default/trigger_intent'
+    url = 'http://0.0.0.0:5005/conversations/default/trigger_intent'
     jarvis_response = requests.post(url, json=trigger_json, headers=headers)
     jarvis_response = jarvis_response.json()
     client_response = [jarvis_response.get('messages')[0].get('text')]
