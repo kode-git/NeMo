@@ -1,23 +1,11 @@
-
-
-
-
-
-
- var http = require('http');
-
-var botResponse=""
-
-
+var http = require('http');
+var botResponse = ""
 
 //predictor of the interested intent
-function sendIntPost(data,resp){
-
-
+function sendIntPost(data, resp) {
     postBody = JSON.stringify({
-        'text' : data.text 
+        'text': data.text
     });
-  
     const options = {
         hostname: 'localhost',
         port: 5005,
@@ -28,19 +16,15 @@ function sendIntPost(data,resp){
             'Content-Length': Buffer.byteLength(postBody, 'utf8')
         }
     }
-
-
-
-        // create request
+    // create request
     const req = http.request(options, res => {
-        //console.log(res)
-        
+
         res.setEncoding('utf8');
         res.on('data', function (chunk) {
-            console.log("the user says: "+JSON.parse(postBody).text)
-            console.log("the intent predicted is: "+JSON.parse(chunk).intent.name+ " with a confidence of "+
-            JSON.parse(chunk).intent.confidence);
-            getResponseFromInt(JSON.parse(chunk).intent.name,resp)
+            console.log("the user says: " + JSON.parse(postBody).text)
+            console.log("the intent predicted is: " + JSON.parse(chunk).intent.name + " with a confidence of " +
+                JSON.parse(chunk).intent.confidence);
+            getResponseFromInt(JSON.parse(chunk).intent.name, resp)
 
         });
     })
@@ -54,25 +38,18 @@ function sendIntPost(data,resp){
     req.write(postBody)
     // send and close channel
     req.end()
-
-
-
-
-
 }
 
-
-//////// getting the response given the best predicted intent
-function getResponseFromInt(intentName,response){
-
+// getting the response given the best predicted intent
+function getResponseFromInt(intentName, response) {
 
     postBody = JSON.stringify({
         "name": intentName.toString(),
         "entities": {
-        "temperature": "high"
+            "temperature": "high"
         }
-        });
-  
+    });
+
     const options = {
         hostname: 'localhost',
         port: 5005,
@@ -83,23 +60,17 @@ function getResponseFromInt(intentName,response){
             'Content-Length': Buffer.byteLength(postBody, 'utf8')
         }
     }
+    // create request
 
-
-
-        // create request
     const req = http.request(options, res => {
-        //console.log(res)
-        
+
         res.setEncoding('utf8');
         res.on('data', function (chunk) {
-           // botRes=JSON.parse(chunk).messages;
+            // botRes=JSON.parse(chunk).messages;
             //console.log("the bot says: "+ JSON.parse(chunk).messages[0].text )
-            console.log("the bot says: "+ JSON.parse(chunk).messages[0] )
-        botResponse=JSON.parse(chunk).messages[0].text
-        response.status(200).json(botResponse)
-
-
-
+            console.log("the bot says: " + JSON.parse(chunk).messages[0])
+            botResponse = JSON.parse(chunk).messages[0].text
+            response.status(200).json(botResponse)
         });
     })
 
@@ -116,27 +87,15 @@ function getResponseFromInt(intentName,response){
 
 }
 
-
-
-
-
-
-
 const sendIntent = (request, response) => {
-    sendIntPost(request.body,response)
+    sendIntPost(request.body, response)
     //response.status(200).json(botResponse)
-    
+
 }
-
-
-
-
-
-
 
 // Exports module for app.js
 
 module.exports = {
     sendIntent,
-   
+
 }

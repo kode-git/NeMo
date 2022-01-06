@@ -1,7 +1,7 @@
 const express = require('express')
 const bodyParser = require('body-parser')
 const app = express()
-const route = require('./rbc')
+const route = require('./route')
 const path = require('path');
 const port = 4000
 
@@ -12,11 +12,8 @@ app.use(
     })
 )
 
-
-
-
 app.get('/', (request, response) => {
-    response.sendFile(path.join(__dirname, 'botIndex.html'));
+    response.sendFile(path.join(__dirname, 'index.html'));
 })
 
 app.get('/index.js', (request, response) => {
@@ -24,10 +21,9 @@ app.get('/index.js', (request, response) => {
 })
 
 
+app.post('/sendIntent',route.sendIntent )
 
-app.post('/sendInt',route.sendIntent )
-
-// default listening
+// default listening on port ${port}(4000)
 app.listen(port, () => {
     console.log(`Log: Backend Server running on port ${port}.`)
     console.log(`Log: Waiting a request...`)
