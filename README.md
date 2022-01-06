@@ -32,11 +32,11 @@ In the future version, we will provide some additional information to run using 
 
 If you have troubles with dependencies open an issue here and be sure to follow each step of https://rasa.com/docs/rasa/installation/. For more information about the modelling on the _Natural Language Understanding_, visits the previous link.
 
-## Docker setup for Backend Container
+## Docker setup
 
 For an easy setup of the dependencies, build and run the image from the Dockerfile following these steps: <br>
 - <b>Step 1</b>: Go into the main project folder with the Dockerfile and type `docker image build -t jaspimg .`
-- <b>Step 2</b>: Step backward into the path with `cd ..` and type `docker run -it -p 9000:9000 --network my-project --mount "type=bind,source=$(pwd)/NeMo-virtual-assistant,target=/app" jaspimg`
+- <b>Step 2</b>: Step backward into the path with `cd ..` and type `docker run -it -p 9000:9000 --network my-project --mount "type=bind,source=$(pwd)/,target=/app" jaspimg`
 - <b>Step 3</b>: Follow the above steps to run the server service with `python manage.py runserver 0.0.0.0:9000`
 
 ## Contributors
