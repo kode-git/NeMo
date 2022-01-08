@@ -22,15 +22,11 @@ Project integrates NeMo framework with the Rasa NLU. Rasa helps you build contex
 
 ## Step-to-Step Guide
 
-In the future version, we will provide some additional information to run using Docker containers. At the moment, we can follow only these steps: <br>
-- <b>Step 1</b>: Running `sh init.sh`
-- <b>Step 2</b>: Set the current environment to the virtual env with `source venv/bin/activate` 
-- <b>(Optional)</b>: In case of _Windows Distributions_: `.\venv\bin\activate`
-- <b>Step 3</b>: `cd /nlu && rasa run --enable-api`
-- <b>Step 4</b>: Open a second shell and digit `python manage.py runserver 9000`
-- <b>Step 5</b>: Open the browser and go to the url _http://locahost:9000/jarvis/index_ to interact with the Jarvis AI
+The entire environment provides some containers in docker. Please, you must follow the Docker setup section. Project runs on docker, so you need to download it via apt:
+- `sudo apt install docker`
+- `sudo apt install docker-compose`
 
-If you have troubles with dependencies open an issue here and be sure to follow each step of https://rasa.com/docs/rasa/installation/. For more information about the modelling on the _Natural Language Understanding_, visits the previous link.
+For problems about Docker setting, check the getting started guide on: https://docs.docker.com/get-started/
 
 ## Docker setup
 
