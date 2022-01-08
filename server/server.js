@@ -20,6 +20,7 @@ app.get('/index.js', (request, response) => {
     response.sendFile(path.join(__dirname, 'index.js'));
 })
 
+app.post('/translateQuestion', route.translateQuestion)
 
 app.post('/sendIntent',route.sendIntent )
 
