@@ -1,6 +1,6 @@
 
-// TODO MediaRecord management
 
+// MediaRecorder
 var mediaRecorder;
 
 function sendMessage() {
@@ -48,12 +48,12 @@ function startRecord() {
 
             mediaRecorder.addEventListener("stop", () => {
                 const audioBlob = new Blob(audioChunks, { 
-                    'type': 'audio/mp3' 
+                    'type': 'audio/wav' 
                   });
+                const audioUrl = URL.createObjectURL(audioBlob);
+                
+                const audio = new Audio(audioUrl);
                 sendRecord(audioBlob)
-                // const audioUrl = URL.createObjectURL(audioBlob);
-                // const audio = new Audio(audioUrl);
-                // sendRecord(audio)
             });
 
         });
@@ -67,27 +67,55 @@ function stopRecord() {
     }, 1000);
 }
 
-function sendRecord(audio) {
-    var question = ""
-    const formData = new FormData();
-    formData.append('audio-file', audio);
-    $.ajax({
-        url: "/translateQuestion",
-        type: "POST",
-        body: formData,
-        success: function (data) {
-            question = data
-            let li = document.createElement('p');
-            li.textContent = " User : " + data;
 
-            // insert a new node before the first list item
-            form.insertBefore(li, form.firstChild);
-            console.log(data)
-        }
-    });
+function sendRecord(blob) {
 
-    // Needs to complete with the rasa management with the invocation of the sendMessage
-    // the question is in the variable setted at 79 and declared to 71
+    // send AudioBlob to speechToText call
+    console.log('File making...')
+    var file = new File([ blob ], "audio.wav");   
+    console.log('Compact in a FormData...')   
+    var form    = new FormData();
+    console.log('Appending...')
+    form.append("file", file);
+    console.log('Start fetching...')
+    fetch('http://localhost:4000/sendAudioQuest', {
+    method: 'post',
+    body: form,
+    })
+    .then((res) => console.log(res))
+    .catch((err) => ('Error occurred', err))
+
+
+
+
+    // send AudioBlob to speechToText call
+    // fd = new FormData()
+    // fd.append('blob-name', 'audio.wav')
+    // fd.append('data', audioBlob)
+    // $.ajax({
+    //     url: "/sendIntent",
+    //     type: "POST",
+    //     dataType: "json",
+    //     data: {
+    //         'audio': fd
+    //     },
+
+    //     success: function (data) {
+    //         console.log(data)
+    //         // receive response text
+    //         // send text to the rasa invocation (sendMessage)
+    //         // receive response
+    //         // send text to the textToSpeech call
+    //         // receive speech audio
+    //         // reproduce audio and trascript the message
+    //     }
+    // });
+    // receive response text
+    // send text to the rasa invocation (sendMessage)
+    // receive response
+    // send text to the textToSpeech call
+    // receive speech audio
+    // reproduce audio and trascript the message
 }
 
 function questionASR(){

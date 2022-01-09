@@ -1,5 +1,5 @@
 var http = require('http');
-const {spawn} = require('child_process');
+const spawn = require('child_process').spawn
 var botResponse = ""
 
 //predictor of the interested intent
@@ -94,44 +94,27 @@ const sendIntent = (request, response) => {
 
 }
 
-const invokeASR = (request, response) => {
-    // taking the audio file from the request
-    // execute the Python ASR script for the invocation of ASR (executeASR)
-    // take the response
-    // forward the response to the client with the text 
+const ASR = (request, response) =>{
+    const ls = spawn('python3', ['../asr/asr.py', '../server/audio.wav']);
+    ls.stdout.on('data', (data) => {
+        console.log(`stdout: ${data}`);
+      });
+      
+      ls.stderr.on('data', (data) => {
+        console.log(`stderr: ${data}`);
+      });
+      
+      ls.on('close', (code) => {
+        console.log(`child process exited with code ${code}`);
+      });
+    
 }
-
-const invokeTTS = (request, response) =>{
-    // taking the text
-    // execute the Python TTS script for the invocation of TTS (executeTTS)
-    // take the response
-    // forward the response to the client
-}
-
-const executeASR = () =>{
-    // Premise of the ASR
-}
-
-const executeTTS = () =>{
-    // Premise of the TTS
-}
-
-const translateQuestion = (request, response) =>{
-    // get the audio from the request
-    // send it to the ASR 
-    // ASR script inside translate it to text
-    // return the text
-    // return the question in text format with the forwarding to the response
-}
-
 
 
 // Exports module for app.js
 
 module.exports = {
     sendIntent,
-    invokeASR,
-    invokeTTS,
-    translateQuestion,
+    ASR,
 
 }

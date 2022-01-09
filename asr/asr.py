@@ -42,6 +42,12 @@ class ASR:
 
 if __name__ == "__main__":
     asr_model = ASR()
-    # asr_model.exportModel(asr_model.getModelName())
+    asr_model.downloadModel(QUARTZNET_MODEL)
+    filename = sys.argv[1]
+    print(filename)
+    sys.stdout.flush()
+
+
+
     # asr_model.importModel("quartzNet_model")
 
