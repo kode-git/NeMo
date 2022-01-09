@@ -42,7 +42,8 @@ app.post('/sendAudioQuest', upload.single('file'), (req, res) => {
     console.log('Sending Audio Quest to ASR...')
     // invocation of ASR
     question = route.ASR(req, res)
-    res.send({ message: 'Successfully uploaded files' })
+    console.log('Sending ' + question + " to the client")
+    res.status(200).json({"Message" : question})
   })
 
 app.post('/sendIntent',route.sendIntent )

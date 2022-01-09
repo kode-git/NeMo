@@ -74,17 +74,30 @@ function sendRecord(blob) {
     console.log('File making...')
     var file = new File([ blob ], "audio.wav");   
     console.log('Compact in a FormData...')   
-    var form    = new FormData();
+    var formInput  = new FormData();
     console.log('Appending...')
-    form.append("file", file);
+    formInput.append("file", file);
     console.log('Start fetching...')
+    var message = ""
     fetch('http://localhost:4000/sendAudioQuest', {
     method: 'post',
-    body: form,
+    body: formInput,
     })
-    .then((res) => console.log(res))
-    .catch((err) => ('Error occurred', err))
+    .then((res) => res.json())
+    .then((jsonRes)=>{
+        console.log('Response received')
+        message = jsonRes.Message
+        console.log(jsonRes.Message)
+        let form = document.getElementById('chat');
+    let li = document.createElement('p');
+    li.textContent = " User : " + message;
 
+    // insert a new node before the first list item
+    form.insertBefore(li, form.firstChild);
+    console.log("Insert " + message + "in the chat as the user question...")
+    })
+    .catch((err) => ('Error occurred', err))
+    
 
 
 

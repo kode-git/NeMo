@@ -1,5 +1,5 @@
 var http = require('http');
-const spawn = require('child_process').spawn
+const spawnSync = require('child_process').spawnSync
 var botResponse = ""
 
 //predictor of the interested intent
@@ -71,7 +71,7 @@ function getResponseFromInt(intentName, response,myEntityType,myEntityValue) {
 
         res.setEncoding('utf8');
         res.on('data', function (chunk) {
-            console.log("the bot says: " + JSON.parse(chunk).messages[0])
+            console.log("Jarvis says: " + JSON.parse(chunk).messages[0])
             botResponse = JSON.parse(chunk).messages[0].text
             response.status(200).json(botResponse)
         });
@@ -97,23 +97,18 @@ const sendIntent = (request, response) => {
 }
 
 const ASR = (request, response) =>{
-    const ls = spawn('python3', ['../asr/asr.py', '../server/audio.wav']);
-    ls.stdout.on('data', (data) => {
-        console.log(`stdout: ${data}`);
-      });
-      
-      ls.stderr.on('data', (data) => {
-        console.log(`stderr: ${data}`);
-      });
-      
-      ls.on('close', (code) => {
-        console.log(`child process exited with code ${code}`);
-      });
-    
+    var ls = spawnSync('python3', ['../asr/asr.py', '../server/audio.wav']);
+    out = ls.stdout + "";
+    // parsing the string and extract the output
+    var parsed = out.substring(
+        out.indexOf("@\n[") + 4,
+        out.lastIndexOf("]\n@") - 1
+     );
+    return parsed
 }
 
 
-// Exports module for app.js
+// Exports module for server.js
 
 module.exports = {
     sendIntent,

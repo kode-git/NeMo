@@ -1,8 +1,10 @@
 import time
 import nemo.collections.asr as nemo_asr
 import os
-import pickle
 import onnxruntime
+import sys
+
+# sys.path.append('/path/to/ffmpeg')
 
 
 QUARTZNET_MODEL = "QuartzNet15x5Base-En"
@@ -41,13 +43,13 @@ class ASR:
 
 
 if __name__ == "__main__":
+    # first load is slow for the ASR encoding
     asr_model = ASR()
     asr_model.downloadModel(QUARTZNET_MODEL)
-    filename = sys.argv[1]
-    print(filename)
+    # load the current audio file
+    wave_file = ["../server/audio.wav"]
+    text = asr_model.model.transcribe(paths2audio_files=wave_file)
+    print("@") # tagging start
+    print(text)
+    print("@") # tagging end
     sys.stdout.flush()
-
-
-
-    # asr_model.importModel("quartzNet_model")
-
