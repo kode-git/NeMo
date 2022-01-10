@@ -22,9 +22,6 @@ from bson.objectid import ObjectId
 from collections import OrderedDict
 import json
 import itertools
-import colorama
-
-from colorama import Fore, Back, Style
 from pymongo import MongoClient
 
 email=""
@@ -38,7 +35,7 @@ db= client['todo_db']
 actions= db['actions']
         
 
-#
+
 
 class ActionShowTime(Action):
 

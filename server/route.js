@@ -25,9 +25,15 @@ function sendIntPost(data, resp) {
             console.log("the user says: " + JSON.parse(postBody).text)
             console.log("the intent predicted is: " + JSON.parse(chunk).intent.name + " with a confidence of " +
                 JSON.parse(chunk).intent.confidence);
+                if(JSON.parse(chunk).entities.length>0){
                 console.log("the entity is: "+JSON.parse(chunk).entities[0].value);
                 entityType=JSON.parse(chunk).entities[0].entity;
                 entityValue=JSON.parse(chunk).entities[0].value;
+                }
+                else{
+                    entityType=null
+                    entityValue=null
+                }
             getResponseFromInt(JSON.parse(chunk).intent.name, resp,entityType,entityValue)
 
         });
@@ -47,13 +53,18 @@ function sendIntPost(data, resp) {
 // getting the response given the best predicted intent
 function getResponseFromInt(intentName, response,myEntityType,myEntityValue) {
     
-
-    postBody = JSON.stringify({
-        "name": intentName.toString(),
-        "entities": {
-            myEntityType: myEntityValue
-        }
-    });
+    if (myEntityType != null) {
+        postBody = JSON.stringify({
+            "name": intentName.toString(),
+            "entities": {
+                myEntityType: myEntityValue
+            }
+        });
+    } else {
+        postBody = JSON.stringify({
+            "name": intentName.toString()
+        });
+    }
 
     const options = {
         hostname: 'localhost',
