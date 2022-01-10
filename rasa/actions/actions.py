@@ -22,12 +22,21 @@ from bson.objectid import ObjectId
 from collections import OrderedDict
 import json
 import itertools
+import colorama
 
+from colorama import Fore, Back, Style
 from pymongo import MongoClient
 
 email=""
 mail=""
 city=""
+
+                
+client = MongoClient("mongodb+srv://Jarvis:JarvisNLP@cluster0.zbc0n.mongodb.net/todo_db?retryWrites=true&w=majority")   
+       
+db= client['todo_db']
+actions= db['actions']
+        
 
 #
 
@@ -94,16 +103,18 @@ class ActionAddTodo(Action):
         entities = tracker.latest_message['entities']
         for e in entities:
             task=e['value']
-        print(task)
-        dispatcher.utter_message(text=f"{'I added ' + task + ' to your list'}")
-                
-        client = MongoClient('localhost:27017')
-        mydb= client['prova']
-        mycol= mydb['characters']
-        print(mycol)
+                    
+        data = {'name' : task}
 
-        data={'name':task}
-        mycol.insert_one(data)
+        if db.actions.count_documents(data):
+            dispatcher.utter_message(text=f"{'I have already added this task to your list'}")
+        else:
+            actions.insert_one(data)
+            dispatcher.utter_message(text=f"{'I added ' + task + ' to your list'}")
+
+
+                
+
 
 
 
@@ -121,22 +132,18 @@ class ActionCompleteTodo(Action):
         entities = tracker.latest_message['entities']
         for e in entities:
             task=e['value']
-                
-        client = MongoClient('localhost:27017')
-        mydb= client['prova']
-        mycol= mydb['characters']
-        
+
         new_list=[]
         id_list=[]
         
         data = {'name' : task}
-        query = mycol.find({ 'name': task })
+        query = actions.find({ 'name': task })
         for i in query:
             print(i)
         check = format(query.retrieved)
         print(check)
         if int(check) == 1:  
-            query = mycol.delete_one(data)
+            query = actions.delete_one(data)
             dispatcher.utter_message(text=f"{'You have completed your task: ' + task }")
         else:
             li = list(task.split(" "))
@@ -149,7 +156,7 @@ class ActionCompleteTodo(Action):
 
             data = json.loads(string)
 
-            result= mycol.find( data )
+            result= actions.find( data )
             for x in result:
                 id=x['_id']
                 id_list=[]
@@ -179,12 +186,12 @@ class ActionCompleteTodo(Action):
             if len(new_res)==0:
                 dispatcher.utter_message(text=f"{'I am sorry, no task found :( ' }")
             elif len(new_res)==1:
-                query = mycol.delete_one(data)
-                dispatcher.utter_message(text=f"{'You have completed your task: ' + task }")
+                query = actions.delete_one(data)
+                dispatcher.utter_message(text=f"{'I have completed your task: ' + task }")
             else: 
                 mess=""
                 for i in range(0,len(new_res)):
-                    for j in mycol.find({"_id": ObjectId(new_res[i][1])}):
+                    for j in actions.find({"_id": ObjectId(new_res[i][1])}):
                         mess = mess + j['name'] + '\n'
                 mess= '\n' + mess
                 dispatcher.utter_message(text=f"{'I found those task: ' + mess }")
@@ -203,12 +210,9 @@ class ActionAskTodo(Action):
         print("FROM ACTION_ASK_TODO" )
          
         list=""
-        client = MongoClient('localhost:27017')
-        mydb= client['prova']
-        mycol= mydb['characters']
         
-        num_task = mycol.find().count()
-        task = mycol.find()
+        num_task = actions.find().count()
+        task = actions.find()
 
         i=0
         for x in task:
