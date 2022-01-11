@@ -29,13 +29,12 @@ mail=""
 city=""
 
                 
-client = MongoClient("mongodb+srv://Jarvis:JarvisNLP@cluster0.zbc0n.mongodb.net/todo_db?retryWrites=true&w=majority")   
-       
+client = MongoClient("mongodb+srv://Jarvis:JarvisNLP@cluster0.zbc0n.mongodb.net/todo_db?retryWrites=true&w=majority")    
 db= client['todo_db']
 actions= db['actions']
         
 
-
+#
 
 class ActionShowTime(Action):
 
@@ -268,15 +267,30 @@ class ActionSendingMail(Action):
     def run(self, dispatcher: CollectingDispatcher,
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-        print('WEEE')
-        sender_email='weriti2829@zoeyy.com'
-        rec_email=email
-        message=mail
-        server = smtplib.SMTP('smtp.gmail.com', 587)
+
+        sender = "jarvisunibo@gmail.com"
+        receiver = email
+        password = "JarvisNlp!"
+        subject = "Jarvis test"
+        body = mail
+
+        # header
+        message = f"""From: Jarvis Unibo{sender}
+        To: {receiver}
+        Subject: {subject}\n
+        {body}
+        """
+
+        server = smtplib.SMTP("smtp.gmail.com", 587)
         server.starttls()
-        server.login(sender_email,'1234')
-        server.sendmail(sender_email,rec_email,message)
-        print("MAIL HAS BEEN SENT")
-        
+
+        try:
+            server.login(sender,password)
+            print("Logged in...")
+            server.sendmail(sender, receiver, message)
+            print("Email has been sent!")
+
+        except smtplib.SMTPAuthenticationError:
+            print("unable to sign in")
         dispatcher.utter_message(text=f"{mail}")
         return []
