@@ -25,16 +25,7 @@ function sendIntPost(data, resp) {
             console.log("the user says: " + JSON.parse(postBody).text)
             console.log("the intent predicted is: " + JSON.parse(chunk).intent.name + " with a confidence of " +
                 JSON.parse(chunk).intent.confidence);
-                if(JSON.parse(chunk).entities.length>0){
-                console.log("the entity is: "+JSON.parse(chunk).entities[0].value);
-                entityType=JSON.parse(chunk).entities[0].entity;
-                entityValue=JSON.parse(chunk).entities[0].value;
-                }
-                else{
-                    entityType=null
-                    entityValue=null
-                }
-            getResponseFromInt(JSON.parse(chunk).intent.name, resp,entityType,entityValue)
+            getResponseFromInt(JSON.parse(chunk).intent.name, resp,JSON.parse(chunk).entities)
 
         });
     })
@@ -51,20 +42,19 @@ function sendIntPost(data, resp) {
 }
 
 // getting the response given the best predicted intent
-function getResponseFromInt(intentName, response,myEntityType,myEntityValue) {
-    
-    if (myEntityType != null) {
-        postBody = JSON.stringify({
-            "name": intentName.toString(),
-            "entities": {
-                myEntityType: myEntityValue
-            }
-        });
-    } else {
-        postBody = JSON.stringify({
-            "name": intentName.toString()
-        });
+function getResponseFromInt(intentName, response,entities) {
+
+
+    postBody = {
+        "name": intentName.toString(),
+        "entities": {}
     }
+
+    //filling the json body with the entities 
+    entities.forEach(element => postBody.entities[element.entity] = element.value)
+    postBodyString = JSON.stringify(postBody)
+
+
 
     const options = {
         hostname: 'localhost',
@@ -73,7 +63,7 @@ function getResponseFromInt(intentName, response,myEntityType,myEntityValue) {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
-            'Content-Length': Buffer.byteLength(postBody, 'utf8')
+            'Content-Length': Buffer.byteLength(postBodyString, 'utf8')
         }
     }
     // create request
@@ -94,7 +84,7 @@ function getResponseFromInt(intentName, response,myEntityType,myEntityValue) {
     })
 
     // write data in the request
-    req.write(postBody)
+    req.write(postBodyString)
     // send and close channel
     req.end()
 
