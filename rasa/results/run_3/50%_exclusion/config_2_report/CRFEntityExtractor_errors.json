@@ -1,0 +1,59 @@
+[
+  {
+    "text": "i want to know the weather in Cordoba",
+    "entities": [
+      {
+        "start": 30,
+        "end": 37,
+        "value": "Cordoba",
+        "entity": "city"
+      }
+    ],
+    "predicted_entities": []
+  },
+  {
+    "text": "hows in Perugia the weather?",
+    "entities": [
+      {
+        "start": 8,
+        "end": 15,
+        "value": "Perugia",
+        "entity": "city"
+      }
+    ],
+    "predicted_entities": []
+  },
+  {
+    "text": "tell me the weather in Los Angeles",
+    "entities": [
+      {
+        "start": 23,
+        "end": 34,
+        "value": "Los Angeles",
+        "entity": "city"
+      }
+    ],
+    "predicted_entities": []
+  },
+  {
+    "text": "add dentist tomorrow to my list",
+    "entities": [
+      {
+        "start": 4,
+        "end": 20,
+        "value": "dentist tomorrow",
+        "entity": "task"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "task",
+        "start": 4,
+        "end": 11,
+        "confidence_entity": 0.4856254756450653,
+        "value": "dentist",
+        "extractor": "DIETClassifier"
+      }
+    ]
+  }
+]

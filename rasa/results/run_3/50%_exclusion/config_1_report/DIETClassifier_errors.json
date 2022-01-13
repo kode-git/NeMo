@@ -1,0 +1,166 @@
+[
+  {
+    "text": "are you a bot?",
+    "entities": [],
+    "predicted_entities": [
+      {
+        "entity": "task",
+        "start": 8,
+        "end": 9,
+        "confidence_entity": 0.6350218057632446,
+        "value": "a",
+        "extractor": "DIETClassifier"
+      }
+    ]
+  },
+  {
+    "text": "not really",
+    "entities": [],
+    "predicted_entities": [
+      {
+        "entity": "task",
+        "start": 4,
+        "end": 10,
+        "confidence_entity": 0.44363752007484436,
+        "value": "really",
+        "extractor": "DIETClassifier"
+      }
+    ]
+  },
+  {
+    "text": "i want to know the weather in Cordoba",
+    "entities": [
+      {
+        "start": 30,
+        "end": 37,
+        "value": "Cordoba",
+        "entity": "city"
+      }
+    ],
+    "predicted_entities": []
+  },
+  {
+    "text": "hows in Perugia the weather?",
+    "entities": [
+      {
+        "start": 8,
+        "end": 15,
+        "value": "Perugia",
+        "entity": "city"
+      }
+    ],
+    "predicted_entities": []
+  },
+  {
+    "text": "tell me the weather in Los Angeles",
+    "entities": [
+      {
+        "start": 23,
+        "end": 34,
+        "value": "Los Angeles",
+        "entity": "city"
+      }
+    ],
+    "predicted_entities": []
+  },
+  {
+    "text": "my day was horrible",
+    "entities": [],
+    "predicted_entities": [
+      {
+        "entity": "task",
+        "start": 7,
+        "end": 19,
+        "confidence_entity": 0.9288938641548157,
+        "value": "was horrible",
+        "extractor": "DIETClassifier"
+      }
+    ]
+  },
+  {
+    "text": "add try cooking a new dish to my list",
+    "entities": [
+      {
+        "start": 4,
+        "end": 26,
+        "value": "try cooking a new dish",
+        "entity": "task"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "task",
+        "start": 4,
+        "end": 7,
+        "confidence_entity": 0.9997478127479553,
+        "value": "try",
+        "extractor": "DIETClassifier"
+      },
+      {
+        "entity": "task",
+        "start": 16,
+        "end": 21,
+        "confidence_entity": 0.9981327652931213,
+        "value": "a new",
+        "extractor": "DIETClassifier"
+      },
+      {
+        "entity": "task",
+        "start": 22,
+        "end": 26,
+        "confidence_entity": 0.7536529302597046,
+        "value": "dish",
+        "extractor": "DIETClassifier"
+      },
+      {
+        "entity": "task",
+        "start": 4,
+        "end": 26,
+        "confidence_entity": 0.8671637180093558,
+        "value": "try cooking a new dish",
+        "extractor": "CRFEntityExtractor"
+      }
+    ]
+  },
+  {
+    "text": "add read a new book to my list",
+    "entities": [
+      {
+        "start": 4,
+        "end": 19,
+        "value": "read a new book",
+        "entity": "task"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "task",
+        "start": 4,
+        "end": 14,
+        "confidence_entity": 0.9989299178123474,
+        "value": "read a new",
+        "extractor": "DIETClassifier"
+      },
+      {
+        "entity": "task",
+        "start": 4,
+        "end": 19,
+        "confidence_entity": 0.9723381412446337,
+        "value": "read a new book",
+        "extractor": "CRFEntityExtractor"
+      }
+    ]
+  },
+  {
+    "text": "add dentist tomorrow to my list",
+    "entities": [
+      {
+        "start": 4,
+        "end": 20,
+        "value": "dentist tomorrow",
+        "entity": "task"
+      }
+    ],
+    "predicted_entities": []
+  }
+]

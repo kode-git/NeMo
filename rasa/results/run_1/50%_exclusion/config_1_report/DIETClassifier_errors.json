@@ -1,0 +1,162 @@
+[
+  {
+    "text": "hows in Perugia the weather?",
+    "entities": [
+      {
+        "start": 8,
+        "end": 15,
+        "value": "Perugia",
+        "entity": "city"
+      }
+    ],
+    "predicted_entities": []
+  },
+  {
+    "text": "hows in Mascara the weather?",
+    "entities": [
+      {
+        "start": 8,
+        "end": 15,
+        "value": "Mascara",
+        "entity": "city"
+      }
+    ],
+    "predicted_entities": []
+  },
+  {
+    "text": "I am going to save the world",
+    "entities": [],
+    "predicted_entities": [
+      {
+        "entity": "task",
+        "start": 19,
+        "end": 22,
+        "confidence_entity": 0.5759732127189636,
+        "value": "the",
+        "extractor": "DIETClassifier"
+      }
+    ]
+  },
+  {
+    "text": "I am disappointed",
+    "entities": [],
+    "predicted_entities": [
+      {
+        "entity": "task",
+        "start": 5,
+        "end": 17,
+        "confidence_entity": 0.9052637815475464,
+        "value": "disappointed",
+        "extractor": "DIETClassifier"
+      }
+    ]
+  },
+  {
+    "text": "add buy apple to my list",
+    "entities": [
+      {
+        "start": 4,
+        "end": 13,
+        "value": "buy apple",
+        "entity": "task"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "task",
+        "start": 4,
+        "end": 7,
+        "confidence_entity": 0.9996292591094971,
+        "value": "buy",
+        "extractor": "DIETClassifier"
+      },
+      {
+        "entity": "task",
+        "start": 4,
+        "end": 13,
+        "confidence_entity": 0.781283569432463,
+        "value": "buy apple",
+        "extractor": "CRFEntityExtractor"
+      }
+    ]
+  },
+  {
+    "text": "add go to a new restaurant to my list",
+    "entities": [
+      {
+        "start": 4,
+        "end": 26,
+        "value": "go to a new restaurant",
+        "entity": "task"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "task",
+        "start": 4,
+        "end": 6,
+        "confidence_entity": 0.9924076795578003,
+        "value": "go",
+        "extractor": "DIETClassifier"
+      },
+      {
+        "entity": "task",
+        "start": 10,
+        "end": 15,
+        "confidence_entity": 0.8505751490592957,
+        "value": "a new",
+        "extractor": "DIETClassifier"
+      },
+      {
+        "entity": "task",
+        "start": 4,
+        "end": 26,
+        "confidence_entity": 0.8650897285682645,
+        "value": "go to a new restaurant",
+        "extractor": "CRFEntityExtractor"
+      }
+    ]
+  },
+  {
+    "text": "complete read crypto documents",
+    "entities": [
+      {
+        "start": 9,
+        "end": 30,
+        "value": "read crypto documents",
+        "entity": "task"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "task",
+        "start": 9,
+        "end": 20,
+        "confidence_entity": 0.44594234228134155,
+        "value": "read crypto",
+        "extractor": "DIETClassifier"
+      }
+    ]
+  },
+  {
+    "text": "complete organize halloween",
+    "entities": [
+      {
+        "start": 9,
+        "end": 27,
+        "value": "organize halloween",
+        "entity": "task"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "task",
+        "start": 9,
+        "end": 17,
+        "confidence_entity": 0.7997840046882629,
+        "value": "organize",
+        "extractor": "DIETClassifier"
+      }
+    ]
+  }
+]

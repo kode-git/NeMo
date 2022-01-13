@@ -1,0 +1,97 @@
+[
+  {
+    "text": "tell me the weather in [Santiago del Estero] (city)",
+    "entities": [],
+    "predicted_entities": [
+      {
+        "entity": "task",
+        "start": 37,
+        "end": 43,
+        "confidence_entity": 0.4265100061893463,
+        "value": "Estero",
+        "extractor": "DIETClassifier"
+      }
+    ]
+  },
+  {
+    "text": "i want to know the weather in Berazategui",
+    "entities": [
+      {
+        "start": 30,
+        "end": 41,
+        "value": "Berazategui",
+        "entity": "city"
+      }
+    ],
+    "predicted_entities": []
+  },
+  {
+    "text": "hows in Mascara the weather?",
+    "entities": [
+      {
+        "start": 8,
+        "end": 15,
+        "value": "Mascara",
+        "entity": "city"
+      }
+    ],
+    "predicted_entities": []
+  },
+  {
+    "text": "I am disappointed",
+    "entities": [],
+    "predicted_entities": [
+      {
+        "entity": "task",
+        "start": 5,
+        "end": 17,
+        "confidence_entity": 0.6691579818725586,
+        "value": "disappointed",
+        "extractor": "DIETClassifier"
+      }
+    ]
+  },
+  {
+    "text": "my day was horrible",
+    "entities": [],
+    "predicted_entities": [
+      {
+        "entity": "task",
+        "start": 7,
+        "end": 19,
+        "confidence_entity": 0.996147871017456,
+        "value": "was horrible",
+        "extractor": "DIETClassifier"
+      }
+    ]
+  },
+  {
+    "text": "add visit granpa to the hospital to my list",
+    "entities": [
+      {
+        "start": 4,
+        "end": 32,
+        "value": "visit granpa to the hospital",
+        "entity": "task"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "task",
+        "start": 4,
+        "end": 35,
+        "confidence_entity": 0.6351090669631958,
+        "value": "visit granpa to the hospital to",
+        "extractor": "DIETClassifier"
+      },
+      {
+        "entity": "task",
+        "start": 4,
+        "end": 32,
+        "confidence_entity": 0.9569403348012268,
+        "value": "visit granpa to the hospital",
+        "extractor": "CRFEntityExtractor"
+      }
+    ]
+  }
+]

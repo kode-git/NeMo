@@ -1,0 +1,93 @@
+[
+  {
+    "text": "i want to know the weather in Cordoba",
+    "entities": [
+      {
+        "start": 30,
+        "end": 37,
+        "value": "Cordoba",
+        "entity": "city"
+      }
+    ],
+    "predicted_entities": []
+  },
+  {
+    "text": "hows in Perugia the weather?",
+    "entities": [
+      {
+        "start": 8,
+        "end": 15,
+        "value": "Perugia",
+        "entity": "city"
+      }
+    ],
+    "predicted_entities": []
+  },
+  {
+    "text": "tell me the weather in Los Angeles",
+    "entities": [
+      {
+        "start": 23,
+        "end": 34,
+        "value": "Los Angeles",
+        "entity": "city"
+      }
+    ],
+    "predicted_entities": []
+  },
+  {
+    "text": "my day was horrible",
+    "entities": [],
+    "predicted_entities": [
+      {
+        "entity": "task",
+        "start": 7,
+        "end": 19,
+        "confidence_entity": 0.9766151905059814,
+        "value": "was horrible",
+        "extractor": "DIETClassifier"
+      }
+    ]
+  },
+  {
+    "text": "add dentist tomorrow to my list",
+    "entities": [
+      {
+        "start": 4,
+        "end": 20,
+        "value": "dentist tomorrow",
+        "entity": "task"
+      }
+    ],
+    "predicted_entities": []
+  },
+  {
+    "text": "add mom birthday gift to my list",
+    "entities": [
+      {
+        "start": 4,
+        "end": 21,
+        "value": "mom birthday gift",
+        "entity": "task"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "task",
+        "start": 4,
+        "end": 24,
+        "confidence_entity": 0.9484825134277344,
+        "value": "mom birthday gift to",
+        "extractor": "DIETClassifier"
+      },
+      {
+        "entity": "task",
+        "start": 4,
+        "end": 21,
+        "confidence_entity": 0.9449821868847198,
+        "value": "mom birthday gift",
+        "extractor": "CRFEntityExtractor"
+      }
+    ]
+  }
+]

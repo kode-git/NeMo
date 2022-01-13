@@ -1,0 +1,52 @@
+[
+  {
+    "text": "i want to know the weather in Cordoba",
+    "entities": [
+      {
+        "start": 30,
+        "end": 37,
+        "value": "Cordoba",
+        "entity": "city"
+      }
+    ],
+    "predicted_entities": []
+  },
+  {
+    "text": "hows in Perugia the weather?",
+    "entities": [
+      {
+        "start": 8,
+        "end": 15,
+        "value": "Perugia",
+        "entity": "city"
+      }
+    ],
+    "predicted_entities": []
+  },
+  {
+    "text": "tell me the weather in Los Angeles",
+    "entities": [
+      {
+        "start": 23,
+        "end": 34,
+        "value": "Los Angeles",
+        "entity": "city"
+      }
+    ],
+    "predicted_entities": []
+  },
+  {
+    "text": "moin",
+    "entities": [],
+    "predicted_entities": [
+      {
+        "entity": "task",
+        "start": 0,
+        "end": 4,
+        "confidence_entity": 0.5120778679847717,
+        "value": "moin",
+        "extractor": "DIETClassifier"
+      }
+    ]
+  }
+]

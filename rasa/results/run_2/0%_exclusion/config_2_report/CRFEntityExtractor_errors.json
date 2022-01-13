@@ -1,0 +1,44 @@
+[
+  {
+    "text": "i want to know the weather in Berazategui",
+    "entities": [
+      {
+        "start": 30,
+        "end": 41,
+        "value": "Berazategui",
+        "entity": "city"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "city",
+        "start": 30,
+        "end": 41,
+        "confidence_entity": 0.989944338798523,
+        "value": "Berazategui",
+        "extractor": "DIETClassifier"
+      }
+    ]
+  },
+  {
+    "text": "hows in Mascara the weather?",
+    "entities": [
+      {
+        "start": 8,
+        "end": 15,
+        "value": "Mascara",
+        "entity": "city"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "city",
+        "start": 8,
+        "end": 15,
+        "confidence_entity": 0.36838385462760925,
+        "value": "Mascara",
+        "extractor": "DIETClassifier"
+      }
+    ]
+  }
+]

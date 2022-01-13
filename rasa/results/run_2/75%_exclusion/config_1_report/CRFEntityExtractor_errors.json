@@ -1,0 +1,237 @@
+[
+  {
+    "text": "i want to know the weather in Berazategui",
+    "entities": [
+      {
+        "start": 30,
+        "end": 41,
+        "value": "Berazategui",
+        "entity": "city"
+      }
+    ],
+    "predicted_entities": []
+  },
+  {
+    "text": "hows in Mascara the weather?",
+    "entities": [
+      {
+        "start": 8,
+        "end": 15,
+        "value": "Mascara",
+        "entity": "city"
+      }
+    ],
+    "predicted_entities": []
+  },
+  {
+    "text": "add organize halloween to my list",
+    "entities": [
+      {
+        "start": 4,
+        "end": 22,
+        "value": "organize halloween",
+        "entity": "task"
+      }
+    ],
+    "predicted_entities": []
+  },
+  {
+    "text": "add visit granpa to the hospital to my list",
+    "entities": [
+      {
+        "start": 4,
+        "end": 32,
+        "value": "visit granpa to the hospital",
+        "entity": "task"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "task",
+        "start": 4,
+        "end": 32,
+        "confidence_entity": 0.8583899140357971,
+        "value": "visit granpa to the hospital",
+        "extractor": "DIETClassifier"
+      },
+      {
+        "entity": "task",
+        "start": 17,
+        "end": 32,
+        "confidence_entity": 0.6878186278042144,
+        "value": "to the hospital",
+        "extractor": "CRFEntityExtractor"
+      }
+    ]
+  },
+  {
+    "text": "add read crypto documents to my list",
+    "entities": [
+      {
+        "start": 4,
+        "end": 25,
+        "value": "read crypto documents",
+        "entity": "task"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "task",
+        "start": 4,
+        "end": 8,
+        "confidence_entity": 0.9995306730270386,
+        "value": "read",
+        "extractor": "DIETClassifier"
+      }
+    ]
+  },
+  {
+    "text": "add water the plant to my list",
+    "entities": [
+      {
+        "start": 4,
+        "end": 19,
+        "value": "water the plant",
+        "entity": "task"
+      }
+    ],
+    "predicted_entities": []
+  },
+  {
+    "text": "complete read crypto documents",
+    "entities": [
+      {
+        "start": 9,
+        "end": 30,
+        "value": "read crypto documents",
+        "entity": "task"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "task",
+        "start": 9,
+        "end": 20,
+        "confidence_entity": 0.9256348013877869,
+        "value": "read crypto",
+        "extractor": "DIETClassifier"
+      },
+      {
+        "entity": "task",
+        "start": 9,
+        "end": 13,
+        "confidence_entity": 0.5537458141392637,
+        "value": "read",
+        "extractor": "CRFEntityExtractor"
+      }
+    ]
+  },
+  {
+    "text": "complete dentist tomorrow",
+    "entities": [
+      {
+        "start": 9,
+        "end": 25,
+        "value": "dentist tomorrow",
+        "entity": "task"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "task",
+        "start": 17,
+        "end": 25,
+        "confidence_entity": 0.8925504088401794,
+        "value": "tomorrow",
+        "extractor": "DIETClassifier"
+      }
+    ]
+  },
+  {
+    "text": "complete organize Andrea's party",
+    "entities": [
+      {
+        "start": 9,
+        "end": 32,
+        "value": "organize Andrea's party",
+        "entity": "task"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "task",
+        "start": 9,
+        "end": 24,
+        "confidence_entity": 0.7075555920600891,
+        "value": "organize Andrea",
+        "extractor": "DIETClassifier"
+      },
+      {
+        "entity": "task",
+        "start": 27,
+        "end": 32,
+        "confidence_entity": 0.5348827838897705,
+        "value": "party",
+        "extractor": "DIETClassifier"
+      }
+    ]
+  },
+  {
+    "text": "complete buy coffe",
+    "entities": [
+      {
+        "start": 9,
+        "end": 18,
+        "value": "buy coffe",
+        "entity": "task"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "task",
+        "start": 9,
+        "end": 12,
+        "confidence_entity": 0.9992889165878296,
+        "value": "buy",
+        "extractor": "DIETClassifier"
+      },
+      {
+        "entity": "task",
+        "start": 9,
+        "end": 12,
+        "confidence_entity": 0.6998322965086319,
+        "value": "buy",
+        "extractor": "CRFEntityExtractor"
+      }
+    ]
+  },
+  {
+    "text": "complete buy apple",
+    "entities": [
+      {
+        "start": 9,
+        "end": 18,
+        "value": "buy apple",
+        "entity": "task"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "task",
+        "start": 9,
+        "end": 18,
+        "confidence_entity": 0.6900404691696167,
+        "value": "buy apple",
+        "extractor": "DIETClassifier"
+      },
+      {
+        "entity": "task",
+        "start": 9,
+        "end": 12,
+        "confidence_entity": 0.6998322965086319,
+        "value": "buy",
+        "extractor": "CRFEntityExtractor"
+      }
+    ]
+  }
+]
