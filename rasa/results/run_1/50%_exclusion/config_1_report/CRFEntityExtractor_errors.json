@@ -1,0 +1,68 @@
+[
+  {
+    "text": "hows in Perugia the weather?",
+    "entities": [
+      {
+        "start": 8,
+        "end": 15,
+        "value": "Perugia",
+        "entity": "city"
+      }
+    ],
+    "predicted_entities": []
+  },
+  {
+    "text": "hows in Mascara the weather?",
+    "entities": [
+      {
+        "start": 8,
+        "end": 15,
+        "value": "Mascara",
+        "entity": "city"
+      }
+    ],
+    "predicted_entities": []
+  },
+  {
+    "text": "complete read crypto documents",
+    "entities": [
+      {
+        "start": 9,
+        "end": 30,
+        "value": "read crypto documents",
+        "entity": "task"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "task",
+        "start": 9,
+        "end": 20,
+        "confidence_entity": 0.44594234228134155,
+        "value": "read crypto",
+        "extractor": "DIETClassifier"
+      }
+    ]
+  },
+  {
+    "text": "complete organize halloween",
+    "entities": [
+      {
+        "start": 9,
+        "end": 27,
+        "value": "organize halloween",
+        "entity": "task"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "task",
+        "start": 9,
+        "end": 17,
+        "confidence_entity": 0.7997840046882629,
+        "value": "organize",
+        "extractor": "DIETClassifier"
+      }
+    ]
+  }
+]

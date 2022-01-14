@@ -1,0 +1,34 @@
+{
+  "task": {
+    "precision": 0.9642857142857143,
+    "recall": 0.7297297297297297,
+    "f1-score": 0.8307692307692307,
+    "support": 37,
+    "confused_with": {}
+  },
+  "city": {
+    "precision": 0.0,
+    "recall": 0.0,
+    "f1-score": 0.0,
+    "support": 2,
+    "confused_with": {}
+  },
+  "micro avg": {
+    "precision": 0.9642857142857143,
+    "recall": 0.6923076923076923,
+    "f1-score": 0.8059701492537313,
+    "support": 39
+  },
+  "macro avg": {
+    "precision": 0.48214285714285715,
+    "recall": 0.36486486486486486,
+    "f1-score": 0.41538461538461535,
+    "support": 39
+  },
+  "weighted avg": {
+    "precision": 0.9148351648351649,
+    "recall": 0.6923076923076923,
+    "f1-score": 0.7881656804733728,
+    "support": 39
+  }
+}

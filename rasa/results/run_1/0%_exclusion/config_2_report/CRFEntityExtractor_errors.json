@@ -1,0 +1,26 @@
+[
+  {
+    "text": "hows in Perugia the weather?",
+    "entities": [
+      {
+        "start": 8,
+        "end": 15,
+        "value": "Perugia",
+        "entity": "city"
+      }
+    ],
+    "predicted_entities": []
+  },
+  {
+    "text": "hows in Mascara the weather?",
+    "entities": [
+      {
+        "start": 8,
+        "end": 15,
+        "value": "Mascara",
+        "entity": "city"
+      }
+    ],
+    "predicted_entities": []
+  }
+]

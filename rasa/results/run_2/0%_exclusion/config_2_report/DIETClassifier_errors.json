@@ -1,0 +1,74 @@
+[
+  {
+    "text": "tell me the weather in [Santiago del Estero] (city)",
+    "entities": [],
+    "predicted_entities": [
+      {
+        "entity": "task",
+        "start": 33,
+        "end": 43,
+        "confidence_entity": 0.51,
+        "value": "del Estero",
+        "extractor": "DIETClassifier"
+      }
+    ]
+  },
+  {
+    "text": "add read crypto documents to my list",
+    "entities": [
+      {
+        "start": 4,
+        "end": 25,
+        "value": "read crypto documents",
+        "entity": "task"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "task",
+        "start": 4,
+        "end": 15,
+        "confidence_entity": 0.5018317699432373,
+        "value": "read crypto",
+        "extractor": "DIETClassifier"
+      },
+      {
+        "entity": "task",
+        "start": 4,
+        "end": 25,
+        "confidence_entity": 0.7800640842756977,
+        "value": "read crypto documents",
+        "extractor": "CRFEntityExtractor"
+      }
+    ]
+  },
+  {
+    "text": "complete read crypto documents",
+    "entities": [
+      {
+        "start": 9,
+        "end": 30,
+        "value": "read crypto documents",
+        "entity": "task"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "task",
+        "start": 9,
+        "end": 20,
+        "confidence_entity": 0.5195885896682739,
+        "value": "read crypto",
+        "extractor": "DIETClassifier"
+      },
+      {
+        "entity": "task",
+        "start": 9,
+        "end": 30,
+        "confidence_entity": 0.6177830850405072,
+        "value": "read crypto documents",
+        "extractor": "CRFEntityExtractor"
+      }
+    ]
+  }
+]

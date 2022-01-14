@@ -1,0 +1,90 @@
+[
+  {
+    "text": "i want to know the weather in Cordoba",
+    "entities": [
+      {
+        "start": 30,
+        "end": 37,
+        "value": "Cordoba",
+        "entity": "city"
+      }
+    ],
+    "predicted_entities": []
+  },
+  {
+    "text": "hows in Perugia the weather?",
+    "entities": [
+      {
+        "start": 8,
+        "end": 15,
+        "value": "Perugia",
+        "entity": "city"
+      }
+    ],
+    "predicted_entities": []
+  },
+  {
+    "text": "tell me the weather in Los Angeles",
+    "entities": [
+      {
+        "start": 23,
+        "end": 34,
+        "value": "Los Angeles",
+        "entity": "city"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "city",
+        "start": 23,
+        "end": 26,
+        "confidence_entity": 0.5502946972846985,
+        "value": "Los",
+        "extractor": "DIETClassifier"
+      }
+    ]
+  },
+  {
+    "text": "moin",
+    "entities": [],
+    "predicted_entities": [
+      {
+        "entity": "task",
+        "start": 0,
+        "end": 4,
+        "confidence_entity": 0.703946590423584,
+        "value": "moin",
+        "extractor": "DIETClassifier"
+      }
+    ]
+  },
+  {
+    "text": "add dentist tomorrow to my list",
+    "entities": [
+      {
+        "start": 4,
+        "end": 20,
+        "value": "dentist tomorrow",
+        "entity": "task"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "task",
+        "start": 4,
+        "end": 11,
+        "confidence_entity": 0.6977226734161377,
+        "value": "dentist",
+        "extractor": "DIETClassifier"
+      },
+      {
+        "entity": "task",
+        "start": 21,
+        "end": 23,
+        "confidence_entity": 0.7378610372543335,
+        "value": "to",
+        "extractor": "DIETClassifier"
+      }
+    ]
+  }
+]

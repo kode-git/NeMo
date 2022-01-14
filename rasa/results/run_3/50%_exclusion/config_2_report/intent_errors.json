@@ -1,0 +1,82 @@
+[
+  {
+    "text": "y",
+    "intent": "affirm",
+    "intent_prediction": {
+      "name": "ask_todo",
+      "confidence": 0.3097984194755554
+    }
+  },
+  {
+    "text": "that sounds good",
+    "intent": "affirm",
+    "intent_prediction": {
+      "name": "mood_unhappy",
+      "confidence": 0.6970136165618896
+    }
+  },
+  {
+    "text": "todo list",
+    "intent": "ask_todo",
+    "intent_prediction": {
+      "name": "add_todo",
+      "confidence": 0.6347217559814453
+    }
+  },
+  {
+    "text": "not really",
+    "intent": "deny",
+    "intent_prediction": {
+      "name": "mood_unhappy",
+      "confidence": 0.8910686373710632
+    }
+  },
+  {
+    "text": "have a nice day",
+    "intent": "goodbye",
+    "intent_prediction": {
+      "name": "mood_great",
+      "confidence": 0.7138472199440002
+    }
+  },
+  {
+    "text": "good by",
+    "intent": "goodbye",
+    "intent_prediction": {
+      "name": "complete_todo",
+      "confidence": 0.29379040002822876
+    }
+  },
+  {
+    "text": "moin",
+    "intent": "greet",
+    "intent_prediction": {
+      "name": "complete_todo",
+      "confidence": 0.6452240347862244
+    }
+  },
+  {
+    "text": "I am feeling very good",
+    "intent": "mood_great",
+    "intent_prediction": {
+      "name": "mood_unhappy",
+      "confidence": 0.6928619742393494
+    }
+  },
+  {
+    "text": "so good",
+    "intent": "mood_great",
+    "intent_prediction": {
+      "name": "mood_unhappy",
+      "confidence": 0.8068114519119263
+    }
+  },
+  {
+    "text": "my day was horrible",
+    "intent": "mood_unhappy",
+    "intent_prediction": {
+      "name": "mood_great",
+      "confidence": 0.45700809359550476
+    }
+  }
+]

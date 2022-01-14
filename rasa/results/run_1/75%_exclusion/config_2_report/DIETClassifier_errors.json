@@ -1,0 +1,207 @@
+[
+  {
+    "text": "tell me the weather in [San Francisco] (city)",
+    "entities": [],
+    "predicted_entities": [
+      {
+        "entity": "task",
+        "start": 24,
+        "end": 37,
+        "confidence_entity": 0.5184930562973022,
+        "value": "San Francisco",
+        "extractor": "DIETClassifier"
+      }
+    ]
+  },
+  {
+    "text": "hows in Mascara the weather?",
+    "entities": [
+      {
+        "start": 8,
+        "end": 15,
+        "value": "Mascara",
+        "entity": "city"
+      }
+    ],
+    "predicted_entities": []
+  },
+  {
+    "text": "add visit granpa to the hospital to my list",
+    "entities": [
+      {
+        "start": 4,
+        "end": 32,
+        "value": "visit granpa to the hospital",
+        "entity": "task"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "task",
+        "start": 24,
+        "end": 32,
+        "confidence_entity": 0.4099249839782715,
+        "value": "hospital",
+        "extractor": "DIETClassifier"
+      }
+    ]
+  },
+  {
+    "text": "add watch chelsea on tv to my list",
+    "entities": [
+      {
+        "start": 4,
+        "end": 23,
+        "value": "watch chelsea on tv",
+        "entity": "task"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "task",
+        "start": 10,
+        "end": 17,
+        "confidence_entity": 0.6919111609458923,
+        "value": "chelsea",
+        "extractor": "DIETClassifier"
+      },
+      {
+        "entity": "task",
+        "start": 21,
+        "end": 23,
+        "confidence_entity": 0.6932801008224487,
+        "value": "tv",
+        "extractor": "DIETClassifier"
+      }
+    ]
+  },
+  {
+    "text": "add go to a new restaurant to my list",
+    "entities": [
+      {
+        "start": 4,
+        "end": 26,
+        "value": "go to a new restaurant",
+        "entity": "task"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "task",
+        "start": 10,
+        "end": 26,
+        "confidence_entity": 0.7412661910057068,
+        "value": "a new restaurant",
+        "extractor": "DIETClassifier"
+      },
+      {
+        "entity": "task",
+        "start": 4,
+        "end": 26,
+        "confidence_entity": 0.6504626056373045,
+        "value": "go to a new restaurant",
+        "extractor": "CRFEntityExtractor"
+      }
+    ]
+  },
+  {
+    "text": "complete go to a new restaurant",
+    "entities": [
+      {
+        "start": 9,
+        "end": 31,
+        "value": "go to a new restaurant",
+        "entity": "task"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "task",
+        "start": 9,
+        "end": 11,
+        "confidence_entity": 0.509050190448761,
+        "value": "go",
+        "extractor": "DIETClassifier"
+      },
+      {
+        "entity": "task",
+        "start": 15,
+        "end": 31,
+        "confidence_entity": 0.7571014761924744,
+        "value": "a new restaurant",
+        "extractor": "DIETClassifier"
+      },
+      {
+        "entity": "task",
+        "start": 9,
+        "end": 31,
+        "confidence_entity": 0.5478383127396667,
+        "value": "go to a new restaurant",
+        "extractor": "CRFEntityExtractor"
+      }
+    ]
+  },
+  {
+    "text": "complete dentist tomorrow",
+    "entities": [
+      {
+        "start": 9,
+        "end": 25,
+        "value": "dentist tomorrow",
+        "entity": "task"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "task",
+        "start": 9,
+        "end": 16,
+        "confidence_entity": 0.5796937346458435,
+        "value": "dentist",
+        "extractor": "DIETClassifier"
+      }
+    ]
+  },
+  {
+    "text": "complete go to the hospital",
+    "entities": [
+      {
+        "start": 9,
+        "end": 27,
+        "value": "go to the hospital",
+        "entity": "task"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "task",
+        "start": 19,
+        "end": 27,
+        "confidence_entity": 0.4631180763244629,
+        "value": "hospital",
+        "extractor": "DIETClassifier"
+      }
+    ]
+  },
+  {
+    "text": "complete organize halloween",
+    "entities": [
+      {
+        "start": 9,
+        "end": 27,
+        "value": "organize halloween",
+        "entity": "task"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "task",
+        "start": 18,
+        "end": 27,
+        "confidence_entity": 0.45167064666748047,
+        "value": "halloween",
+        "extractor": "DIETClassifier"
+      }
+    ]
+  }
+]

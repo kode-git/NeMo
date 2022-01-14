@@ -1,0 +1,106 @@
+[
+  {
+    "text": "hows in Perugia the weather?",
+    "entities": [
+      {
+        "start": 8,
+        "end": 15,
+        "value": "Perugia",
+        "entity": "city"
+      }
+    ],
+    "predicted_entities": []
+  },
+  {
+    "text": "hows in Mascara the weather?",
+    "entities": [
+      {
+        "start": 8,
+        "end": 15,
+        "value": "Mascara",
+        "entity": "city"
+      }
+    ],
+    "predicted_entities": []
+  },
+  {
+    "text": "I am disappointed",
+    "entities": [],
+    "predicted_entities": [
+      {
+        "entity": "task",
+        "start": 5,
+        "end": 17,
+        "confidence_entity": 0.9932103753089905,
+        "value": "disappointed",
+        "extractor": "DIETClassifier"
+      }
+    ]
+  },
+  {
+    "text": "add visit granpa to the hospital to my list",
+    "entities": [
+      {
+        "start": 4,
+        "end": 32,
+        "value": "visit granpa to the hospital",
+        "entity": "task"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "task",
+        "start": 4,
+        "end": 35,
+        "confidence_entity": 0.8747121691703796,
+        "value": "visit granpa to the hospital to",
+        "extractor": "DIETClassifier"
+      },
+      {
+        "entity": "task",
+        "start": 4,
+        "end": 32,
+        "confidence_entity": 0.9631059870922728,
+        "value": "visit granpa to the hospital",
+        "extractor": "CRFEntityExtractor"
+      }
+    ]
+  },
+  {
+    "text": "add go to a new restaurant to my list",
+    "entities": [
+      {
+        "start": 4,
+        "end": 26,
+        "value": "go to a new restaurant",
+        "entity": "task"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "task",
+        "start": 4,
+        "end": 6,
+        "confidence_entity": 0.7540830373764038,
+        "value": "go",
+        "extractor": "DIETClassifier"
+      },
+      {
+        "entity": "task",
+        "start": 10,
+        "end": 26,
+        "confidence_entity": 0.5945795178413391,
+        "value": "a new restaurant",
+        "extractor": "DIETClassifier"
+      },
+      {
+        "entity": "task",
+        "start": 4,
+        "end": 26,
+        "confidence_entity": 0.9633280218384074,
+        "value": "go to a new restaurant",
+        "extractor": "CRFEntityExtractor"
+      }
+    ]
+  }
+]

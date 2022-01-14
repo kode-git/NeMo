@@ -1,0 +1,69 @@
+[
+  {
+    "text": "tell me the weather in [Santiago del Estero] (city)",
+    "entities": [],
+    "predicted_entities": [
+      {
+        "entity": "city",
+        "start": 24,
+        "end": 43,
+        "confidence_entity": 0.3002472221851349,
+        "value": "Santiago del Estero",
+        "extractor": "DIETClassifier"
+      }
+    ]
+  },
+  {
+    "text": "i want to know the weather in Berazategui",
+    "entities": [
+      {
+        "start": 30,
+        "end": 41,
+        "value": "Berazategui",
+        "entity": "city"
+      }
+    ],
+    "predicted_entities": []
+  },
+  {
+    "text": "hows in Mascara the weather?",
+    "entities": [
+      {
+        "start": 8,
+        "end": 15,
+        "value": "Mascara",
+        "entity": "city"
+      }
+    ],
+    "predicted_entities": []
+  },
+  {
+    "text": "add read crypto documents to my list",
+    "entities": [
+      {
+        "start": 4,
+        "end": 25,
+        "value": "read crypto documents",
+        "entity": "task"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "task",
+        "start": 9,
+        "end": 25,
+        "confidence_entity": 0.44133657217025757,
+        "value": "crypto documents",
+        "extractor": "DIETClassifier"
+      },
+      {
+        "entity": "task",
+        "start": 4,
+        "end": 25,
+        "confidence_entity": 0.5736236203211103,
+        "value": "read crypto documents",
+        "extractor": "CRFEntityExtractor"
+      }
+    ]
+  }
+]

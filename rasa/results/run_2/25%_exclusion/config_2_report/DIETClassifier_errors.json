@@ -1,0 +1,131 @@
+[
+  {
+    "text": "tell me the weather in [Santiago del Estero] (city)",
+    "entities": [],
+    "predicted_entities": [
+      {
+        "entity": "task",
+        "start": 33,
+        "end": 43,
+        "confidence_entity": 0.55,
+        "value": "del Estero",
+        "extractor": "DIETClassifier"
+      }
+    ]
+  },
+  {
+    "text": "hows in Mascara the weather?",
+    "entities": [
+      {
+        "start": 8,
+        "end": 15,
+        "value": "Mascara",
+        "entity": "city"
+      }
+    ],
+    "predicted_entities": []
+  },
+  {
+    "text": "add organize halloween to my list",
+    "entities": [
+      {
+        "start": 4,
+        "end": 22,
+        "value": "organize halloween",
+        "entity": "task"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "task",
+        "start": 4,
+        "end": 25,
+        "confidence_entity": 0.644205629825592,
+        "value": "organize halloween to",
+        "extractor": "DIETClassifier"
+      },
+      {
+        "entity": "task",
+        "start": 4,
+        "end": 22,
+        "confidence_entity": 0.9662716399508148,
+        "value": "organize halloween",
+        "extractor": "CRFEntityExtractor"
+      }
+    ]
+  },
+  {
+    "text": "add read crypto documents to my list",
+    "entities": [
+      {
+        "start": 4,
+        "end": 25,
+        "value": "read crypto documents",
+        "entity": "task"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "task",
+        "start": 4,
+        "end": 8,
+        "confidence_entity": 0.977259635925293,
+        "value": "read",
+        "extractor": "DIETClassifier"
+      },
+      {
+        "entity": "task",
+        "start": 16,
+        "end": 25,
+        "confidence_entity": 0.5903654098510742,
+        "value": "documents",
+        "extractor": "DIETClassifier"
+      },
+      {
+        "entity": "task",
+        "start": 4,
+        "end": 25,
+        "confidence_entity": 0.7404434660999141,
+        "value": "read crypto documents",
+        "extractor": "CRFEntityExtractor"
+      }
+    ]
+  },
+  {
+    "text": "complete read crypto documents",
+    "entities": [
+      {
+        "start": 9,
+        "end": 30,
+        "value": "read crypto documents",
+        "entity": "task"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "task",
+        "start": 9,
+        "end": 13,
+        "confidence_entity": 0.9819526076316833,
+        "value": "read",
+        "extractor": "DIETClassifier"
+      },
+      {
+        "entity": "task",
+        "start": 21,
+        "end": 30,
+        "confidence_entity": 0.4299134612083435,
+        "value": "documents",
+        "extractor": "DIETClassifier"
+      },
+      {
+        "entity": "task",
+        "start": 9,
+        "end": 30,
+        "confidence_entity": 0.5501933337695457,
+        "value": "read crypto documents",
+        "extractor": "CRFEntityExtractor"
+      }
+    ]
+  }
+]

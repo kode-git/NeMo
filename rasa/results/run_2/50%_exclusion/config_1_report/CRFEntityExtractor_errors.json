@@ -1,0 +1,111 @@
+[
+  {
+    "text": "tell me the weather in [Santiago del Estero] (city)",
+    "entities": [],
+    "predicted_entities": [
+      {
+        "entity": "task",
+        "start": 33,
+        "end": 43,
+        "confidence_entity": 0.5552466537879709,
+        "value": "del Estero",
+        "extractor": "CRFEntityExtractor"
+      }
+    ]
+  },
+  {
+    "text": "i want to know the weather in Berazategui",
+    "entities": [
+      {
+        "start": 30,
+        "end": 41,
+        "value": "Berazategui",
+        "entity": "city"
+      }
+    ],
+    "predicted_entities": []
+  },
+  {
+    "text": "hows in Mascara the weather?",
+    "entities": [
+      {
+        "start": 8,
+        "end": 15,
+        "value": "Mascara",
+        "entity": "city"
+      }
+    ],
+    "predicted_entities": []
+  },
+  {
+    "text": "complete read crypto documents",
+    "entities": [
+      {
+        "start": 9,
+        "end": 30,
+        "value": "read crypto documents",
+        "entity": "task"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "task",
+        "start": 9,
+        "end": 20,
+        "confidence_entity": 0.541924238204956,
+        "value": "read crypto",
+        "extractor": "DIETClassifier"
+      }
+    ]
+  },
+  {
+    "text": "complete dentist tomorrow",
+    "entities": [
+      {
+        "start": 9,
+        "end": 25,
+        "value": "dentist tomorrow",
+        "entity": "task"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "task",
+        "start": 9,
+        "end": 25,
+        "confidence_entity": 0.9112690687179565,
+        "value": "dentist tomorrow",
+        "extractor": "DIETClassifier"
+      }
+    ]
+  },
+  {
+    "text": "complete buy coffe",
+    "entities": [
+      {
+        "start": 9,
+        "end": 18,
+        "value": "buy coffe",
+        "entity": "task"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "task",
+        "start": 9,
+        "end": 18,
+        "confidence_entity": 0.9022884964942932,
+        "value": "buy coffe",
+        "extractor": "DIETClassifier"
+      },
+      {
+        "entity": "task",
+        "start": 9,
+        "end": 12,
+        "confidence_entity": 0.69513444088651,
+        "value": "buy",
+        "extractor": "CRFEntityExtractor"
+      }
+    ]
+  }
+]
