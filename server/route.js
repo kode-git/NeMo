@@ -98,6 +98,36 @@ const sendIntent = (request, response) => {
 }
 
 const ASR = (request, response) =>{
+
+
+    postBody = {
+        "audioPath": "../server/audio.wav",
+    }
+
+    postBodyString = JSON.stringify(postBody)
+
+    const options = {
+        hostname: 'localhost',
+        port: 9000,
+        path: '/asr/',
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Content-Length': Buffer.byteLength(postBodyString, 'utf8')
+        }
+    }
+    // create request
+    const req = http.request(options, res => {
+
+        res.setEncoding('utf8');
+        res.on('data', function (text) {
+            return text
+        });
+    })
+
+
+
+    /*
     var ls = spawnSync('python3', ['../asr/asr.py', '../server/audio.wav']);
     out = ls.stdout + "";
     // parsing the string and extract the output
@@ -106,6 +136,7 @@ const ASR = (request, response) =>{
         out.lastIndexOf("]\n@") - 1
      );
     return parsed
+    */
 }
 
 

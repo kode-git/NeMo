@@ -1,7 +1,6 @@
 import soundfile as sf
 from nemo.collections.tts.models.base import SpectrogramGenerator, Vocoder
 import os
-import onnxruntime
 
 _specGenerator = "tts_en_tacotron2"
 _vocoderName = "tts_hifigan"
@@ -69,9 +68,6 @@ class TTS:
         sf.write(f"{filename}.wav", audio.to('cpu').detach().numpy()[0], 22050)
         return f"{filename}.wav"
 
-
-    def importModel(self, filename):
-        onnxruntime.InferenceSession(f"{filename}.onnx")
 
 
 if __name__ == "__main__":
