@@ -95,6 +95,11 @@ function sendRecord(blob) {
     // insert a new node before the first list item
     form.insertBefore(li, form.firstChild);
     console.log("Insert " + message + "in the chat as the user question...")
+
+    // sending the message to rasa
+
+
+    // reproduce audio and write the message
     })
     .catch((err) => ('Error occurred', err))
     
