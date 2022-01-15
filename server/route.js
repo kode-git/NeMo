@@ -97,46 +97,32 @@ const sendIntent = (request, response) => {
 
 }
 
-const ASR = (request, response) =>{
-
-
-    postBody = {
-        "audioPath": "../server/audio.wav",
-    }
-
-    postBodyString = JSON.stringify(postBody)
-
+ const ASR = async function(request, response){
+    console.log('Called ASR method in route.js..')
+    responseData = ""
     const options = {
-        hostname: 'localhost',
+        hostname: '127.0.0.1',
         port: 9000,
         path: '/asr/',
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
-            'Content-Length': Buffer.byteLength(postBodyString, 'utf8')
+            'Content-Length': Buffer.byteLength('{}', 'utf8')
         }
     }
     // create request
     const req = http.request(options, res => {
-
         res.setEncoding('utf8');
-        res.on('data', function (text) {
-            return text
+        res.on('data', function (data) {
+            data = JSON.parse(data)
+            responseData = data.text[0]
+            response.status(200).json({ "Message": responseData })
         });
     })
+    
+    req.write('{}')
+    req.end()
 
-
-
-    /*
-    var ls = spawnSync('python3', ['../asr/asr.py', '../server/audio.wav']);
-    out = ls.stdout + "";
-    // parsing the string and extract the output
-    var parsed = out.substring(
-        out.indexOf("@\n[") + 4,
-        out.lastIndexOf("]\n@") - 1
-     );
-    return parsed
-    */
 }
 
 
