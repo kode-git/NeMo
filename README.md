@@ -14,33 +14,56 @@ The project is based on this framework and, within the use of Rasa NLU processes
 ## Rasa 
 Project integrates NeMo framework with the Rasa NLU. Rasa helps you build contextual assistants capable of having layered conversations with lots of back-and-forth. In order for a human to have a meaningful exchange with a contextual assistant, the assistant needs to be able to use context to build on things that were previously discussed – Rasa enables you to build assistants that can do this in a scalable way.
 
+
+## Components
+The project is composed by few elements which has some setups before to start the project.
+<ul>
+<li>Django Server - for the ASR and TTS invocations</li>
+<li>express.js Server - for the bridging with ASR, TTS and NLU</li>
+<li>Rasa Actions container - a Docker container for the actions element in NLU</li>
+<li>Rasa shell - for the environment on the Rasa server</li>
+</ul>
+
 ## Requirements
+
 <ul>
 <li>Python 3.6, 3.7 or 3.8</li>
 <li>Pytorch 1.10.0 or above</li>
 </ul>
 
+For the rest of dependencies in Python, run `pip install -i requirements.txt` in a virtual environment
+
 ## Step-to-Step Guide
 
-The entire environment provides some containers in docker. Please, you must follow the Docker setup section. Project runs on docker, so you need to download it via apt:
+Some parts of the environment provides some containers in docker. Please, you must follow the Docker setup section. Project runs on docker, so you need to download it via apt:
 - `sudo apt install docker`
 - `sudo apt install docker-compose`
 
 For problems about Docker setting, check the getting started guide on: https://docs.docker.com/get-started/
 
-## Docker setup
+## Environment setup
 
-For an easy setup of the dependencies, build and run the image from the Dockerfile following these steps: <br>
+For an easy setup of the dependencies, build and run the image and servers from the Dockerfile or the respective directories following these steps. You must have 4 terminals to run correctly each component. <br>
+In the first one, you need to setup the express.js server with the following steps: <br>
 - <b>Step 1</b>: `cd server`
 - <b>Step 2</b>: `npm init` and `npm install -i express`
 - <b>Step 3</b>: `nodemon server.js`
 
-For the rasa setup (you need to open an other terminal):
+In the second one, you have to run the django server: <br>
+- <b>Step 1</b>: `python3 -m venv venv`
+- <b>Step 2</b>: `source venv/bin/activate` (Linux/MacOS) or `./venv/bin/activate` (Windows)
+- <b>Step 3</b>: `pip3 install -i requirements.txt`
+- <b>Step 4</b>: `python3 manage.py runserver 9000`
+
+In the third one, you have to download and build some images about Rasa via Docker: <br>
 - <b>Step 0</b>: Type `docker network create jarvis-net`
 - <b>Step 1</b>: Go into the rasa project folder with the Dockerfile and type `sudo docker image build -f Dockerfile_actions.dockerfile -t rasa-actions .`
-- <b>Step 2</b>: Go into the rasa project folder with the Dockerfile and type `sudo docker image build -f Dockerfile_shell.dockerfile -t rasa-shell .`
-- <b>Step 3</b>: Type `sudo docker run -it -p 5055:5055 --network jarvis-net --mount "type=bind,source=$(pwd)/,target=/app" --name action-server rasa-actions `
-- <b>Step 4</b>: Going in the main directory the third terminal and type `cd rasa && sudo docker run -it -p 5005:5005 --network jarvis-net --mount "type=bind,source=$(pwd)/,target=/app" rasa-shell`
+- <b>Step 2</b>: Type `sudo docker run -it -p 5055:5055 --network jarvis-net --mount "type=bind,source=$(pwd)/,target=/app" --name action-server rasa-actions `
+For the last one, you have to run the Rasa shell:
+- <b>Step 1</b>: Go into the rasa project folder with the Dockerfile and type `sudo docker image build -f Dockerfile_shell.dockerfile -t rasa-shell .`
+- <b>Step 2</b>: Going in the main directory the third terminal and type `cd rasa && sudo docker run -it -p 5005:5005 --network jarvis-net --mount "type=bind,source=$(pwd)/,target=/app" rasa-shell`
+<br>
+Finally, you can go to `localhost:4000` and play with the Jarvis IA
 
 ## Contributors
 - Andrea Gurioli (@andreagurioli1995)
