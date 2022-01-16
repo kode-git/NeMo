@@ -58,7 +58,8 @@ In the second one, you have to run the django server: <br>
 In the third one, you have to download and build some images about Rasa via Docker: <br>
 - <b>Step 0</b>: Type `docker network create jarvis-net`
 - <b>Step 1</b>: Go into the rasa project folder with the Dockerfile and type `sudo docker image build -f Dockerfile_actions.dockerfile -t rasa-actions .`
-- <b>Step 2</b>: Type `sudo docker run -it -p 5055:5055 --network jarvis-net --mount "type=bind,source=$(pwd)/,target=/app" --name action-server rasa-actions `
+- <b>Step 2</b>: Type `sudo docker run -it -p 5055:5055 --network jarvis-net --mount "type=bind,source=$(pwd)/,target=/app" --name action-server rasa-actions `<br>
+
 For the last one, you have to run the Rasa shell:
 - <b>Step 1</b>: Go into the rasa project folder with the Dockerfile and type `sudo docker image build -f Dockerfile_shell.dockerfile -t rasa-shell .`
 - <b>Step 2</b>: Going in the main directory the third terminal and type `cd rasa && sudo docker run -it -p 5005:5005 --network jarvis-net --mount "type=bind,source=$(pwd)/,target=/app" rasa-shell`
