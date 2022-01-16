@@ -94,48 +94,43 @@ function sendRecord(blob) {
 
     // insert a new node before the first list item
     form.insertBefore(li, form.firstChild);
-    console.log("Insert " + message + "in the chat as the user question...")
+    console.log("Insert " + message + " in the chat as the user question...")
 
     // sending the message to rasa
+    $.ajax({
+        url: "/sendIntent",
+        type: "POST",
+        dataType: "json",
+        data: {
+            'text': message
+        },
 
+        success: function (data) {
+            text = data
+            console.log("Data from rasa:" + data)
+            $.ajax({
+                url: "/sendResponseAudio",
+                type: "POST",
+                dataType: "json",
+                data: {
+                    'text': text
+                },
+        
+                success: function (data) {
+                    console.log("Audio: " + data.audio_file)
+                    let li = document.createElement('p');
+                    li.textContent = " Jarvis : " + text;
+        
+                    // insert a new node before the first list item
+                    form.insertBefore(li, form.firstChild);
+                }
+            });
+            
+        }
+    });
 
     // reproduce audio and write the message
     })
     .catch((err) => ('Error occurred', err))
-    
 
-
-
-    // send AudioBlob to speechToText call
-    // fd = new FormData()
-    // fd.append('blob-name', 'audio.wav')
-    // fd.append('data', audioBlob)
-    // $.ajax({
-    //     url: "/sendIntent",
-    //     type: "POST",
-    //     dataType: "json",
-    //     data: {
-    //         'audio': fd
-    //     },
-
-    //     success: function (data) {
-    //         console.log(data)
-    //         // receive response text
-    //         // send text to the rasa invocation (sendMessage)
-    //         // receive response
-    //         // send text to the textToSpeech call
-    //         // receive speech audio
-    //         // reproduce audio and trascript the message
-    //     }
-    // });
-    // receive response text
-    // send text to the rasa invocation (sendMessage)
-    // receive response
-    // send text to the textToSpeech call
-    // receive speech audio
-    // reproduce audio and trascript the message
-}
-
-function questionASR(){
-    
 }

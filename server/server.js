@@ -44,7 +44,7 @@ app.post('/sendAudioQuest', upload.single('file'), (req, res) => {
   route.ASR(req, res)
 })
 
-
+app.post('/sendResponseAudio', route.TTS)
 
 app.post('/sendIntent', route.sendIntent)
 

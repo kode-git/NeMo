@@ -2,7 +2,7 @@ import soundfile as sf
 from nemo.collections.tts.models.base import SpectrogramGenerator, Vocoder
 import os
 
-_specGenerator = "tts_en_tacotron2"
+_specGenerator = "tts_en_fastpitch"
 _vocoderName = "tts_hifigan"
 
 class TTS:

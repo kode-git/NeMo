@@ -15,8 +15,9 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-
+from nemo_app import views
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('/', include('nemo_app.urls'))
+    path('asr/', views.asr_transcribe),
+    path('tts/', views.tts_translate)
 ]

@@ -93,11 +93,9 @@ function getResponseFromInt(intentName, response,entities) {
 
 const sendIntent = (request, response) => {
     sendIntPost(request.body, response)
-    //response.status(200).json(botResponse)
-
 }
 
- const ASR = async function(request, response){
+const ASR = async function(request, response){
     console.log('Called ASR method in route.js..')
     responseData = ""
     const options = {
@@ -126,10 +124,46 @@ const sendIntent = (request, response) => {
 }
 
 
+const TTS = async function(request, response){
+    console.log("Received TTS request :" + request.body)
+    postBody = JSON.stringify({
+        'text': request.body.text
+    });
+
+    console.log('Called ASR method in route.js..')
+    responseData = ""
+    const options = {
+        hostname: '127.0.0.1',
+        port: 9000,
+        path: '/tts/',
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Content-Length': Buffer.byteLength(postBody, 'utf8')
+        }
+    }
+    // create request
+    const req = http.request(options, res => {
+        res.setEncoding('utf8');
+        res.on('data', function (data) {
+            data = JSON.parse(data)
+            responseAudio = data.audio_file
+            response.status(200).json({"audio_file" : responseAudio })
+        });
+    })
+    
+    req.write(postBody)
+    req.end()
+
+}
+
+
+
+
 // Exports module for server.js
 
 module.exports = {
-    sendIntent,
-    ASR,
-
+    sendIntent, // Text message full management
+    ASR, // question management in audio mode
+    TTS, // response management in audio and text mode
 }

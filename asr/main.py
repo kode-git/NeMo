@@ -42,7 +42,7 @@ if __name__ == "__main__":
     asr_model = ASR()
     asr_model.downloadModel()
     # load the current audio file
-    wave_file = ["../server/audio.wav"]
+    wave_file = ["./../server/audio.wav"]
     text = asr_model.model.transcribe(paths2audio_files=wave_file)
     print("@") # tagging start
     print(text)
