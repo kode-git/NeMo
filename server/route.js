@@ -72,9 +72,14 @@ function getResponseFromInt(intentName, response,entities) {
 
         res.setEncoding('utf8');
         res.on('data', function (chunk) {
-            console.log("Jarvis says: " + JSON.parse(chunk).messages[0])
+            try{
+            console.log("Jarvis says: " + JSON.stringify(JSON.parse(chunk).messages[0]))
             botResponse = JSON.parse(chunk).messages[0].text
             response.status(200).json(botResponse)
+            } catch(error){
+                console.log('Rasa don\'t have message to send, intent not supported')
+                response.status(200).json("")
+            }
         });
     })
 

@@ -2,7 +2,7 @@ import soundfile as sf
 from nemo.collections.tts.models.base import SpectrogramGenerator, Vocoder
 import os
 
-_specGenerator = "tts_en_fastpitch"
+_specGenerator = "tts_en_fastspeech_2"
 _vocoderName = "tts_hifigan"
 
 class TTS:
@@ -62,6 +62,9 @@ class TTS:
     def textToSpeech(self, text : str, filename):
         if self.vocoder == None or self.spectogramGenerator == None:
             raise Exception('Vocoder or Spectogram Generator are None. Please, setup them before invoke he textToSpeech method!')
+        # clear the filename
+        if os.path.isfile(f"{filename}.wav"):
+            os.remove(f"{filename}.wav")
         parsed = self.spectogramGenerator.parse(text)
         spectogram = self.spectogramGenerator.generate_spectrogram(tokens=parsed)
         audio = self.vocoder.convert_spectrogram_to_audio(spec=spectogram)
@@ -74,7 +77,6 @@ if __name__ == "__main__":
     tts = TTS()
     tts.downloadSpectogramGenerator()
     tts.downloadVocoder()
-    tts.textToSpeech('The weather in Bologna is 39 celsius, sir', "audio")
-    audio = tts.textToSpeech('Hello World', "audio")
+    audio = tts.textToSpeech('The weather in Bologna is 39 celsius, sir', "speech")
     os.system(f"play {audio}")
     

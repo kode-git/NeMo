@@ -50,8 +50,8 @@ In the first one, you need to setup the express.js server with the following ste
 - <b>Step 3</b>: `nodemon server.js`
 
 In the second one, you have to run the django server: <br>
-- <b>Step 1</b>: `python3 -m venv venv`
-- <b>Step 2</b>: `source venv/bin/activate` (Linux/MacOS) or `./venv/bin/activate` (Windows)
+- <b>Step 1</b>: `python3 -m venv venv` or `python -m venv venv`
+- <b>Step 2</b>: `source venv/bin/activate` (Linux/MacOS) or `.\venv\bin\activate` (Windows)
 - <b>Step 3</b>: `pip3 install -i requirements.txt`
 - <b>Step 4</b>: `python3 manage.py runserver 9000`
 
