@@ -30,14 +30,10 @@ rules:
     - senderemail: null
   # The actions we want to run when the form is submitted.
   - action: utter_ask_mail_content
-  
-
-  
-- rule: Mail content form
-  steps:
   - intent: mail_content
   - action: mail_content_form
   - active_loop: mail_content_form
+  
 
 - rule: Write content form
   condition:
@@ -49,10 +45,14 @@ rules:
   - active_loop: null
   - slot_was_set:
     - containermail: null
-  # The actions we want to run when the form is submitted.
   - action: utter_mail_confirmed
+  - action: mail_response
 
 
+- rule: start utter mail
+  steps:
+  - action: utter_mail_confirmed
+  - action: mail_response
 
 - rule: weather form
   steps:
@@ -72,4 +72,3 @@ rules:
     - cityname: null
 
 #
-

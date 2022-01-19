@@ -94,3 +94,4 @@ actions:
 - validate_weather_form
 - weather_form
 - action_ask_todo
+- mail_response

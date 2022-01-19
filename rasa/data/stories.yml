@@ -208,7 +208,7 @@ stories:
 #----------------------------------------
 
 
-- story: interactive_story_2
+- story: interactive_mailing_story_1
   steps:
   - intent: mailing
   - action: utter_ask_email
@@ -230,7 +230,85 @@ stories:
     - containermail: i love you
   - active_loop: null
   - action: utter_mail_confirmed
+  - action: mail_response
+
   
+- story: interactive_mailing_story_2
+  steps:
+  - intent: mailing
+  - action: utter_ask_email
+  - intent: mail_recipient
+  - action: register_form
+  - active_loop: register_form
+  - slot_was_set:
+    - requested_slot: senderemail
+  - slot_was_set:
+    - senderemail: emailrandom@gmail.com
+  - active_loop: null
+  - action: utter_ask_mail_content
+  - intent: mail_content
+  - action: mail_content_form
+  - active_loop: mail_content_form
+  - slot_was_set:
+    - requested_slot: containermail
+  - slot_was_set:
+    - containermail: i want to fix an appointment on saturday please
+  - active_loop: null
+  - action: utter_mail_confirmed
+  - action: mail_response
+
+  
+- story: interactive_mailing_story_3
+  steps:
+  - intent: mailing
+  - action: utter_ask_email
+  - intent: mail_recipient
+  - action: register_form
+  - active_loop: register_form
+  - slot_was_set:
+    - requested_slot: senderemail
+  - slot_was_set:
+    - senderemail: idontknow@gmail.com
+  - active_loop: null
+  - action: utter_ask_mail_content
+  - intent: mail_content
+  - action: mail_content_form
+  - active_loop: mail_content_form
+  - slot_was_set:
+    - requested_slot: containermail
+  - slot_was_set:
+    - containermail: when we can fix the issue on our project?
+  - active_loop: null
+  - action: utter_mail_confirmed
+  - action: mail_response
+  
+  
+- story: interactive_mailing_story_4
+  steps:
+  - intent: mailing
+  - action: utter_ask_email
+  - intent: mail_recipient
+  - action: register_form
+  - active_loop: register_form
+  - slot_was_set:
+    - requested_slot: senderemail
+  - slot_was_set:
+    - senderemail: emailrandom@gmail.com
+  - active_loop: null
+  - action: utter_ask_mail_content
+  - intent: mail_content
+  - action: mail_content_form
+  - active_loop: mail_content_form
+  - slot_was_set:
+    - requested_slot: containermail
+  - slot_was_set:
+    - containermail: today is gonna be the day, get ready for it. We'll meet at 10 am
+  - active_loop: null
+  - action: utter_mail_confirmed
+  - action: mail_response
+
+
+  #-------------------------------------------------------
   
 - story: city_story_2
   steps:

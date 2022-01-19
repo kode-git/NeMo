@@ -231,13 +231,14 @@ class ActionSendMail(Action):
     def run(self, dispatcher: CollectingDispatcher,
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+        global email
         entities = tracker.latest_message['entities']
         for e in entities:
             if e['entity']=='senderemail':
                 email = e['value']
 
         dispatcher.utter_message(text=f"{email}")
-
+        print(email)
         return []
 
 
@@ -249,33 +250,32 @@ class ActionSendMail(Action):
     def run(self, dispatcher: CollectingDispatcher,
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+        global mail
         entities = tracker.latest_message['entities']
+        print(email)
         for e in entities:
             if e['entity']=='containermail':
                 mail = e['value']
 
-        dispatcher.utter_message(text=f"{mail}")
-
         return []
-
 
 class ActionSendingMail(Action):
     
     def name(self) -> Text:
-        return "utter_mail_confirmed"
+        return "mail_response"
 
-    def run(self, dispatcher: CollectingDispatcher,
-            tracker: Tracker,
-            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-
+    def run(self, dispatcher,tracker,domain):
+        global mail
+        global email
+            
         sender = "jarvisunibo@gmail.com"
         receiver = email
         password = "JarvisNlp!"
-        subject = "Jarvis test"
+        subject = "Jarvis mailing"
         body = mail
-
+        
         # header
-        message = f"""From: Jarvis Unibo{sender}
+        message = f"""From: Jarvis Unibo
         To: {receiver}
         Subject: {subject}\n
         {body}
@@ -287,10 +287,15 @@ class ActionSendingMail(Action):
         try:
             server.login(sender,password)
             print("Logged in...")
+            print(email)
+            print(mail)
             server.sendmail(sender, receiver, message)
-            print("Email has been sent!")
+            print("Mail has been sent!")
+            dispatcher.utter_message(text=f"Mail has been sent to "+ receiver)
 
         except smtplib.SMTPAuthenticationError:
-            print("unable to sign in")
-        dispatcher.utter_message(text=f"{mail}")
+            print("Unable to sign in")
+            dispatcher.utter_message(text=f"I'm sorry i think there's a problem")
+            
+                
         return []

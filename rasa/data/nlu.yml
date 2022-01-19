@@ -10,87 +10,24 @@ nlu:
 - intent: greet
   examples: |
     - hey
-    - hello
-    - hi
-    - hello there
-    - good morning
-    - good evening
-    - moin
-    - hey there
-    - let's go
-    - hey dude
-    - goodmorning
-    - goodevening
-    - good afternoon
+    
 - intent: goodbye
   examples: |
-    - good afternoon
-    - cu
-    - good by
-    - cee you later
-    - good night
-    - bye
-    - goodbye
-    - have a nice day
-    - see you around
-    - bye bye
-    - see you later
+    - good 
 - intent: affirm
   examples: |
     - yes
-    - y
-    - indeed
-    - of course
-    - that sounds good
-    - correct
 - intent: deny
   examples: |
     - no
-    - n
-    - never
-    - I don't think so
-    - don't like that
-    - no way
-    - not really
 - intent: mood_great
   examples: |
     - perfect
-    - great
-    - amazing
-    - feeling like a king
-    - wonderful
-    - I am feeling very good
-    - I am great
-    - I am amazing
-    - I am going to save the world
-    - super stoked
-    - extremely good
-    - so so perfect
-    - so good
-    - so perfect
+
 - intent: mood_unhappy
   examples: |
-    - my day was horrible
-    - I am sad
-    - I don't feel very well
-    - I am disappointed
-    - super sad
-    - I'm so sad
-    - sad
-    - very sad
-    - unhappy
-    - not good
-    - not very good
-    - extremly sad
-    - so saad
     - so sad
-- intent: bot_challenge
-  examples: |
-    - are you a bot?
-    - are you a human?
-    - am I talking to a bot?
-    - am I talking to a human?
-    - how are you?
+
 - intent: mailing
   examples: |
     - i want to send an email
@@ -99,10 +36,21 @@ nlu:
     - [giovi@gmail.com](senderemail)
     - [mario@gmail.com](senderemail)
     - [andrea@gmail.com](senderemail)
+    
 - intent: mail_content
   examples: |
-    - [meeting at 9am](containermail)
-    - [finish the project](containermail)
+    - [dear meeting at 9am regards](containermail)
+    - [finish the dear project regards](containermail)
+    - [If you know dear anybody else who’ll find this useful, please forward the email to them. regards](containermail)
+    - [Let us know if you face any problems  dear accessing the site by replying to this email. regards](containermail)
+    - [We’ll get back dear to you ASAP and ensure you gain access to it immediately regards](containermail)
+    - [I noticed that dear you didn’t download the link I sent, so I’m sending it again regards](containermail)
+    - [I am emailing you today to let you know we have opened doors to our](containermail)
+    - [If you have any questions about the product, please respond to this email or use the live chat on the product page](containermail)
+    - [I hope you are enjoying your recent purchase of our project regards](containermail)
+    - \b[a-zA-Z0-9_\-][a-zA-Z0-9_\- ]*[a-zA-Z0-9_\-]\b (containermail)
+
+
 - intent: give_time
   examples: |
     - show time
@@ -204,3 +152,8 @@ nlu:
 
     
 
+- intent: nlu_fallback
+  examples: |
+    - I want to order food
+    - What is 2 + 2?
+    - Who's the US President?
