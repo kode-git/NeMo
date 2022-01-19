@@ -2,8 +2,8 @@ import soundfile as sf
 from nemo.collections.tts.models.base import SpectrogramGenerator, Vocoder
 import os
 
-_specGenerator = "tts_en_fastspeech_2"
-_vocoderName = "tts_hifigan"
+_specGenerator = "tts_en_tacotron2"
+_vocoderName = "tts_melgan"
 
 class TTS:
 

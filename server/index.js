@@ -107,7 +107,8 @@ function sendRecord(blob) {
 
         success: function (data) {
             text = data
-            console.log("Data from rasa:" + data)
+            if(text == "" || text == " " || text == undefined) text = "I didn't understand, can you repeat?"
+            console.log("Data from rasa:" + text)
             $.ajax({
                 url: "/sendResponseAudio",
                 type: "POST",
