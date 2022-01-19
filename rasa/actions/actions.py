@@ -237,8 +237,6 @@ class ActionSendMail(Action):
             if e['entity']=='senderemail':
                 email = e['value']
 
-        dispatcher.utter_message(text=f"{email}")
-        print(email)
         return []
 
 
@@ -291,7 +289,6 @@ class ActionSendingMail(Action):
             print(mail)
             server.sendmail(sender, receiver, message)
             print("Mail has been sent!")
-            dispatcher.utter_message(text=f"Mail has been sent to "+ receiver)
 
         except smtplib.SMTPAuthenticationError:
             print("Unable to sign in")
