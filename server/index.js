@@ -22,12 +22,14 @@ function sendMessage() {
         },
 
         success: function (data) {
+            text = data
+            if(text == "" || text == " " || text == undefined) text = "I didn't understand, can you repeat?"
+            console.log("Data from rasa:" + text)
             let li = document.createElement('p');
-            li.textContent = " Jarvis : " + data;
+            li.textContent = " Jarvis : " + text;
 
             // insert a new node before the first list item
             form.insertBefore(li, form.firstChild);
-            console.log(data)
         }
     });
 };

@@ -1,9 +1,9 @@
 var http = require('http');
-const spawnSync = require('child_process').spawnSync
 var botResponse = ""
 
 //predictor of the interested intent
 function sendIntPost(data, resp) {
+
     postBody = JSON.stringify({
         'text': data.text
     });
@@ -43,7 +43,6 @@ function sendIntPost(data, resp) {
 
 // getting the response given the best predicted intent
 function getResponseFromInt(intentName, response,entities) {
-
 
     postBody = {
         "name": intentName.toString(),

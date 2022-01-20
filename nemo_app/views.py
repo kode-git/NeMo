@@ -2,9 +2,11 @@ from django.http import JsonResponse
 from django.shortcuts import render
 from asr.main import ASR
 from tts.main import TTS
+from nemo import asr as nemo_asr
 import json
 from django.views.decorators.csrf import csrf_exempt
-import os
+import gzip
+import os, shutil, wget
 
 # Create your views here.
 
@@ -15,6 +17,9 @@ asr_model.downloadModel()
 tts_model = TTS()
 tts_model.downloadSpectogramGenerator()
 tts_model.downloadVocoder()  
+
+# Import LM 
+
 
 @csrf_exempt
 def asr_transcribe(request):
