@@ -45,14 +45,9 @@ rules:
   - active_loop: null
   - slot_was_set:
     - containermail: null
-  - action: utter_mail_confirmed
   - action: mail_response
 
 
-- rule: start utter mail
-  steps:
-  - action: utter_mail_confirmed
-  - action: mail_response
 
 - rule: weather form
   steps:

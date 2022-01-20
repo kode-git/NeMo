@@ -28,9 +28,6 @@ intents:
 - mail_content:
     use_entities:
     - containermail
-- ask_weather:
-    use_entities:
-    - cityname
 entities:
 - city
 - cityname
@@ -72,8 +69,6 @@ responses:
   - text: Ok, please tell me the recipient.
   utter_ask_mail_content:
   - text: Please write the content of the mail.
-  utter_mail_confirmed:
-  - text: I will send the mail \'{containermail}\' to {senderemail}
   utter_invalid_city:
   - text: I'm sorry, that city doesn't exist. Please retry :(
 actions:
@@ -88,7 +83,6 @@ actions:
 - utter_greet
 - utter_iamabot
 - utter_invalid_city
-- utter_mail_confirmed
 - validate_mail_content_form
 - validate_register_form
 - validate_weather_form

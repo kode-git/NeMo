@@ -80,11 +80,15 @@ class ActionShowWheater(Action):
         complete_api_link = "https://api.openweathermap.org/data/2.5/weather?q="+city+"&APPID=dbd3b02d8958d62185d02e944cd5f522"
         api_link = requests.get(complete_api_link)
         api_data = api_link.json()
-        temp_city = ((api_data['main']['temp'])-273.15)
-        weather_desc = api_data['weather'][0]['description']
-        print(tracker.slots['city'])
-        dispatcher.utter_message(text=f"{'The weather in ' + city + ' is '+ weather_desc + ' and the temperature is '+ str(round(temp_city,1)) +'°'}")
-    
+        
+        if(api_data['cod']=='404'):
+            dispatcher.utter_message(text=f"I'm sorry, this city doesn't exist")
+        else:
+            temp_city = ((api_data['main']['temp'])-273.15)
+            weather_desc = api_data['weather'][0]['description']
+            print(tracker.slots['city'])
+            dispatcher.utter_message(text=f"{'The weather in ' + city + ' is '+ weather_desc + ' and the temperature is '+ str(round(temp_city,1)) +'°'}")
+        
         return []
 
 
@@ -284,12 +288,10 @@ class ActionSendingMail(Action):
 
         try:
             server.login(sender,password)
-            print("Logged in...")
-            print(email)
-            print(mail)
             server.sendmail(sender, receiver, message)
             print("Mail has been sent!")
 
+            dispatcher.utter_message(text=f"Mail has been sent to " + receiver)
         except smtplib.SMTPAuthenticationError:
             print("Unable to sign in")
             dispatcher.utter_message(text=f"I'm sorry i think there's a problem")

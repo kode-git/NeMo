@@ -1,12 +1,6 @@
 version: "2.0"
 nlu:
 
-- lookup: city
-  examples: |
-    - Salto
-
-
-
 - intent: greet
   examples: |
     - hey
@@ -31,12 +25,23 @@ nlu:
 - intent: mailing
   examples: |
     - i want to send an email
+    - send an email
+    - sending an email
+    - mailing
+    - i want to mail 
+    - send mail
+
 - intent: mail_recipient
   examples: |
     - [giovi@gmail.com](senderemail)
     - [mario@gmail.com](senderemail)
     - [andrea@gmail.com](senderemail)
-    
+
+- regex: containermail
+  examples: |
+    - \bdear \b
+    - \b regards\b
+
 - intent: mail_content
   examples: |
     - [dear meeting at 9am regards](containermail)
@@ -48,31 +53,30 @@ nlu:
     - [I am emailing you today to let you know we have opened doors to our](containermail)
     - [If you have any questions about the product, please respond to this email or use the live chat on the product page](containermail)
     - [I hope you are enjoying your recent purchase of our project regards](containermail)
-    - \b[a-zA-Z0-9_\-][a-zA-Z0-9_\- ]*[a-zA-Z0-9_\-]\b (containermail)
 
 
 - intent: give_time
   examples: |
     - show time
 
-- intent: ask_weather
-  examples: |
-    - whats the tempo in [Fano]{"entity": "cityname", "value": "fano"}
-
 
 - intent: inform_weather
   examples: |
-    - tell me the weather in [Bari](city)
-    - hows in [Perugia](city) the weather?
-    - hows in [Mascara](city) the weather?
-    - i want to know the weather in [Berazategui](city)
-    - i want to know the weather in [Cordoba](city)
-    - tell me the weather in [Los Angeles](city)
-    - tell me the weather in [New York](city)
-    - tell me the weather in [Rio Cuarto](city)
-    - tell me the weather in [Las Vegaso](city)
-    - tell me the weather in [San Francisco] (city)
-    - tell me the weather in [Santiago del Estero] (city)
+    - tell me the weather in [bari](city)
+    - hows in [perugia](city) the weather?
+    - hows in [mascara](city) the weather?
+    - i want to know the weather in [berazategui](city)
+    - i want to know the weather in [cordoba](city)
+    - tell me the weather in [los angeles](city)
+    - tell me the weather in [new york](city)
+    - tell me the weather in [rio cuarto](city)
+    - tell me the weather in [as vegaso](city)
+    - tell me the weather in [san francisco] (city)
+    - tell me the weather in [santiago del estero] (city)
+    - whats the temperature in [milano](city)
+    - how is the temperature in [london](city)
+    - whats the weather in [new delhi](city)
+    - what is the weather in [rio de janeiro](city)
 
 
 - intent: add_todo
@@ -148,9 +152,14 @@ nlu:
     - i want to see my list
     - what's inside my todo list
     - todo list
-    
-
-    
+    - show to do list
+    - show to do
+    - to do list
+    - to do 
+    - list
+    - my list 
+    - tell me my list
+    - tell me my to do list
 
 - intent: nlu_fallback
   examples: |

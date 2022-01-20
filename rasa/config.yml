@@ -18,6 +18,11 @@ pipeline:
      epochs: 100
      constrain_similarities: true
      model_confidence: cosine
+   - name: RegexEntityExtractor
+      # text will be processed with case insensitive as default
+     case_sensitive: False
+      # use regexes to extract entities
+     use_regexes: True
    - name: CRFEntityExtractor
    - name: EntitySynonymMapper
    - name: ResponseSelector
@@ -27,6 +32,8 @@ pipeline:
    - name: FallbackClassifier
      threshold: 0.3
      ambiguity_threshold: 0.1
+
+
 
 # Configuration for Rasa Core.
 # https://rasa.com/docs/rasa/core/policies/

@@ -229,7 +229,6 @@ stories:
   - slot_was_set:
     - containermail: i love you
   - active_loop: null
-  - action: utter_mail_confirmed
   - action: mail_response
 
   
@@ -254,7 +253,6 @@ stories:
   - slot_was_set:
     - containermail: i want to fix an appointment on saturday please
   - active_loop: null
-  - action: utter_mail_confirmed
   - action: mail_response
 
   
@@ -279,7 +277,6 @@ stories:
   - slot_was_set:
     - containermail: when we can fix the issue on our project?
   - active_loop: null
-  - action: utter_mail_confirmed
   - action: mail_response
   
   
@@ -304,32 +301,12 @@ stories:
   - slot_was_set:
     - containermail: today is gonna be the day, get ready for it. We'll meet at 10 am
   - active_loop: null
-  - action: utter_mail_confirmed
   - action: mail_response
 
 
   #-------------------------------------------------------
-  
-- story: city_story_2
-  steps:
-  - intent: ask_weather
-  - action: weather_form
-  - active_loop: weather_form
-  - slot_was_set:
-    - requested_slot: cityname
-  - slot_was_set:
-    - cityname: Madrid
-  - active_loop: null
 
   
-- story: city_test1
-  steps:
-  - intent: inform_weather
-    entities:
-    - city: Rimini
-  - slot_was_set:
-    - city: Rimini
-  - action: action_weather
   
 - story: city_test2
   steps:
