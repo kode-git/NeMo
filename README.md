@@ -31,7 +31,7 @@ The project is composed by few elements which has some setups before to start th
 <li>Pytorch 1.10.0 or above</li>
 </ul>
 
-For the rest of dependencies in Python, run `pip install -i requirements.txt` in a virtual environment
+For the rest of dependencies in Python, run `pip install -r requirements.txt` in a virtual environment
 
 ## Step-to-Step Guide
 
