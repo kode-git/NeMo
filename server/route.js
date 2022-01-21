@@ -117,7 +117,7 @@ const ASR = async function(request, response){
         res.setEncoding('utf8');
         res.on('data', function (data) {
             data = JSON.parse(data)
-            responseData = data.text[0]
+            responseData = data.text
             response.status(200).json({ "Message": responseData })
         });
     })
