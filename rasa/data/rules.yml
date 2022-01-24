@@ -64,6 +64,6 @@ rules:
   - action: weather_form
   - active_loop: null
   - slot_was_set:
-    - cityname: null
+    - city: null
 
 #

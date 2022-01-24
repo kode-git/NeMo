@@ -4,6 +4,10 @@ nlu:
 - intent: greet
   examples: |
     - hey
+    - hi
+    - hello
+    - ehi
+    - hola
     
 - intent: goodbye
   examples: |
@@ -17,6 +21,9 @@ nlu:
 - intent: mood_great
   examples: |
     - perfect
+    - I am fine... thank you
+    - Fine, thank you
+    - So great!
 
 - intent: mood_unhappy
   examples: |
@@ -37,22 +44,18 @@ nlu:
     - [mario@gmail.com](senderemail)
     - [andrea@gmail.com](senderemail)
 
-- regex: containermail
-  examples: |
-    - \bdear \b
-    - \b regards\b
 
 - intent: mail_content
   examples: |
-    - [dear meeting at 9am regards](containermail)
-    - [finish the dear project regards](containermail)
-    - [If you know dear anybody else who’ll find this useful, please forward the email to them. regards](containermail)
-    - [Let us know if you face any problems  dear accessing the site by replying to this email. regards](containermail)
-    - [We’ll get back dear to you ASAP and ensure you gain access to it immediately regards](containermail)
-    - [I noticed that dear you didn’t download the link I sent, so I’m sending it again regards](containermail)
-    - [I am emailing you today to let you know we have opened doors to our](containermail)
-    - [If you have any questions about the product, please respond to this email or use the live chat on the product page](containermail)
-    - [I hope you are enjoying your recent purchase of our project regards](containermail)
+    - write [dear meeting at 9am regards](containermail)
+    - write [finish the dear project regards](containermail)
+    - write [If you know dear anybody else who'll find this useful, please forward the email to them. regards](containermail)
+    - write [Let us know if you face any problems  dear accessing the site by replying to this email. regards](containermail)
+    - write [We'll get back dear to you ASAP and ensure you gain access to it immediately regards](containermail)
+    - write [I noticed that dear you didn't download the link I sent, so I'm sending it again regards](containermail)
+    - write [I am emailing you today to let you know we have opened doors to our](containermail)
+    - write [If you have any questions about the product, please respond to this email or use the live chat on the product page](containermail)
+    - write [I hope you are enjoying your recent purchase of our project regards](containermail)
 
 
 - intent: give_time
@@ -109,6 +112,34 @@ nlu:
     - add [buy new book](task) to my list
     - add [buy new computer](task) to my list
     - add [ask money to mom](task) to my list
+    - add [buy coffe](task) to list
+    - add [wash hand](task) to list
+    - add [pay the rent every first of the month](task) to list
+    - add [wash hair](task) to list
+    - add [meeting in via Riva di Reno](task) to list
+    - add [buy apple](task) to list
+    - add [dentist tomorrow](task) to list
+    - add [mom birthday gift](task) to list
+    - add [go to the hospital](task) to list
+    - add [organize halloween](task) to list
+    - add [visit granpa to the hospital](task) to list
+    - add [buy sanitizer](task) to list
+    - add [organize Andrea's party](task) to list
+    - add [change your look ](task) to list
+    - add [go to a new restaurant](task) to list
+    - add [try a new food](task) to list
+    - add [try a new drink](task) to list
+    - add [try cooking a new dish](task) to list
+    - add [read a new book](task) to list
+    - add [water the plant](task) to list
+    - add [root a three](task) to list
+    - add [read crypto documents](task) to list
+    - add [add new commit on github](task) to list
+    - add [study for nlp exam](task) to list
+    - add [watch chelsea on tv](task) to list
+    - add [buy new book](task) to list
+    - add [buy new computer](task) to list
+    - add [ask money to mom](task) to list
     
     
 
@@ -147,8 +178,14 @@ nlu:
 - intent: ask_todo
   examples: |
     - what's in my list?
+    - what is in my list?
+    - what's in my list
+    - what is  in my list
     - tell me about my list
     - how's my list?
+    - how is my list
+    - how's my list
+    - how is my list?
     - i want to see my list
     - what's inside my todo list
     - todo list
@@ -160,6 +197,16 @@ nlu:
     - my list 
     - tell me my list
     - tell me my to do list
+    - check list
+    - checklist
+    - show my list
+    - show lists
+    - show todo
+    - check todo
+    - what is todo
+    - show to do
+    - check to do
+    - what is to do
 
 - intent: nlu_fallback
   examples: |

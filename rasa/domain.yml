@@ -30,7 +30,6 @@ intents:
     - containermail
 entities:
 - city
-- cityname
 - containermail
 - senderemail
 - task
@@ -41,19 +40,16 @@ slots:
   containermail:
     type: text
     influence_conversation: false
-  cityname:
-    type: text
-    influence_conversation: false
   city:
     type: text
-    influence_conversation: true
+    influence_conversation: false
   task:
     type: text
     influence_conversation: true
 
 responses:
   utter_greet:
-  - text: Hey! How ?
+  - text: Hey! How are you?
   utter_cheer_up:
   - text: 'Here is something to cheer you up:'
     image: https://i.imgur.com/nGF1K8f.jpg
@@ -66,11 +62,13 @@ responses:
   utter_iamabot:
   - text: I am a bot, powered by Rasa.
   utter_ask_email:
-  - text: Ok, please tell me the recipient.
+  - text: Ok. Please, tell me the mail of receiver.
   utter_ask_mail_content:
-  - text: Please write the content of the mail.
+  - text: Say write and the content of the mail.
   utter_invalid_city:
-  - text: I'm sorry, that city doesn't exist. Please retry :(
+  - text: I am sorry, that city doesn't exist. Please retry
+  utter_nlu_fallback:
+  - text: I am sorry, I didn't understand, can you repeat?
 actions:
 - action_mail_sender
 - action_show_time
