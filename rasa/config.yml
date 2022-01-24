@@ -18,11 +18,6 @@ pipeline:
      epochs: 100
      constrain_similarities: true
      model_confidence: cosine
-   - name: RegexEntityExtractor
-      # text will be processed with case insensitive as default
-     case_sensitive: False
-      # use regexes to extract entities
-     use_regexes: True
    - name: CRFEntityExtractor
    - name: EntitySynonymMapper
    - name: ResponseSelector

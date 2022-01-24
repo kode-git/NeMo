@@ -218,13 +218,16 @@ class ActionAskTodo(Action):
         for x in task:
             i=i+1
             
-            single_task = '\nNumber ' + str(i) + ': ' + x['name'] + '.'
-            list = list + single_task
-        
-        dispatcher.utter_message(text=f"{'You have ' + str(num_task) + ' tasks in your TODO list: ' + list }")
-        
-                
 
+            if(i==num_task):
+                single_task =  str(i) + ': ' + x['name'] + '.'
+                list = list + single_task
+            else: 
+                single_task =  str(i) + ': ' + x['name'] + ', '
+                list = list + single_task
+                
+        
+        dispatcher.utter_message(text=f"{'TODO list is: ' + list }")
 
 
 class ActionSendMail(Action):
@@ -290,7 +293,7 @@ class ActionSendingMail(Action):
             server.login(sender,password)
             server.sendmail(sender, receiver, message)
             print("Mail has been sent!")
-
+            print(body)
             dispatcher.utter_message(text=f"Mail has been sent to " + receiver)
         except smtplib.SMTPAuthenticationError:
             print("Unable to sign in")

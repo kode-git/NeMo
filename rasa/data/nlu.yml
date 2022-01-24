@@ -1,6 +1,5 @@
 version: "2.0"
 nlu:
-
 - intent: greet
   examples: |
     - hey
@@ -8,10 +7,9 @@ nlu:
     - hello
     - ehi
     - hola
-    
 - intent: goodbye
   examples: |
-    - good 
+    - good
 - intent: affirm
   examples: |
     - yes
@@ -24,64 +22,74 @@ nlu:
     - I am fine... thank you
     - Fine, thank you
     - So great!
-
 - intent: mood_unhappy
   examples: |
     - so sad
-
 - intent: mailing
   examples: |
     - i want to send an email
     - send an email
     - sending an email
     - mailing
-    - i want to mail 
+    - i want to mail
     - send mail
-
+    - i want to send an emai
+    - i want to send email
 - intent: mail_recipient
   examples: |
     - [giovi@gmail.com](senderemail)
     - [mario@gmail.com](senderemail)
     - [andrea@gmail.com](senderemail)
-
+    - [giovanni.pietrucci2@live.it](senderemail)
+    - [mariounibo@outlook.com](senderemail)
+    - [giovanni123@hotmail.it](senderemail)
+    - [andreaguro@hotmail.it](senderemail)
 
 - intent: mail_content
   examples: |
     - write [dear meeting at 9am regards](containermail)
     - write [finish the dear project regards](containermail)
-    - write [If you know dear anybody else who'll find this useful, please forward the email to them. regards](containermail)
-    - write [Let us know if you face any problems  dear accessing the site by replying to this email. regards](containermail)
-    - write [We'll get back dear to you ASAP and ensure you gain access to it immediately regards](containermail)
-    - write [I noticed that dear you didn't download the link I sent, so I'm sending it again regards](containermail)
-    - write [I am emailing you today to let you know we have opened doors to our](containermail)
-    - write [If you have any questions about the product, please respond to this email or use the live chat on the product page](containermail)
-    - write [I hope you are enjoying your recent purchase of our project regards](containermail)
-
-
+    - write [If you know dear](containermail)
+    - write [Let us know if ](containermail)
+    - write [We'll get back ](containermail)
+    - write [I noticed that dear](containermail)
+    - write [I am emailing you](containermail)
+    - write [If you have any questions](containermail)
+    - write [I hope you are enjoying](containermail)
+    - write [ironman favorite hero](containermail)
+    - write [we need to finish this project](containermail)
+    - write [i love nlp](containermail)
+    - write [my roomate is polite](containermail)
+    - write [submit to the professor](containermail)
+    - write [link my github repository](containermail)
+    - write [share the link of instagram profile](containermail)
+    - write [watch the new video of macbook](containermail)
+    - write [dear professor when can we make a meeting?](containermail)
+    - write [i would like to fix an appointment for monday](containermail)
+    - write [you need to finish your report](containermail)
+    - write [lets drink a cup of tea](containermail)
+    - write [how is the situation of your homework](containermail)
+    - write [which kind of books do you study for C programming?](containermail)
 - intent: give_time
   examples: |
     - show time
-
-
 - intent: inform_weather
   examples: |
     - tell me the weather in [bari](city)
     - hows in [perugia](city) the weather?
     - hows in [mascara](city) the weather?
-    - i want to know the weather in [berazategui](city)
-    - i want to know the weather in [cordoba](city)
     - tell me the weather in [los angeles](city)
     - tell me the weather in [new york](city)
     - tell me the weather in [rio cuarto](city)
-    - tell me the weather in [as vegaso](city)
+    - tell me the weather in [las vegaso](city)
     - tell me the weather in [san francisco] (city)
     - tell me the weather in [santiago del estero] (city)
     - whats the temperature in [milano](city)
     - how is the temperature in [london](city)
     - whats the weather in [new delhi](city)
     - what is the weather in [rio de janeiro](city)
-
-
+    - weather in [barcelona](city)
+    - weather in [paris](city)
 - intent: add_todo
   examples: |
     - add [buy coffe](task) to my list
@@ -109,9 +117,9 @@ nlu:
     - add [add new commit on github](task) to my list
     - add [study for nlp exam](task) to my list
     - add [watch chelsea on tv](task) to my list
-    - add [buy new book](task) to my list
-    - add [buy new computer](task) to my list
-    - add [ask money to mom](task) to my list
+    - add [buy new book](task) 
+    - add [buy new computer](task)
+    - add [ask money to mom](task)
     - add [buy coffe](task) to list
     - add [wash hand](task) to list
     - add [pay the rent every first of the month](task) to list
@@ -140,41 +148,53 @@ nlu:
     - add [buy new book](task) to list
     - add [buy new computer](task) to list
     - add [ask money to mom](task) to list
-    
-    
-
+    - add [try cooking a new dish](task)
+    - add [read a new book](task)
+    - add [water the plant](task)
+    - add [root a three](task)
+    - add [read crypto documents](task)
+    - add [add new commit on github](task)
+    - add [study for nlp exam](task) 
+    - add [watch chelsea on tv](task)
+    - add [buy new book](task)
+    - add [buy new computer](task)
+    - add [ask money to mom](task)
+    - add [go to the hospital](task)
+    - add [organize halloween](task)
+    - add [visit granpa to the hospital](task)
+    - add [buy sanitizer](task)
+    - add [organize Andrea's party](task)
+    - add [change your look ](task)
 - intent: complete_todo
   examples: |
     - complete [buy coffe](task)
     - complete [wash hand](task)
     - complete [pay the rent every first of the month](task)
-    - complete [wash hair](task) 
-    - complete [meeting in via Riva di Reno](task) 
-    - complete [buy apple](task) 
+    - complete [wash hair](task)
+    - complete [meeting in via Riva di Reno](task)
+    - complete [buy apple](task)
     - complete [dentist tomorrow](task)
     - complete [mom birthday gift](task)
-    - complete [go to the hospital](task) 
-    - complete [organize halloween](task) 
-    - complete [visit granpa to the hospital](task) 
-    - complete [buy sanitizer](task) 
-    - complete [organize Andrea's party](task) 
+    - complete [go to the hospital](task)
+    - complete [organize halloween](task)
+    - complete [visit granpa to the hospital](task)
+    - complete [buy sanitizer](task)
+    - complete [organize Andrea's party](task)
     - complete [change your look ](task)
-    - complete [go to a new restaurant](task) 
-    - complete [try a new food](task) 
-    - complete [try a new drink](task) 
-    - complete [try cooking a new dish](task) 
-    - complete [read a new book](task) 
-    - complete [water the plant](task) 
-    - complete [root a three](task) 
-    - complete [read crypto documents](task) 
-    - complete [add new commit on github](task) 
-    - complete [study for nlp exam](task) 
+    - complete [go to a new restaurant](task)
+    - complete [try a new food](task)
+    - complete [try a new drink](task)
+    - complete [try cooking a new dish](task)
+    - complete [read a new book](task)
+    - complete [water the plant](task)
+    - complete [root a three](task)
+    - complete [read crypto documents](task)
+    - complete [add new commit on github](task)
+    - complete [study for nlp exam](task)
     - complete [watch chelsea on tv](task)
-    - complete [buy new book](task) 
-    - complete [buy new computer](task) 
-    - complete [ask money to mom](task) 
-    
-    
+    - complete [buy new book](task)
+    - complete [buy new computer](task)
+    - complete [ask money to mom](task)
 - intent: ask_todo
   examples: |
     - what's in my list?
@@ -192,9 +212,9 @@ nlu:
     - show to do list
     - show to do
     - to do list
-    - to do 
+    - to do
     - list
-    - my list 
+    - my list
     - tell me my list
     - tell me my to do list
     - check list
@@ -204,10 +224,8 @@ nlu:
     - show todo
     - check todo
     - what is todo
-    - show to do
     - check to do
     - what is to do
-
 - intent: nlu_fallback
   examples: |
     - I want to order food

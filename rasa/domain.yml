@@ -3,31 +3,28 @@ session_config:
   session_expiration_time: 60
   carry_over_slots_to_new_session: true
 intents:
+- mail_content:
+    use_entities:
+    - containermail
+- mailing
+- mail_recipient:
+    use_entities:
+    - senderemail
 - inform_weather
 - greet
 - affirm
 - deny
 - mood_great
 - mood_unhappy
-- mailing
 - give_time
 - inform_quota_code
 - ask_todo
-
 - add_todo:
     use_entities:
     - task
-
 - complete_todo:
     use_entities:
     - task
-
-- mail_recipient:
-    use_entities:
-    - senderemail
-- mail_content:
-    use_entities:
-    - containermail
 entities:
 - city
 - containermail
@@ -46,7 +43,6 @@ slots:
   task:
     type: text
     influence_conversation: true
-
 responses:
   utter_greet:
   - text: Hey! How are you?
@@ -70,14 +66,18 @@ responses:
   utter_nlu_fallback:
   - text: I am sorry, I didn't understand, can you repeat?
 actions:
+- action_add_todo
+- action_ask_todo
+- action_complete_todo
 - action_mail_sender
 - action_show_time
 - action_weather
-- action_add_todo
-- action_complete_todo
 - inform_weather
 - mail_content_form
+- mail_response
 - register_form
+- utter_ask_email
+- utter_ask_mail_content
 - utter_greet
 - utter_iamabot
 - utter_invalid_city
@@ -85,5 +85,3 @@ actions:
 - validate_register_form
 - validate_weather_form
 - weather_form
-- action_ask_todo
-- mail_response

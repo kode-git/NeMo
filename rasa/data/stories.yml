@@ -208,105 +208,26 @@ stories:
 #----------------------------------------
 
 
-- story: interactive_mailing_story_1
-  steps:
-  - intent: mailing
-  - action: utter_ask_email
-  - intent: mail_recipient
-  - action: register_form
-  - active_loop: register_form
-  - slot_was_set:
-    - requested_slot: senderemail
-  - slot_was_set:
-    - senderemail: pino@gmail.com
-  - active_loop: null
-  - action: utter_ask_mail_content
-  - intent: mail_content
-  - action: mail_content_form
-  - active_loop: mail_content_form
-  - slot_was_set:
-    - requested_slot: containermail
-  - slot_was_set:
-    - containermail: i love you
-  - active_loop: null
-  - action: mail_response
-
-  
-- story: interactive_mailing_story_2
-  steps:
-  - intent: mailing
-  - action: utter_ask_email
-  - intent: mail_recipient
-  - action: register_form
-  - active_loop: register_form
-  - slot_was_set:
-    - requested_slot: senderemail
-  - slot_was_set:
-    - senderemail: emailrandom@gmail.com
-  - active_loop: null
-  - action: utter_ask_mail_content
-  - intent: mail_content
-  - action: mail_content_form
-  - active_loop: mail_content_form
-  - slot_was_set:
-    - requested_slot: containermail
-  - slot_was_set:
-    - containermail: i want to fix an appointment on saturday please
-  - active_loop: null
-  - action: mail_response
-
-  
-- story: interactive_mailing_story_3
-  steps:
-  - intent: mailing
-  - action: utter_ask_email
-  - intent: mail_recipient
-  - action: register_form
-  - active_loop: register_form
-  - slot_was_set:
-    - requested_slot: senderemail
-  - slot_was_set:
-    - senderemail: idontknow@gmail.com
-  - active_loop: null
-  - action: utter_ask_mail_content
-  - intent: mail_content
-  - action: mail_content_form
-  - active_loop: mail_content_form
-  - slot_was_set:
-    - requested_slot: containermail
-  - slot_was_set:
-    - containermail: when we can fix the issue on our project?
-  - active_loop: null
-  - action: mail_response
-  
-  
-- story: interactive_mailing_story_4
-  steps:
-  - intent: mailing
-  - action: utter_ask_email
-  - intent: mail_recipient
-  - action: register_form
-  - active_loop: register_form
-  - slot_was_set:
-    - requested_slot: senderemail
-  - slot_was_set:
-    - senderemail: emailrandom@gmail.com
-  - active_loop: null
-  - action: utter_ask_mail_content
-  - intent: mail_content
-  - action: mail_content_form
-  - active_loop: mail_content_form
-  - slot_was_set:
-    - requested_slot: containermail
-  - slot_was_set:
-    - containermail: today is gonna be the day, get ready for it. We'll meet at 10 am
-  - active_loop: null
-  - action: mail_response
 
 
   #-------------------------------------------------------
 
+  #-------------------NLU FALLBACK--------------------------
+- story: nlu_test
+  steps:
+    - intent: nlu_fallback
+    - action: utter_nlu_fallback
   
+- story: nlu_test2
+  steps:
+    - intent: nlu_fallback
+    - action: utter_nlu_fallback
+
+- story: nlu_test3
+  steps:
+    - intent: nlu_fallback
+    - action: utter_nlu_fallback
+  #---------------------------------------------------------
   
 - story: city_test2
   steps:
@@ -334,3 +255,107 @@ stories:
   - slot_was_set:
     - city: Geelong
   - action: action_weather
+
+
+- story: interactive_story_1
+  steps:
+  - intent: mailing
+  - action: utter_ask_email
+  - intent: mail_recipient
+    entities:
+    - senderemail: giovanni.pietrucci2@gmail.com
+  - slot_was_set:
+    - senderemail: giovanni.pietrucci2@gmail.com
+  - action: register_form
+  - action: utter_ask_mail_content
+  - intent: mail_content
+    entities:
+    - containermail: ironman favorite hero
+  - slot_was_set:
+    - containermail: ironman favorite hero
+  - action: mail_content_form
+  - action: mail_response
+
+
+- story: interactive_story_2
+  steps:
+  - intent: mailing
+  - action: utter_ask_email
+  - intent: mail_recipient
+    entities:
+    - senderemail: giovanni@gmail.com
+  - slot_was_set:
+    - senderemail: giovanni@gmail.com
+  - action: register_form
+  - action: utter_ask_mail_content
+  - intent: mail_content
+    entities:
+    - containermail: my phone is broke
+  - slot_was_set:
+    - containermail: my phone is broke
+  - action: mail_content_form
+  - action: mail_response
+
+
+  
+- story: interactive_story_3
+  steps:
+  - intent: mailing
+  - action: utter_ask_email
+  - intent: mail_recipient
+    entities:
+    - senderemail: pietrucci2@gmail.com
+  - slot_was_set:
+    - senderemail: pietrucci2@gmail.com
+  - action: register_form
+  - action: utter_ask_mail_content
+  - intent: mail_content
+    entities:
+    - containermail: the cat is on the table
+  - slot_was_set:
+    - containermail: the cat is on the table
+  - action: mail_content_form
+  - action: mail_response
+
+  
+- story: interactive_story_4
+  steps:
+  - intent: mailing
+  - action: utter_ask_email
+  - intent: mail_recipient
+    entities:
+    - senderemail: textrandom@gmail.com
+  - slot_was_set:
+    - senderemail: textrandom@gmail.com
+  - action: register_form
+  - action: utter_ask_mail_content
+  - intent: mail_content
+    entities:
+    - containermail: the template is need to update
+  - slot_was_set:
+    - containermail: the template is need to update
+  - action: mail_content_form
+  - action: mail_response
+
+
+
+- story: interactive_story_1
+  steps:
+  - intent: mailing
+  - action: utter_ask_email
+  - intent: mail_recipient
+    entities:
+    - senderemail: textrandom@gmail.com
+  - slot_was_set:
+    - senderemail: textrandom@gmail.com
+  - action: register_form
+  - action: utter_ask_mail_content
+  - intent: mail_content
+    entities:
+    - containermail: we need finish this project
+  - slot_was_set:
+    - containermail: we need finish this project
+  - action: mail_content_form
+  - action: mail_response
+  - intent: mailing
+  - action: utter_ask_email
