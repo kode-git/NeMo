@@ -195,7 +195,7 @@ class ActionCompleteTodo(Action):
                     for j in actions.find({"_id": ObjectId(new_res[i][1])}):
                         mess = mess + j['name'] + '\n'
                 mess= '\n' + mess
-                dispatcher.utter_message(text=f"{'I found those task: ' + mess }")
+                dispatcher.utter_message(text=f"{'I found these tasks: ' + mess }")
 
 
 
