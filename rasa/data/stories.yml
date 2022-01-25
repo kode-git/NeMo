@@ -35,7 +35,11 @@ stories:
   - intent: give_time
   - action: action_give_time
 
-#---------------------------------------------
+#-------------BOT FUNCITONALITIES--------------
+- story: interactive_funcitionalites
+  steps:
+  - intent: bot_funcionalities
+  - action: utter_bot_funcionalities
 #-------------ADD TODO-------------------------
 
 

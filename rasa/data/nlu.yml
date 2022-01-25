@@ -296,3 +296,12 @@ nlu:
 - intent: deny_all
   examples: |
     - no
+
+
+- intent: bot_funcionalities
+  examples: |
+    - what can you do?
+    - what you do?
+    - help 
+    - i need help
+    - tell me your functionalities
