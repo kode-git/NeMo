@@ -23,7 +23,7 @@ from collections import OrderedDict
 import json
 import itertools
 from pymongo import MongoClient
-
+from time import strftime
 email=""
 mail=""
 city=""
@@ -39,27 +39,16 @@ actions= db['actions']
 class ActionShowTime(Action):
 
     def name(self) -> Text:
-        return "weather_form"
+        return "action_give_time"
 
     def run(self, dispatcher: CollectingDispatcher,
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-        print("FROM WEATHER_FORM")
-        entities = tracker.latest_message['entities']
-        for e in entities:
-            if e['entity']=='cityname':
-                loc = e['value']
-                print(e['value'])
-        location = loc
-        complete_api_link = "https://api.openweathermap.org/data/2.5/weather?q="+location+"&APPID=dbd3b02d8958d62185d02e944cd5f522"
+         
+         
+        time= strftime("%H:%M")
         
-        api_link = requests.get(complete_api_link)
-        api_data = api_link.json()
-        
-        temp_city = ((api_data['main']['temp'])-273.15)
-        weather_desc = api_data['weather'][0]['description']
-      
-        dispatcher.utter_message(text=f"{'The weather in ' + city + ' is '+ weather_desc + ' and the temperature is '+ str(round(temp_city,1)) +'°'}")
+        dispatcher.utter_message(text=f"{'It is '+ time }")
         
         return []
 

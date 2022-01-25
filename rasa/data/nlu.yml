@@ -117,7 +117,11 @@ nlu:
     - write [which kind of books do you study for C programming?](containermail)
 - intent: give_time
   examples: |
-    - show time
+    - what time is it
+    - time is
+    - time
+    - tell me time
+    - what is the time
 - intent: inform_weather
   examples: |
     - tell me the weather in [bari](city)

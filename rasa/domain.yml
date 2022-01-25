@@ -81,6 +81,7 @@ actions:
 - action_show_time
 - action_weather
 - inform_weather
+- action_give_time
 - mail_content_form
 - mail_response
 - register_form

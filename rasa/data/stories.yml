@@ -22,7 +22,20 @@ stories:
   - action: utter_greet
   - intent: bot_challenge
   - action: utter_iamabot
+#-------------SHOW TIME-----------------------
 
+- story: interactive_time
+  steps:
+  - intent: give_time
+  - action: action_give_time
+
+  
+- story: interactive_time2
+  steps:
+  - intent: give_time
+  - action: action_give_time
+
+#---------------------------------------------
 #-------------ADD TODO-------------------------
 
 
