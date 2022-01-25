@@ -1,30 +1,75 @@
 version: "2.0"
 nlu:
+
 - intent: greet
   examples: |
     - hey
-    - hi
     - hello
-    - ehi
-    - hola
+    - hi
+    - hello there
+    - good morning
+    - good evening
+    - moin
+    - hey there
+    - let's go
+    - hey dude
+    - goodmorning
+    - goodevening
+    - good afternoon
 - intent: goodbye
   examples: |
-    - good
-- intent: affirm
-  examples: |
-    - delete
-- intent: deny
-  examples: |
-    - deletea
+    - good afternoon
+    - good by
+    - cee you later
+    - good night
+    - bye
+    - goodbye
+    - have a nice day
+    - see you around
+    - bye bye
+    - see you later
 - intent: mood_great
   examples: |
     - perfect
-    - I am fine... thank you
-    - Fine, thank you
-    - So great!
+    - great
+    - amazing
+    - fine
+    - well
+    - feeling like a king
+    - wonderful
+    - I am feeling very good
+    - I am great
+    - I am amazing
+    - I am going to save the world
+    - super stoked
+    - extremely good
+    - so so perfect
+    - so good
+    - so perfect
 - intent: mood_unhappy
   examples: |
+    - my day was horrible
+    - I am sad
+    - I don't feel very well
+    - I am disappointed
+    - super sad
+    - I'm so sad
+    - sad
+    - very sad
+    - unhappy
+    - not good
+    - not very good
+    - extremly sad
+    - so saad
     - so sad
+- intent: bot_challenge
+  examples: |
+    - are you a bot?
+    - are you a human?
+    - am I talking to a bot?
+    - am I talking to a human?
+    - how are you?
+
 - intent: mailing
   examples: |
     - i want to send an email
