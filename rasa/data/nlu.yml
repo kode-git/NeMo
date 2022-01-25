@@ -12,10 +12,10 @@ nlu:
     - good
 - intent: affirm
   examples: |
-    - yes
+    - delete
 - intent: deny
   examples: |
-    - no
+    - deletea
 - intent: mood_great
   examples: |
     - perfect
@@ -226,8 +226,24 @@ nlu:
     - what is todo
     - check to do
     - what is to do
+
 - intent: nlu_fallback
   examples: |
     - I want to order food
     - What is 2 + 2?
     - Who's the US President?
+
+
+
+- intent: confirm_send
+  examples: |
+    - send
+
+
+- intent: confirm_add
+  examples: |
+    - yes
+
+- intent: deny_all
+  examples: |
+    - no

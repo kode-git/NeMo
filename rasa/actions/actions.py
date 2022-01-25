@@ -90,6 +90,22 @@ class ActionShowWheater(Action):
             dispatcher.utter_message(text=f"{'The weather in ' + city + ' is '+ weather_desc + ' and the temperature is '+ str(round(temp_city,1)) +'°'}")
         
         return []
+task=""
+
+class ActionConfirmAdd(Action):
+
+    def name(self) -> Text:
+        return "action_confirm_add"
+
+    def run(self, dispatcher,tracker,domain):
+        print("FROM action_confirm_add" )
+        global task
+        entities = tracker.latest_message['entities']
+        for e in entities:
+            task=e['value']
+        
+        dispatcher.utter_message(text=f"{'Do you want to add ' + task + ' to your list'}")
+
 
 
 class ActionAddTodo(Action):
@@ -99,11 +115,7 @@ class ActionAddTodo(Action):
 
     def run(self, dispatcher,tracker,domain):
         print("FROM ACTION_ADD_TODO" )
-         
-        entities = tracker.latest_message['entities']
-        for e in entities:
-            task=e['value']
-                    
+        global task 
         data = {'name' : task}
 
         if db.actions.count_documents(data):
@@ -301,3 +313,4 @@ class ActionSendingMail(Action):
             
                 
         return []
+

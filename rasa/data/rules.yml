@@ -49,7 +49,15 @@ rules:
   - active_loop: null
   - slot_was_set:
     - containermail: null
+  - action: utter_confirm_send
+  - intent: confirm_send
   - action: mail_response
+
+
+- rule: When the user say no
+  steps:
+  - intent: deny_all
+  - action: utter_deny_all
 
 
 

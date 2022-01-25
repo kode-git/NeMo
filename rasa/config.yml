@@ -25,8 +25,7 @@ pipeline:
      constrain_similarities: true
      model_confidence: cosine
    - name: FallbackClassifier
-     threshold: 0.3
-     ambiguity_threshold: 0.1
+     threshold: 0.7
 
 
 

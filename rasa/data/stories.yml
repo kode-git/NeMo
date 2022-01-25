@@ -38,71 +38,63 @@ stories:
 
 #-------------ADD TODO-------------------------
 
-- story: add_todo_list story_1
-  steps:
-  - intent: add_todo
-  - action: action_add_todo
-  - slot_was_set:
-    - requested_slot: task
-  - slot_was_set:
-    - task: buy gold apple
-  - action: action_listen
 
 
 - story: add_todo_list story_2
   steps:
   - intent: add_todo
-  - action: action_add_todo
+  - action: action_confirm_add
   - slot_was_set:
     - requested_slot: task
   - slot_was_set:
-    - task: meeting related to project
-  - action: action_listen
+    - task: buy apple
+  - intent: confirm_add
+  - action: action_add_todo
 
 
 - story: add_todo_list story_3
   steps:
   - intent: add_todo
-  - action: action_add_todo
+  - action: action_confirm_add
   - slot_was_set:
     - requested_slot: task
   - slot_was_set:
-    - task: wash hair clothes
-  - action: action_listen
-
+    - task: learn geography
+  - intent: confirm_add
+  - action: action_add_todo
 
 - story: add_todo_list story_4
   steps:
   - intent: add_todo
-  - action: action_add_todo
+  - action: action_confirm_add
   - slot_was_set:
     - requested_slot: task
   - slot_was_set:
-    - task: pay rent
-  - action: action_listen
-
+    - task: work project
+  - intent: confirm_add
+  - action: action_add_todo
 
 - story: add_todo_list story_5
   steps:
   - intent: add_todo
-  - action: action_add_todo
+  - action: action_confirm_add
   - slot_was_set:
     - requested_slot: task
   - slot_was_set:
-    - task: read bible
-  - action: action_listen
-
+    - task: go to market
+  - intent: confirm_add
+  - action: action_add_todo
 
 - story: add_todo_list story_6
   steps:
   - intent: add_todo
-  - action: action_add_todo
+  - action: action_confirm_add
   - slot_was_set:
     - requested_slot: task
   - slot_was_set:
-    - task: wash dogs
-  - action: action_listen
-
+    - task: study nlp
+  - intent: confirm_add
+  - action: action_add_todo
 #--------------COMPLETE TODO--------------------------
 
 
@@ -274,6 +266,8 @@ stories:
   - slot_was_set:
     - containermail: ironman favorite hero
   - action: mail_content_form
+  - action: utter_confirm_send
+  - intent: confirm_send
   - action: mail_response
 
 
@@ -294,6 +288,8 @@ stories:
   - slot_was_set:
     - containermail: my phone is broke
   - action: mail_content_form
+  - action: utter_confirm_send
+  - intent: confirm_send
   - action: mail_response
 
 
@@ -315,6 +311,8 @@ stories:
   - slot_was_set:
     - containermail: the cat is on the table
   - action: mail_content_form
+  - action: utter_confirm_send
+  - intent: confirm_send
   - action: mail_response
 
   
@@ -335,6 +333,8 @@ stories:
   - slot_was_set:
     - containermail: the template is need to update
   - action: mail_content_form
+  - action: utter_confirm_send
+  - intent: confirm_send
   - action: mail_response
 
 
@@ -356,6 +356,6 @@ stories:
   - slot_was_set:
     - containermail: we need finish this project
   - action: mail_content_form
+  - action: utter_confirm_send
+  - intent: confirm_send
   - action: mail_response
-  - intent: mailing
-  - action: utter_ask_email
