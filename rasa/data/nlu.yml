@@ -139,6 +139,13 @@ nlu:
     - what is the weather in [rio de janeiro](city)
     - weather in [barcelona](city)
     - weather in [paris](city)
+    - weather [barcelona](city)
+    - weather [paris](city)
+    - temperature in [barcelona](city)
+    - temperature in [paris](city)
+    - temperature [new york](city)
+    - temperature [paris](city)
+
 - intent: add_todo
   examples: |
     - add [buy coffe](task) to my list

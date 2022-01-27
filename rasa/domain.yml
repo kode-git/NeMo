@@ -88,6 +88,7 @@ actions:
 - action_give_time
 - utter_bot_funcionalities
 - mail_content_form
+- unhappy_response
 - mail_response
 - register_form
 - utter_ask_email

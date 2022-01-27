@@ -14,7 +14,7 @@ stories:
   - intent: greet
   - action: utter_greet
   - intent: mood_unhappy
-  - action: utter_cheer_up
+  - action: unhappy_response
 
 - story: interactive_story_1
   steps:

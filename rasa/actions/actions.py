@@ -5,6 +5,7 @@
 # https://rasa.com/docs/rasa/custom-actions
 
 import datetime as dt
+from email import message
 from typing import Any, Text, Dict, List
 import json
 import requests 
@@ -24,6 +25,8 @@ import json
 import itertools
 from pymongo import MongoClient
 from time import strftime
+import wikipedia
+
 email=""
 mail=""
 city=""
@@ -303,3 +306,20 @@ class ActionSendingMail(Action):
                 
         return []
 
+
+
+class ActionSendingMail(Action):
+    
+    def name(self) -> Text:
+        return "unhappy_response"
+
+    def run(self, dispatcher,tracker,domain):
+        length=101
+        while length > 100:
+            joke_api_link = "https://jokes.guyliangilsing.me/retrieveJokes.php?type=dadjoke"
+            joke_link = requests.get(joke_api_link)
+            joke = joke_link.json()    
+            length=len(joke['joke'])
+        dispatcher.utter_message(text=f""+str(joke['joke']))
+      
+        return []
