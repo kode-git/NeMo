@@ -2,6 +2,7 @@ from django.http import JsonResponse
 from django.shortcuts import render
 from asr.main import ASR
 from tts.main import TTS
+from nlp.QAModel import QAModel
 import json
 from django.views.decorators.csrf import csrf_exempt
 import os
@@ -10,9 +11,9 @@ import numpy as np
 # Create your views here.
 
 ASR_MODEL = "QuartzNet15x5Base-En"
-
 asr_model = ASR()
 asr_model.downloadModel()
+qa_model = QAModel()
 tts_model = TTS()
 tts_model.downloadSpectogramGenerator()
 tts_model.downloadVocoder()  
