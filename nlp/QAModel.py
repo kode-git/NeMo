@@ -1,9 +1,8 @@
-from msilib.schema import Error
-from  nemo_collections.nlp.models import QAModel
+from  nemo.collections.nlp.models import QAModel
 import json
 QA_MODEL = "qa_squadv1.1_bertbase"
 
-class QAModel:
+class _QAModel:
 
     def __init__(self, name=QA_MODEL):
         self.model_name = name
@@ -24,7 +23,7 @@ class QAModel:
     def downloadQAModel(self, name_model):
         try:
             self.model = QAModel.from_pretrained(name_model)
-        except Error:
+        except Exception:
             # do nothing
             print('Model not found')
 
