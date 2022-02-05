@@ -41,3 +41,14 @@ def tts_translate(request):
     data = {'audio_file' : audio}
     os.system(f"play {audio}")
     return JsonResponse(data)
+
+@csrf_exempt
+def nlp_question(request):
+    # if this is hosted on django, don't need to get from request, 
+    # if it is hosted on rasa, it must to be in request
+    # out-of-environment from docker network.
+    jsonDataFile = json.loads(request.body.decode("utf-8"))
+    # jsonDataFile consists in the well formatted context, question and answer
+    output = qa_model.model.inference(jsonDataFile)
+    # getting the first answer with the higher confidence
+    data = {'answer': output[0].items()[1][1]}
