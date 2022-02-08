@@ -363,3 +363,11 @@ stories:
   - action: utter_confirm_send
   - intent: confirm_send
   - action: mail_response
+
+
+#--------------------WIKI ASK-----------------------
+
+- story: interactive_wiki
+  steps:
+  - intent: ask_wiki
+  - action: wiki_action

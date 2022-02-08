@@ -312,3 +312,15 @@ nlu:
     - help 
     - i need help
     - tell me your functionalities
+
+  
+  
+- intent: ask_wiki
+  examples: |
+    - search for [how old is leonardo di caprio?](wiki)
+    - search for [how many people died from covid?](wiki)
+    - search for [who is micheal jordan?](wiki)
+    - search for [what is nlp?](wiki)
+    - search for [what is alexa?](wiki)
+    - search for [what is real madrid?](wiki)
+

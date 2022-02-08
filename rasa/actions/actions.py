@@ -26,6 +26,11 @@ import itertools
 from pymongo import MongoClient
 from time import strftime
 import wikipedia
+from search_wiki import get_info_phrase
+import spacy
+from sqlalchemy import false
+
+
 
 email=""
 mail=""
@@ -322,4 +327,36 @@ class ActionSendingMail(Action):
             length=len(joke['joke'])
         dispatcher.utter_message(text=f""+str(joke['joke']))
       
+        return []
+
+
+
+class ActionWikiAsk(Action):
+    
+    def name(self) -> Text:
+        return "wiki_action"
+
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+        
+        sentence = "what is covid 19"
+        nlp = spacy.load('en_core_web_sm')        
+        try:                       
+            doc = nlp(sentence)
+            print("#####################")
+            oblique_phrase = get_info_phrase(doc)   
+            print("RESULT: " + str(oblique_phrase))
+            print("#####################")   
+            print(wikipedia.search(oblique_phrase))
+            print("----------------------------------------------")
+            result=wikipedia.summary(oblique_phrase , auto_suggest=False)
+            dispatcher.utter_message(text=f""+str(result))   
+        except wikipedia.exceptions.PageError:
+            new_search=wikipedia.search(oblique_phrase)[0]
+            result= wikipedia.summary(new_search)
+            dispatcher.utter_message(text=f""+str(result))   
+
+
+
         return []

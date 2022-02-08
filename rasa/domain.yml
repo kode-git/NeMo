@@ -25,6 +25,9 @@ intents:
 - confirm_add
 - goodbye
 - bot_challenge
+- ask_wiki:
+    use_entities:
+    - wiki
 - add_todo:
     use_entities:
     - task
@@ -36,6 +39,7 @@ entities:
 - containermail
 - senderemail
 - task
+- wiki
 slots:
   senderemail:
     type: text
@@ -47,6 +51,9 @@ slots:
     type: text
     influence_conversation: false
   task:
+    type: text
+    influence_conversation: true
+  wiki:
     type: text
     influence_conversation: true
 responses:
@@ -101,3 +108,4 @@ actions:
 - validate_weather_form
 - weather_form
 - action_confirm_add
+- wiki_action
