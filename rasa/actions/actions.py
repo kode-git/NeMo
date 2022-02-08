@@ -341,10 +341,10 @@ class ActionWikiAsk(Action):
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
         print("TEST ", tracker.latest_message.get('text'))
         entities = tracker.latest_message['entities']
+        text = tracker.latest_message.get('text')
+        sentence = text.replace('search', '')
         sentence= " "
-        for e in entities:
-            if e['entity']=='wiki':
-                sentence = e['value']
+        
         #sentence = "what is covid 19"
         print("my sentence is  ",sentence)
         nlp = spacy.load('en_core_web_sm')        

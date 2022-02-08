@@ -298,14 +298,13 @@ nlu:
     - tell me your functionalities
 - intent: ask_wiki
   examples: |
-    - search for [how old is leonardo di caprio?](wiki)
-    - search for [how many people died from covid?](wiki)
-    - search for [who is micheal jordan?](wiki)
-    - search for [what is nlp?](wiki)
-    - search for [what is alexa?](wiki)
-    - search for [what is real madrid?](wiki)
-    - search for [how old is mattarella](wiki)
-    - search for [how old is mattarella](wiki)[how old is mattarella](wiki)?
-    - search for [what is sprite?](wiki)
-    - search for [who is Alexa?](wiki)
-    - search for [what is covid 19?](wiki)
+    - search how old is leonardo di caprio?
+    - search how many people died from covid?
+    - search who is micheal jordan?
+    - search what is nlp?
+    - search what is alexa?
+    - search what is real madrid?
+    - search how old is mattarella?
+    - search what is sprite?
+    - search who is Alexa?
+    - search what is covid 19?

@@ -3,9 +3,7 @@ session_config:
   session_expiration_time: 60
   carry_over_slots_to_new_session: true
 intents:
-- ask_wiki:
-    use_entities:
-    - wiki
+- ask_wiki
 - mail_content:
     use_entities:
     - containermail
@@ -39,7 +37,6 @@ entities:
 - containermail
 - senderemail
 - task
-- wiki
 slots:
   senderemail:
     type: text
@@ -51,9 +48,6 @@ slots:
     type: text
     influence_conversation: false
   task:
-    type: text
-    influence_conversation: true
-  wiki:
     type: text
     influence_conversation: true
 responses:
