@@ -30,6 +30,14 @@ from search_wiki import get_info_phrase
 import spacy
 from sqlalchemy import false
 import requests
+import json
+from nemo.collections.nlp.models import QAModel
+from QAModel import _QAModel
+# Download and load the pre-trained BERT-based model
+#model = QAModel.from_pretrained("qa_squadv1.1_bertbase")
+
+
+model = _QAModel().getModel()
 
 
 
@@ -355,37 +363,38 @@ class ActionWikiAsk(Action):
             print(wikipedia.search(oblique_phrase))
             print("----------------------------------------------")
             result=wikipedia.summary(oblique_phrase , auto_suggest=False)
-            dispatcher.utter_message(text=f""+str(result))   
         except wikipedia.exceptions.PageError:
             new_search=wikipedia.search(oblique_phrase)[0]
-            result= wikipedia.summary(new_search)
-            dispatcher.utter_message(text=f""+str(result))   
+            result= wikipedia.summary(new_search)  
         
 
-            title = oblique_phrase
-            context = result
-            question = sentence
+        title = oblique_phrase
+        context = result
+        question = sentence
 
 
-            myInput = {
-                "data": [
-                    {
-                        "title": title,
-                        "paragraphs": [
-                            {
-                                "context": context,
-                                "qas": [
-                                    {
-                                        "question": question,
-                                        "id": "56be4db0acb8001400a502ee"
-                                    }
-                                ]
-                            }
-                        ]
-                    }
-                ]
-            }
-        r = requests.post("localhost:9000/question", data=myInput)
-        print(r.status_code, r.reason)
-        dispatcher.utter_message(text=f""+str(r.text)) 
+        myInput = {
+            "data": [
+                {
+                    "title": title,
+                    "paragraphs": [
+                        {
+                            "context": context,
+                            "qas": [
+                                {
+                                    "question": question,
+                                    "id": "56be4db0acb8001400a502ee"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+        inputFile = json.dumps(myInput)
+        with open('bert_input.json', 'w') as outfile:
+            outfile.write(inputFile)
+        output = model.inference('bert_input.json')
+        for value in output[0].items():
+            dispatcher.utter_message(text=f"The answer is "+str(value[1][1])) 
         return []
