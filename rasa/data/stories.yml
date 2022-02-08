@@ -370,4 +370,19 @@ stories:
 - story: interactive_wiki
   steps:
   - intent: ask_wiki
+    entities:
+    - wiki: how old is leonardo di caprio?
+  - slot_was_set:
+    - wiki: how old is leonardo di caprio?
   - action: wiki_action
+
+  
+- story: interactive_wiki2
+  steps:
+  - intent: ask_wiki
+    entities:
+    - wiki: how many people died from covid?
+  - slot_was_set:
+    - wiki: how many people died from covid?
+  - action: wiki_action
+
