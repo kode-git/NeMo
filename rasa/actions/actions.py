@@ -339,8 +339,13 @@ class ActionWikiAsk(Action):
     def run(self, dispatcher: CollectingDispatcher,
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-        
-        sentence = "what is covid 19"
+        entities = tracker.latest_message['entities']
+        sentence= " "
+        for e in entities:
+            if e['entity']=='wiki':
+                sentence = e['value']
+        #sentence = "what is covid 19"
+        print("my sentence is  ",sentence)
         nlp = spacy.load('en_core_web_sm')        
         try:                       
             doc = nlp(sentence)
