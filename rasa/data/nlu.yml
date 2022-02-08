@@ -1,6 +1,5 @@
 version: "2.0"
 nlu:
-
 - intent: greet
   examples: |
     - hey
@@ -69,7 +68,6 @@ nlu:
     - am I talking to a bot?
     - am I talking to a human?
     - how are you?
-
 - intent: mailing
   examples: |
     - i want to send an email
@@ -89,7 +87,6 @@ nlu:
     - [mariounibo@outlook.com](senderemail)
     - [giovanni123@hotmail.it](senderemail)
     - [andreaguro@hotmail.it](senderemail)
-
 - intent: mail_content
   examples: |
     - write [dear meeting at 9am regards](containermail)
@@ -145,7 +142,6 @@ nlu:
     - temperature in [paris](city)
     - temperature [new york](city)
     - temperature [paris](city)
-
 - intent: add_todo
   examples: |
     - add [buy coffe](task) to my list
@@ -173,7 +169,7 @@ nlu:
     - add [add new commit on github](task) to my list
     - add [study for nlp exam](task) to my list
     - add [watch chelsea on tv](task) to my list
-    - add [buy new book](task) 
+    - add [buy new book](task)
     - add [buy new computer](task)
     - add [ask money to mom](task)
     - add [buy coffe](task) to list
@@ -210,11 +206,8 @@ nlu:
     - add [root a three](task)
     - add [read crypto documents](task)
     - add [add new commit on github](task)
-    - add [study for nlp exam](task) 
+    - add [study for nlp exam](task)
     - add [watch chelsea on tv](task)
-    - add [buy new book](task)
-    - add [buy new computer](task)
-    - add [ask money to mom](task)
     - add [go to the hospital](task)
     - add [organize halloween](task)
     - add [visit granpa to the hospital](task)
@@ -282,39 +275,27 @@ nlu:
     - what is todo
     - check to do
     - what is to do
-
 - intent: nlu_fallback
   examples: |
     - I want to order food
     - What is 2 + 2?
     - Who's the US President?
-
-
-
 - intent: confirm_send
   examples: |
     - send
-
-
 - intent: confirm_add
   examples: |
     - yes
-
 - intent: deny_all
   examples: |
     - no
-
-
 - intent: bot_funcionalities
   examples: |
     - what can you do?
     - what you do?
-    - help 
+    - help
     - i need help
     - tell me your functionalities
-
-  
-  
 - intent: ask_wiki
   examples: |
     - search for [how old is leonardo di caprio?](wiki)
@@ -323,4 +304,8 @@ nlu:
     - search for [what is nlp?](wiki)
     - search for [what is alexa?](wiki)
     - search for [what is real madrid?](wiki)
-
+    - search for [how old is mattarella](wiki)
+    - search for [how old is mattarella](wiki)[how old is mattarella](wiki)?
+    - search for [what is sprite?](wiki)
+    - search for [who is Alexa?](wiki)
+    - search for [what is covid 19?](wiki)

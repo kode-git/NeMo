@@ -386,3 +386,46 @@ stories:
     - wiki: how many people died from covid?
   - action: wiki_action
 
+
+- story: interactive_story_1
+  steps:
+  - intent: ask_wiki
+    entities:
+    - wiki: how many people died from covid?
+  - slot_was_set:
+    - wiki: how many people died from covid?
+  - action: wiki_action
+  - intent: ask_wiki
+    entities:
+    - wiki: how old is mattarella
+  - slot_was_set:
+    - wiki: how old is mattarella
+  - action: wiki_action
+
+- story: interactive_story_1
+  steps:
+  - intent: ask_wiki
+    entities:
+    - wiki: how old is mattarella
+    - wiki: how old is mattarella
+  - slot_was_set:
+    - wiki: how old is mattarella
+  - action: wiki_action
+  - intent: ask_wiki
+    entities:
+    - wiki: what is sprite?
+  - slot_was_set:
+    - wiki: what is sprite?
+  - action: wiki_action
+  - intent: ask_wiki
+    entities:
+    - wiki: who is Alexa?
+  - slot_was_set:
+    - wiki: who is Alexa?
+  - action: wiki_action
+  - intent: ask_wiki
+    entities:
+    - wiki: what is covid 19?
+  - slot_was_set:
+    - wiki: what is covid 19?
+  - action: wiki_action
