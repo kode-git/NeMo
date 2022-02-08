@@ -29,6 +29,7 @@ import wikipedia
 from search_wiki import get_info_phrase
 import spacy
 from sqlalchemy import false
+import requests
 
 
 
@@ -340,12 +341,9 @@ class ActionWikiAsk(Action):
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
         print("TEST ", tracker.latest_message.get('text'))
-        entities = tracker.latest_message['entities']
         text = tracker.latest_message.get('text')
         sentence = text.replace('search', '')
-        sentence= " "
         
-        #sentence = "what is covid 19"
         print("my sentence is  ",sentence)
         nlp = spacy.load('en_core_web_sm')        
         try:                       
@@ -362,7 +360,32 @@ class ActionWikiAsk(Action):
             new_search=wikipedia.search(oblique_phrase)[0]
             result= wikipedia.summary(new_search)
             dispatcher.utter_message(text=f""+str(result))   
+        
+
+            title = oblique_phrase
+            context = result
+            question = sentence
 
 
-
+            myInput = {
+                "data": [
+                    {
+                        "title": title,
+                        "paragraphs": [
+                            {
+                                "context": context,
+                                "qas": [
+                                    {
+                                        "question": question,
+                                        "id": "56be4db0acb8001400a502ee"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
+        r = requests.post("localhost:9000/question", data=myInput)
+        print(r.status_code, r.reason)
+        dispatcher.utter_message(text=f""+str(r.text)) 
         return []
