@@ -339,6 +339,7 @@ class ActionWikiAsk(Action):
     def run(self, dispatcher: CollectingDispatcher,
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+        print("TEST ", tracker.latest_message.get('text'))
         entities = tracker.latest_message['entities']
         sentence= " "
         for e in entities:
