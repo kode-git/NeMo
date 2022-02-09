@@ -18,10 +18,9 @@ Project integrates NeMo framework with the Rasa NLU. Rasa helps you build contex
 ## Components
 The project is composed by few elements which has some setups before to start the project.
 <ul>
-<li>Django Server - for the ASR and TTS invocations</li>
-<li>express.js Server - for the bridging with ASR, TTS and NLU</li>
-<li>Rasa Actions container - a Docker container for the actions element in NLU</li>
-<li>Rasa shell - for the environment on the Rasa server</li>
+<li>Flask Server - for the ASR and TTS invocations</li>
+<li>Rasa Actions Container - a Docker container for the actions element in NLU</li>
+<li>Rasa Shell Container - for the environment on the Rasa Server</li>
 </ul>
 
 ## Requirements
@@ -43,17 +42,13 @@ For problems about Docker setting, check the getting started guide on: https://d
 
 ## Environment setup
 
-For an easy setup of the dependencies, build and run the image and servers from the Dockerfile or the respective directories following these steps. You must have 4 terminals to run correctly each component. <br>
-In the first one, you need to setup the express.js server with the following steps: <br>
-- <b>Step 1</b>: `cd server`
-- <b>Step 2</b>: `npm init` and `npm install -i express`
-- <b>Step 3</b>: `nodemon server.js`
+For an easy setup of the dependencies, build and run the image and servers from the Dockerfile or the respective directories following these steps. You must have 3 terminals to run correctly each component. <br>
 
-In the second one, you have to run the django server: <br>
+In the first one, you have to run the django server: <br>
 - <b>Step 1</b>: `python3 -m venv venv` or `python -m venv venv`
 - <b>Step 2</b>: `source venv/bin/activate` (Linux/MacOS) or `.\venv\bin\activate` (Windows)
 - <b>Step 3</b>: `pip3 install -i requirements.txt`
-- <b>Step 4</b>: `python3 manage.py runserver 9000`
+- <b>Step 4</b>: `python3 nemo/server.py`
 
 In the third one, you have to download and build some images about Rasa via Docker: <br>
 - <b>Step 0</b>: Type `docker network create jarvis-net`
