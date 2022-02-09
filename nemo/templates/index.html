@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/mainpage.css') }}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Alysia AI</title>
+</head>
+
+<body>
+    <div class="center">
+        <section class="msger">
+            <header class="msger-header">
+                <div class="msger-header-title">
+                    <i class="material-icons chat-icons">smart_toy</i>
+                </div>
+                <div class="msger-header-options">
+                    <span><i class="fas fa-cog"></i></span>
+                </div>
+            </header>
+
+            <main id="content-chat" class="msger-chat">
+
+                <!-- Template for the message chats 
+            <div class="msg left-msg">
+                <div style="background-image: url(avatars/5.png)" class="msg-img"></div>
+
+                <div class="msg-bubble">
+
+                    <div id="peer-msg-1" class="msg-text">
+                        Message of other peer
+                    </div>
+                </div>
+            </div>
+
+            <div class="msg right-msg">
+                <div style="background-image: url(avatars/4.png)" class="msg-img"></div>
+
+                <div class="msg-bubble ">
+
+                    <div class="msg-text ">
+                        This is my message!
+                    </div>
+                </div>
+            </div>
+            -->
+            </main>
+
+            <form class="msger-inputarea ">
+                <input id="input-chat" type="text " class="msger-input " placeholder="Enter your message... ">
+                <div id="send-chat" class="btn btn-primary msger-send-btn"><i class="material-icons chat-icons">send</i>
+                </div>
+                <div id="record-chat" class="btn btn-danger msger-record-btn"><i
+                        class="material-icons chat-icons">mic_none</i> </div>
+                <div id="stop-chat" class="btn btn-danger msger-record-btn"><i
+                        class="material-icons chat-icons">mic</i> </div>
+            </form>
+        </section>
+    </div>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/mainpage.css') }}">
+    <script src="{{ url_for('static',filename='scripts/styles.js') }}" type="text/javascript"></script>
+    <script src="{{ url_for('static',filename='scripts/index.js') }}" type="text/javascript"></script>
+</body>
+
+</html>
