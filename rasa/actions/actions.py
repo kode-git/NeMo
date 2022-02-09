@@ -366,7 +366,10 @@ class ActionWikiAsk(Action):
         except wikipedia.exceptions.PageError:
             new_search=wikipedia.search(oblique_phrase)[0]
             result= wikipedia.summary(new_search)  
-        
+        except wikipedia.DisambiguationError as e:
+            result= wikipedia.summary(e.options[0])
+            dispatcher.utter_message(text=f""+str(result))   
+       
 
         title = oblique_phrase
         context = result
