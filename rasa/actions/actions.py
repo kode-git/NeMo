@@ -4,79 +4,64 @@
 # See this guide on how to implement these action:
 # https://rasa.com/docs/rasa/custom-actions
 
-import datetime as dt
-from email import message
 from typing import Any, Text, Dict, List
-import json
-import requests 
+import json, requests, wikipedia, spacy, json, itertools, smtplib
 from rasa_sdk import Action, Tracker
 from rasa_sdk.executor import CollectingDispatcher
-from rasa_sdk.events import SlotSet
-import rasa_sdk.events
-import smtplib
-import os
 from typing import Text
 from pymongo import MongoClient
-import re
-import pprint
 from bson.objectid import ObjectId     
-from collections import OrderedDict
-import json
-import itertools
 from pymongo import MongoClient
 from time import strftime
-import wikipedia
 from search_wiki import get_info_phrase
-import spacy
 from sqlalchemy import false
-import requests
-import json
 from nemo.collections.nlp.models import QAModel
 from QAModel import _QAModel
-# Download and load the pre-trained BERT-based model
-#model = QAModel.from_pretrained("qa_squadv1.1_bertbase")
 
+# Download and load the pre-trained BERT-based model
+# model = QAModel.from_pretrained("qa_squadv1.1_bertbase")
 
 model = _QAModel().getModel()
 
+# Global variables for entities
+global email
+global mailBody
+global city
+global task
+email = "" # send email 
+mailBody = "" # mail content 
+city = "" # city of weather
+task = "" # task for the To-Do list
 
-
-email=""
-mail=""
-city=""
-
-                
+# MongoDB setup for actions elements
 client = MongoClient("mongodb+srv://Jarvis:JarvisNLP@cluster0.zbc0n.mongodb.net/todo_db?retryWrites=true&w=majority")    
-db= client['todo_db']
-actions= db['actions']
+db = client['todo_db'] # name of the database
+actions= db['actions'] # name of collection
         
 
-#
-
+# ActionShowTime defines the action to show the time
 class ActionShowTime(Action):
 
     def name(self) -> Text:
         return "action_give_time"
 
-    def run(self, dispatcher: CollectingDispatcher,
-            tracker: Tracker,
-            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-         
-         
-        time= strftime("%H:%M")
-        
+    def run(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+        print("----------  Weather Action --------------")
+        time = strftime("%H:%M")
+        print(f'ActionShowTime invoked, the current time is {time}')
         dispatcher.utter_message(text=f"{'It is '+ time }")
-        
-        return []
+        print('------------------------------------------')
+        return [] # Actions run didn't return anything
 
 
-class ActionShowWheater(Action):
+# ActionShowWeather defines the action of the weather API
+class ActionShowWeather(Action):
 
     def name(self) -> Text:
         return "action_weather"
 
     def run(self, dispatcher,tracker,domain):
-        print("FROM ACTION_WEATHER" )
+        print("----------  Weather Action --------------")
          
         entities = tracker.latest_message['entities']
         for e in entities:
@@ -94,76 +79,84 @@ class ActionShowWheater(Action):
             weather_desc = api_data['weather'][0]['description']
             print(tracker.slots['city'])
             dispatcher.utter_message(text=f"{'The weather in ' + city + ' is '+ weather_desc + ' and the temperature is '+ str(round(temp_city,1)) +'°'}")
-        
+        print('------------------------------------------')
         return []
-task=""
+        
 
+# Actions to confirm the adding of the element in the To-Do list
 class ActionConfirmAdd(Action):
 
     def name(self) -> Text:
         return "action_confirm_add"
 
-    def run(self, dispatcher,tracker,domain):
-        print("FROM action_confirm_add" )
-        global task
-        entities = tracker.latest_message['entities']
-        for e in entities:
-            task=e['value']
-        
+    def run(self, dispatcher, tracker, domain):
+        print("----------  Confirm To-Do List Message --------------")
+        entities = tracker.latest_message['entities'] 
+        print(f'Last entity:  {entities}')
+        print(f'Type of entities: {type(entities)}')
+        task = entities[0]['value']
+        print(f'Task detected is {task}')
         dispatcher.utter_message(text=f"{'Do you want to add ' + task + ' to your list'}")
+        print('-----------------------------------------------------')
 
 
-
+# Actions to add the To-Do after the ActionConfirmaAdd invocation
 class ActionAddTodo(Action):
 
     def name(self) -> Text:
         return "action_add_todo"
 
-    def run(self, dispatcher,tracker,domain):
-        print("FROM ACTION_ADD_TODO" )
-        global task 
+    def run(self, dispatcher, tracker, domain):
+        print('--------- Adding Element in the To-Do List -------------')
         data = {'name' : task}
-
+        print(f'Task to add: {task}')
         if db.actions.count_documents(data):
             dispatcher.utter_message(text=f"{'I have already added this task to your list'}")
+            print('Element already exists')
         else:
             actions.insert_one(data)
             dispatcher.utter_message(text=f"{'I added ' + task + ' to your list'}")
+            print('Added element in the To-Do list')
+        print('-----------------------------------------------------')
 
 
                 
-
-
-
-
-
-
-
+# Actions to complete the task in the To-Do list
 class ActionCompleteTodo(Action):
 
     def name(self) -> Text:
         return "action_complete_todo"
 
     def run(self, dispatcher,tracker,domain):
-        print("FROM ACTION_COMPLETE_TODO" )
+        print('--------- Complete Element in the To-Do List -------------')
          
+        # get the task from the latest message on the tracker
         entities = tracker.latest_message['entities']
-        for e in entities:
-            task=e['value']
+        task= entities[0]['value']
 
+        # initiation of id and list element
         new_list=[]
         id_list=[]
         
+        # initiation of the data json with the task name
         data = {'name' : task}
+
+        # query to find the task name in the list
         query = actions.find({ 'name': task })
-        for i in query:
-            print(i)
+
+        # return the elements from the query 
         check = format(query.retrieved)
-        print(check)
+        print(f"Check elements retrieved from the query: {check}")
+        
         if int(check) == 1:  
+            # if it is equal to 1 element
             query = actions.delete_one(data)
             dispatcher.utter_message(text=f"{'You have completed your task: ' + task }")
+            print(f'Complete the task: {task}')
         else:
+            # if there is 0 or more than 1 element in the list
+
+            # combination between words of the task, splitting the words, defines the most confidence task and select it
             li = list(task.split(" "))
             for L in range(1, len(li)+1):
                 for subset in itertools.combinations(li, L):
@@ -172,7 +165,7 @@ class ActionCompleteTodo(Action):
                     for X in range(1, L):
                         string = string.replace('] }',', { "name": { "$regex" : ".*'+ subset[X] +'.*" } } ] }')
 
-            data = json.loads(string)
+            data = json.loads(string) #
 
             result= actions.find( data )
             for x in result:
@@ -213,30 +206,33 @@ class ActionCompleteTodo(Action):
                         mess = mess + j['name'] + '\n'
                 mess= '\n' + mess
                 dispatcher.utter_message(text=f"{'I found these tasks: ' + mess }")
+            print('-----------------------------------------------------')
 
 
 
 
-
-
+# Action to ask To-Do list 
 class ActionAskTodo(Action):
 
     def name(self) -> Text:
         return "action_ask_todo"
 
     def run(self, dispatcher,tracker,domain):
-        print("FROM ACTION_ASK_TODO" )
-         
-        list=""
+        print('---------- Ask To-Do List -------------')
         
+        # redefine the list from previous call
+        list = ""
+        
+        # counter tasks
         num_task = actions.find().count()
+
+        # list of tasks
         task = actions.find()
 
-        i=0
+        # index
+        i = 0
         for x in task:
-            i=i+1
-            
-
+            i = i+1
             if(i==num_task):
                 single_task =  str(i) + ': ' + x['name'] + '.'
                 list = list + single_task
@@ -244,11 +240,12 @@ class ActionAskTodo(Action):
                 single_task =  str(i) + ': ' + x['name'] + ', '
                 list = list + single_task
                 
-        
         dispatcher.utter_message(text=f"{'TODO list is: ' + list }")
+        print('--------------------------------------')
 
 
-class ActionSendMail(Action):
+# Action to register mail of the sender
+class ActionRegisterMail(Action):
     
     def name(self) -> Text:
         return "register_form"
@@ -256,16 +253,17 @@ class ActionSendMail(Action):
     def run(self, dispatcher: CollectingDispatcher,
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-        global email
+        print('------------- Register Mail of Sender  ---------------')
         entities = tracker.latest_message['entities']
         for e in entities:
             if e['entity']=='senderemail':
                 email = e['value']
-
+        print('------------------------------------------------------')
         return []
 
 
-class ActionSendMail(Action):
+# Action to register the content of the mail
+class ActionRegisterMailBody(Action):
     
     def name(self) -> Text:
         return "mail_content_form"
@@ -273,40 +271,43 @@ class ActionSendMail(Action):
     def run(self, dispatcher: CollectingDispatcher,
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-        global mail
+        print('---------- Register Content of Mail -----------------')
         entities = tracker.latest_message['entities']
         print(email)
         for e in entities:
             if e['entity']=='containermail':
-                mail = e['value']
-
+                mailBody = e['value']
+        print('-----------------------------------------------------')
         return []
 
+
+# Action to send the email to the sender with the content of mail
+# email : sender mail
+# mailBody: content of the email
 class ActionSendingMail(Action):
     
     def name(self) -> Text:
         return "mail_response"
 
     def run(self, dispatcher,tracker,domain):
-        global mail
-        global email
-            
+        print('------------- Sending Mail ----------------')
+        # elements about the mail of the bot
         sender = "jarvisunibo@gmail.com"
         receiver = email
         password = "JarvisNlp!"
         subject = "Jarvis mailing"
-        body = mail
+        body = mailBody
         
-        # header
+        # Header of the mail
         message = f"""From: Jarvis Unibo
         To: {receiver}
         Subject: {subject}\n
         {body}
         """
-
         server = smtplib.SMTP("smtp.gmail.com", 587)
         server.starttls()
-
+        # Sending email
+        print('Sending email...')
         try:
             server.login(sender,password)
             server.sendmail(sender, receiver, message)
@@ -316,30 +317,33 @@ class ActionSendingMail(Action):
         except smtplib.SMTPAuthenticationError:
             print("Unable to sign in")
             dispatcher.utter_message(text=f"I'm sorry i think there's a problem")
-            
-                
+        print('------------------------------------------')
         return []
 
 
-
-class ActionSendingMail(Action):
+# Action to send a joke when you are unhappy, sad, bad or negative adjectives. Check nlu.yaml for more info about the action invocation
+class ActionUnhappyResponse(Action):
     
     def name(self) -> Text:
         return "unhappy_response"
 
     def run(self, dispatcher,tracker,domain):
+        print('------------- Sending Joke ---------------------')
         length=101
         while length > 100:
+            # API of jokes from the link below
             joke_api_link = "https://jokes.guyliangilsing.me/retrieveJokes.php?type=dadjoke"
-            joke_link = requests.get(joke_api_link)
-            joke = joke_link.json()    
-            length=len(joke['joke'])
-        dispatcher.utter_message(text=f""+str(joke['joke']))
-      
+            joke_link = requests.get(joke_api_link) # request to the API
+            joke = joke_link.json() # retrieve the json of response
+            length=len(joke['joke']) # retrieve the length of the response
+            print(f'Joke is {str(joke["joke"])}')
+            # end of while
+        dispatcher.utter_message(text = f"" + str(joke['joke'])) # utter_message on the joke retrieved from the API
+        print('-------------------------------------------------')
         return []
 
 
-
+# Action for the Wikipedia management
 class ActionWikiAsk(Action):
     
     def name(self) -> Text:
@@ -348,34 +352,34 @@ class ActionWikiAsk(Action):
     def run(self, dispatcher: CollectingDispatcher,
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-        print("TEST ", tracker.latest_message.get('text'))
+        print('----------------------------- Wikipedia Action Invocation -----------------------------------')
+        print("Wikipedia tracket for the latest message:", tracker.latest_message.get('text'))
         text = tracker.latest_message.get('text')
         sentence = text.replace('search', '')
         
-        print("my sentence is  ",sentence)
+        print("My sentence is:", sentence)
         nlp = spacy.load('en_core_web_sm')        
         try:                       
             doc = nlp(sentence)
-            print("#####################")
+            print("Part-of-Speech extrapolation")
             oblique_phrase = get_info_phrase(doc)   
-            print("RESULT: " + str(oblique_phrase))
-            print("#####################")   
+            print("Result: " + str(oblique_phrase))
+            print("Keys words: ", oblique_phrase)
             print(wikipedia.search(oblique_phrase))
-            print("----------------------------------------------")
-            result=wikipedia.summary(oblique_phrase , auto_suggest=False)
-        except wikipedia.exceptions.PageError:
+            result = wikipedia.summary(oblique_phrase , auto_suggest=False)
+        except wikipedia.exceptions.PageError:  
+            # Page Error on Wikipedia scraping
             new_search=wikipedia.search(oblique_phrase)[0]
             result= wikipedia.summary(new_search)  
         except wikipedia.DisambiguationError as e:
+            # Page Semantic Error on the Disambiguation
             result= wikipedia.summary(e.options[0])
             dispatcher.utter_message(text=f""+str(result))   
        
-
         title = oblique_phrase
         context = result
         question = sentence
-
-
+        # Input of the QaModel with the Squad_v1 formatting
         myInput = {
             "data": [
                 {
@@ -394,10 +398,15 @@ class ActionWikiAsk(Action):
                 }
             ]
         }
+        # Transform it in JSON 
         inputFile = json.dumps(myInput)
+        # Writing the bert_input to submit to QA_Model
         with open('bert_input.json', 'w') as outfile:
             outfile.write(inputFile)
+
+        print('Inference on the QA_Model...')
         output = model.inference('bert_input.json')
         for value in output[0].items():
-            dispatcher.utter_message(text=f"The answer is "+str(value[1][1])) 
+            dispatcher.utter_message(text=f"The answer is: "+ str(value[1][1])) 
+        print('-------------------------------------------------------------------------------------------')
         return []

@@ -89,12 +89,16 @@ def transcribeAudio():
 @app.route('/tts', methods=["POST"])
 def encodeText():
     print("-------------------------- TTS API ----------------------------")
+    print('Getting context')
     content = request.get_json()
     message = content['text']
     filename = content['filename']
-    print(f'Received {message}, encoding text started...')
+    print('Filename taken from the request is: ', filename, ' and message to write is: ', message)
+    print(f'Starting encoding...')
     audio = tts.textToSpeech(message, './static/speech/' + filename + ".wav" )
+    print('Play the audio file...')
     os.system(f"play {audio}")
+    print('Return the message\" ', message, ' \"to the client')
     print('---------------------------------------------------------------')
     return message
 

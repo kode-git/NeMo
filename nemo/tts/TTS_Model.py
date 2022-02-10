@@ -2,8 +2,8 @@ import soundfile as sf
 from nemo.collections.tts.models.base import SpectrogramGenerator, Vocoder
 import os
 
-_specGenerator = "tts_en_tacotron2"
-_vocoderName = "tts_melgan"
+_specGenerator = "tts_en_fastpitch"
+_vocoderName = "tts_waveglow_88m"
 
 class TTS_Model:
 
@@ -60,13 +60,20 @@ class TTS_Model:
 
 
     def textToSpeech(self, text : str, filename):
+        print('Invocation of textToSpeech in TTS module')
         if self.vocoder == None or self.spectogramGenerator == None:
             raise Exception('Vocoder or Spectogram Generator are None. Please, setup them before invoke he textToSpeech method!')
         # clear the filename
         parsed = self.spectogramGenerator.parse(text)
+        print('Parsed text is: ', parsed)
+        print('Generate spectogram...')
         spectogram = self.spectogramGenerator.generate_spectrogram(tokens=parsed)
+        print('Convert spectogram to audio...')
         audio = self.vocoder.convert_spectrogram_to_audio(spec=spectogram)
+        print('Tensor Audio: ', audio)
+        print('Writing file in: ', filename)
         sf.write(filename, audio.to('cpu').detach().numpy()[0], 22050)
+        print('Return filename: ', filename)
         return filename
 
 
