@@ -114,7 +114,8 @@ function getResponse(question){
                 console.log('Not response...') // if the rasa have internal error
             } 
             else{
-                generateAudio(data)
+                // generateAudio(data)
+                insertBotMessage("Alysia", data)  
             }
         }
     });
