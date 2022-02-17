@@ -10,15 +10,10 @@ rules:
   - intent: bot_challenge
   - action: utter_iamabot
 
-
-
 - rule: fallback management
   steps:
   - intent: nlu_fallback
   - action: utter_nlu_fallback
-
-
-
 
 - rule: Sender form
   steps:
@@ -57,13 +52,10 @@ rules:
   - intent: confirm_send
   - action: mail_response
 
-
 - rule: When the user say no
   steps:
   - intent: deny_all
   - action: utter_deny_all
-
-
 
 - rule: weather form
   steps:

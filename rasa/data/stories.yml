@@ -1,7 +1,9 @@
-version: "2.0"
+# Actions are catched by front-end server
 
+version: "2.0"
 stories:
 
+# ----------- Greetings -------------
 - story: happy path
   steps:
   - intent: greet
@@ -22,28 +24,26 @@ stories:
   - action: utter_greet
   - intent: bot_challenge
   - action: utter_iamabot
-#-------------SHOW TIME-----------------------
 
+# -------- Show time ---------
 - story: interactive_time
   steps:
   - intent: give_time
   - action: action_give_time
 
-  
 - story: interactive_time2
   steps:
   - intent: give_time
   - action: action_give_time
 
-#-------------BOT FUNCITONALITIES--------------
-- story: interactive_funcitionalites
+
+# --------- Show Functionalites -----------
+- story: interactive_functionalites
   steps:
-  - intent: bot_funcionalities
-  - action: utter_bot_funcionalities
-#-------------ADD TODO-------------------------
+  - intent: bot_functionalities
+  - action: utter_bot_functionalities
 
-
-
+# --------- Add To-Do List --------------
 - story: add_todo_list story_2
   steps:
   - intent: add_todo
@@ -54,7 +54,6 @@ stories:
     - task: buy apple
   - intent: confirm_add
   - action: action_add_todo
-
 
 - story: add_todo_list story_3
   steps:
@@ -99,9 +98,8 @@ stories:
     - task: study nlp
   - intent: confirm_add
   - action: action_add_todo
-#--------------COMPLETE TODO--------------------------
 
-
+#--------- Complete To-Do List ------------
 - story: complete_todo_list story_1
   steps:
   - intent: complete_todo
@@ -162,9 +160,7 @@ stories:
     - task: take a photo of my document
   - action: action_listen
 
-#---------------ASK TODO-------------------------
-
-
+# ------------- Ask To-Do List ---------------
 - story: ask_todo_list story_1
   steps:
   - intent: ask_todo
@@ -201,14 +197,8 @@ stories:
   - intent: ask_todo
   - action: action_ask_todo
   - action: action_listen
-#----------------------------------------
 
-
-
-
-  #-------------------------------------------------------
-
-  #-------------------NLU FALLBACK--------------------------
+  # ------------ NLU Fallback -------------
 - story: nlu_test
   steps:
     - intent: nlu_fallback
@@ -223,8 +213,8 @@ stories:
   steps:
     - intent: nlu_fallback
     - action: utter_nlu_fallback
-  #---------------------------------------------------------
-  
+
+# ----------- Inform Weather --------------  
 - story: city_test2
   steps:
   - intent: inform_weather
@@ -252,7 +242,7 @@ stories:
     - city: Geelong
   - action: action_weather
 
-
+# ----------- Mailing ---------------
 - story: interactive_story_1
   steps:
   - intent: mailing
@@ -341,8 +331,6 @@ stories:
   - intent: confirm_send
   - action: mail_response
 
-
-
 - story: interactive_story_1
   steps:
   - intent: mailing
@@ -365,7 +353,7 @@ stories:
   - action: mail_response
 
 
-#--------------------WIKI ASK-----------------------
+# -------------- Asking Wikipedia ------------------
 
 - story: interactive_wiki
   steps:

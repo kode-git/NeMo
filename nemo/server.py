@@ -5,15 +5,14 @@ from asr.ASR_Model import *  # ASR modules
 from tts.TTS_Model import *  # TTS modules
 # default packages
 import numpy as np
-import os
-import itertools
-import spacy
-import wikipedia
+import itertools, spacy, smtplib, wikipedia
 from nemo.collections.nlp.models import QAModel
 from nlp.QAModel import _QAModel
 from pymongo import MongoClient
 from bson.objectid import ObjectId
 from time import strftime
+from email.message import EmailMessage
+
 
 # instance the app
 app = Flask(__name__)
@@ -22,10 +21,6 @@ CORS(app)
 # ASR modules setup
 asr = ASR_Model()
 
-# TTS modules setup
-tts = TTS_Model()
-tts.downloadSpectogramGenerator()
-tts.downloadVocoder()
 
 # QAModel
 qaModel = _QAModel().getModel()
@@ -36,6 +31,11 @@ nlp = spacy.load('en_core_web_sm')
 # utils
 global counter
 counter = 0
+
+global mailReceiver
+global contentBody
+mailReceiver = ""
+contentBody = ""
 
 # MongoDB setup
 client = MongoClient(
@@ -54,6 +54,8 @@ def index():
 
 @app.route('/intent', methods=["POST"])
 def sendIntent():
+    global mailReceiver
+    global contentBody
     content = request.get_json()
     question = content['text']
     print('----------------------- Intent API ------------------------------')
@@ -72,14 +74,20 @@ def sendIntent():
 
     trigger_json = {}
     returnValue = "I didn't understand, can you repeat?"
+    
+    # ------------ Ask Wiki --------------
     if(intent_name == "ask_wiki"):
         # ask_wiki intent
         print('Ask Wiki invocation')
         # define returnValue
         returnValue = dispatchingQAModel(question)
+    
+    # ------------ Give Time --------------
     elif intent_name == "give_time":
         returnValue = f'It\'s {dispatchingTime()}'
         print(f'Output sent: {returnValue}')
+    
+    # ------------ Weather Service --------------
     elif intent_name == "inform_weather":
         entities = prediction.get('entities')
         city = ""
@@ -90,6 +98,8 @@ def sendIntent():
             returnValue = "I'm sorry, this city doesn't exist"
         else:
             returnValue = dispatchingWeather(city)
+    
+    # ------------ Add To-Do List --------------
     elif intent_name == "add_todo":
         entities = prediction.get('entities')
         for element in entities:
@@ -98,8 +108,12 @@ def sendIntent():
         print(f'Final entity chosen is: {todo_task}')
         dispatchingAddToDo(todo_task)
         returnValue = f'Task {todo_task} added to the list'
+    
+    # ------------ Ask To-Do List --------------
     elif intent_name == "ask_todo":
         returnValue = dispatchingAskToDo()
+    
+    # ------------ Complete To-Do List --------------
     elif intent_name == "complete_todo":
         entities = prediction.get('entities')
         for element in entities:
@@ -107,6 +121,28 @@ def sendIntent():
             print(f'Possible entity: {todo_task}')
         print(f'Final entity chosen is: {todo_task}')
         returnValue = dispatchingCompleteToDo(todo_task)
+   
+    # ------------ Mood Unhappy --------------
+    elif intent_name == "mood_unhappy":
+        returnValue = f"So, let's me give you a joke; {dispatchingUnhappyJoke()}"
+    
+    # ------------ Mail Registration --------------
+    elif intent_name == "mail_recipient":
+        entities = prediction.get('entities')
+        for element in entities:
+            mail = element.get('value')
+            print(f'Possible entity: {mail}')
+        print(f'Final entity chosen is: {mail}')
+        mailReceiver = mail
+        returnValue = 'Ok, tell me the content of the mail. Say \'write\' and the content of the mail to send it correctly'
+    
+    # ------------ Mail Content Registration --------------
+    elif intent_name == "mail_content":
+        print('Enter in the mail content intent...')
+        contentBody = question
+        returnValue = dispatchingMail(mailReceiver, contentBody)
+    
+    # ------------ Others Default Functions --------------
     else:
         # Other intent different from ask_wiki
         trigger_json = {
@@ -158,31 +194,12 @@ def transcribeAudio():
     return jsonify(transcript=data)
 
 
-@app.route('/tts', methods=["POST"])
-def encodeText():
-    print("-------------------------- TTS API ----------------------------")
-    print('Getting context')
-    content = request.get_json()
-    message = content['text']
-    filename = content['filename']
-    print('Filename taken from the request is: ',
-          filename, ' and message to write is: ', message)
-    print(f'Starting encoding...')
-    tts.downloadVocoder()
-    audio = tts.textToSpeech(message, './static/speech/' + filename + ".wav")
-    print('Play the audio file...')
-    os.system(f"play {audio}")
-    print('Return the message\" ', message, ' \"to the client')
-    print('---------------------------------------------------------------')
-    return message
-
 # Internal function
 
 # Action to do for the wikipedia function
 
 
 def dispatchingQAModel(text):
-    print('----------------------------- Wikipedia Dispatcher -----------------------------------')
     sentence = text.replace('search', '')
     print('Text input is: ' + sentence)
     try:
@@ -233,7 +250,6 @@ def dispatchingQAModel(text):
     output = qaModel.inference('bert_input.json')
     for value in output[0].items():
         text = f"The answer is " + str(value[1][1])
-    print('-------------------------------------------------------------------------------------------')
     return text
 
 # utility for wikipedia function
@@ -400,6 +416,57 @@ def dispatchingCompleteToDo(task):
 
             
             return f"I found {composition_str} in the list, which one do you want to complete?"
+
+# Greeting function
+def dispatchingUnhappyJoke():
+    length = 101
+    while length > 100: 
+        # API of jokes from the link below
+        joke_api_link = "https://jokes.guyliangilsing.me/retrieveJokes.php?type=dadjoke"
+        joke_link = requests.get(joke_api_link) # request to the API
+        joke = joke_link.json() # retrieve the json of response
+        length=len(joke['joke']) # retrieve the length of the response
+        print(f'Joke is {str(joke["joke"])}')
+        # end of while
+    return f"{str(joke['joke'])}" # returned message on the joke retrieved from the API
+
+
+def dispatchingMail(mail, content):
+    if mail == None:
+        return f'I am sorry, I forgot the receiver mail, can you rewrite it?'
+    if content == None:
+        return f'I did not register the content of the mail, can you please say the content and start with \'write \' word?'
+    replacement = ''
+    content = f"Alysia Assistant is an automatic system, the email sent to the owner is:\n {content}".split()
+    content[0] = replacement
+    content = ' '.join(content)
+    print(f'Email of receiver: {mail}')
+    print(f'Content to send: {content}')
+    
+    # Data of the email
+    sender = "alysia.mail.assistant@gmail.com"
+    password = "blockchain"
+    subject = "Alysia Mailing System: Virtual Assistant Message"
+
+    msg = EmailMessage()
+    msg.set_content(content)
+
+    msg['Subject'] = subject
+    msg['From'] = sender
+    msg['To'] = mail
+
+    try:
+        # Send the message via our own SMTP server.
+        server = smtplib.SMTP('smtp.gmail.com', 587)
+        server.starttls()
+        server.login(sender, password)
+        server.send_message(msg)
+        server.quit()
+        print("Mail has been sent!")
+        return f'Email sent to {mail} correctly'
+    except smtplib.SMTPAuthenticationError:
+        print("Unable to sign in")
+        return f'Unable to send an email to {mail}'   
 
 
 app.run(host='0.0.0.0', port=4000)

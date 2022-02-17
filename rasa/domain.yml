@@ -22,7 +22,7 @@ intents:
 - ask_todo
 - confirm_send
 - deny_all
-- bot_funcionalities
+- bot_functionalities
 - confirm_add
 - goodbye
 - bot_challenge
@@ -75,7 +75,7 @@ responses:
   - text: Do you want to add a task to you list?
   utter_deny_all:
   - text: Ok, how can I help you now?
-  utter_bot_funcionalities:
+  utter_bot_functionalities:
   - text: You can ask me the weather, time, todo list management, send a mail and greeting
 actions:
 - action_add_todo
@@ -93,7 +93,7 @@ actions:
 - unhappy_response
 - utter_ask_email
 - utter_ask_mail_content
-- utter_bot_funcionalities
+- utter_bot_functionalities
 - utter_greet
 - utter_iamabot
 - utter_invalid_city
