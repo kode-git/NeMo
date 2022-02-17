@@ -5,7 +5,7 @@
 # https://rasa.com/docs/rasa/custom-actions
 
 from typing import Any, Text, Dict, List
-import json, requests, wikipedia, spacy, json, itertools, smtplib
+import json, requests, json, itertools, smtplib
 from rasa_sdk import Action, Tracker
 from rasa_sdk.executor import CollectingDispatcher
 from typing import Text
@@ -13,15 +13,15 @@ from pymongo import MongoClient
 from bson.objectid import ObjectId     
 from pymongo import MongoClient
 from time import strftime
-from search_wiki import get_info_phrase
 from sqlalchemy import false
-from nemo.collections.nlp.models import QAModel
-from QAModel import _QAModel
+# import wikipedia, spacy
+# from nemo.collections.nlp.models import QAModel
+# from QAModel import _QAModel
 
 # Download and load the pre-trained BERT-based model
 # model = QAModel.from_pretrained("qa_squadv1.1_bertbase")
 
-model = _QAModel().getModel()
+# model = _QAModel().getModel()
 
 # Global variables for entities
 global email
@@ -342,7 +342,7 @@ class ActionUnhappyResponse(Action):
         print('-------------------------------------------------')
         return []
 
-
+''''''''''
 # Action for the Wikipedia management
 class ActionWikiAsk(Action):
     
@@ -355,6 +355,9 @@ class ActionWikiAsk(Action):
         print('----------------------------- Wikipedia Action Invocation -----------------------------------')
         print("Wikipedia tracket for the latest message:", tracker.latest_message.get('text'))
         text = tracker.latest_message.get('text')
+        print('Tracker object: ' + str(tracker))
+        print('Tracker last message: ' + str(tracker.latest_message))
+        print('Tracker_events: ' + str(tracker.events))
         sentence = text.replace('search', '')
         
         print("My sentence is:", sentence)
@@ -410,3 +413,4 @@ class ActionWikiAsk(Action):
             dispatcher.utter_message(text=f"The answer is: "+ str(value[1][1])) 
         print('-------------------------------------------------------------------------------------------')
         return []
+'''''''''

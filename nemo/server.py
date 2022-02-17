@@ -6,10 +6,14 @@ from tts.TTS_Model import *  # TTS modules
 # default packages
 import numpy as np
 import os
+import itertools
 import spacy
 import wikipedia
 from nemo.collections.nlp.models import QAModel
 from nlp.QAModel import _QAModel
+from pymongo import MongoClient
+from bson.objectid import ObjectId
+from time import strftime
 
 # instance the app
 app = Flask(__name__)
@@ -19,11 +23,11 @@ CORS(app)
 asr = ASR_Model()
 
 # TTS modules setup
-# tts = TTS_Model()
-# tts.downloadSpectogramGenerator()
-# tts.downloadVocoder()
+tts = TTS_Model()
+tts.downloadSpectogramGenerator()
+tts.downloadVocoder()
 
-# QAModel 
+# QAModel
 qaModel = _QAModel().getModel()
 
 # Spacy
@@ -33,9 +37,14 @@ nlp = spacy.load('en_core_web_sm')
 global counter
 counter = 0
 
+# MongoDB setup
+client = MongoClient(
+    "mongodb+srv://Jarvis:JarvisNLP@cluster0.zbc0n.mongodb.net/todo_db?retryWrites=true&w=majority")
+db = client['todo_db']  # name of the database
+actions = db['actions']  # name of collection
+
+
 # main index page which return the index.html
-
-
 @app.route('/', methods=["GET"])
 def index():
     return render_template('index.html')
@@ -68,24 +77,56 @@ def sendIntent():
         print('Ask Wiki invocation')
         # define returnValue
         returnValue = dispatchingQAModel(question)
+    elif intent_name == "give_time":
+        returnValue = f'It\'s {dispatchingTime()}'
+        print(f'Output sent: {returnValue}')
+    elif intent_name == "inform_weather":
+        entities = prediction.get('entities')
+        city = ""
+        for element in entities:
+            city = element.get('value')
+        print('The weather city found is:', city)
+        if city == "" or city == None:
+            returnValue = "I'm sorry, this city doesn't exist"
+        else:
+            returnValue = dispatchingWeather(city)
+    elif intent_name == "add_todo":
+        entities = prediction.get('entities')
+        for element in entities:
+            todo_task = element.get('value')
+            print(f'Possible entity: {todo_task}')
+        print(f'Final entity chosen is: {todo_task}')
+        dispatchingAddToDo(todo_task)
+        returnValue = f'Task {todo_task} added to the list'
+    elif intent_name == "ask_todo":
+        returnValue = dispatchingAskToDo()
+    elif intent_name == "complete_todo":
+        entities = prediction.get('entities')
+        for element in entities:
+            todo_task = element.get('value')
+            print(f'Possible entity: {todo_task}')
+        print(f'Final entity chosen is: {todo_task}')
+        returnValue = dispatchingCompleteToDo(todo_task)
     else:
         # Other intent different from ask_wiki
         trigger_json = {
-        "name": str(intent_name),
-        "entities": {},
+            "name": str(intent_name),
+            "entities": {},
         }
         entities = prediction.get('entities')
         for element in entities:
-            trigger_json.get('entities')[element.get('entity')] = element.get('value')
+            trigger_json.get('entities')[element.get(
+                'entity')] = element.get('value')
         print('Trigger JSON to submit to the trigger_intent API:')
         print(trigger_json)
         url = 'http://localhost:5005/conversations/default/trigger_intent'
-        jarvis_response = requests.post(url, json=trigger_json, headers=headers)
+        jarvis_response = requests.post(
+            url, json=trigger_json, headers=headers)
         jarvis_response = jarvis_response.json()
         client_response = [jarvis_response.get('messages')[0].get('text')]
         print(f"Bot says: {client_response}")
         returnValue = client_response[0]
-    
+
     # return the response to the client in Json format
     print('---------------------------------------------------------------')
     return returnValue
@@ -137,6 +178,8 @@ def encodeText():
 
 # Internal function
 
+# Action to do for the wikipedia function
+
 
 def dispatchingQAModel(text):
     print('----------------------------- Wikipedia Dispatcher -----------------------------------')
@@ -165,9 +208,9 @@ def dispatchingQAModel(text):
     myInput = {
         "data": [
             {
-                    "title": title,
-                    "paragraphs": [
-                        {
+                "title": title,
+                "paragraphs": [
+                    {
                             "context": context,
                             "qas": [
                                 {
@@ -176,8 +219,8 @@ def dispatchingQAModel(text):
                                 }
                             ]
                         }
-                    ]
-                }
+                ]
+            }
         ]
     }
     # Transform it in JSON
@@ -189,9 +232,11 @@ def dispatchingQAModel(text):
     print('Inference on the QA_Model...')
     output = qaModel.inference('bert_input.json')
     for value in output[0].items():
-        text = f"The answer is: " + str(value[1][1])
+        text = f"The answer is " + str(value[1][1])
     print('-------------------------------------------------------------------------------------------')
     return text
+
+# utility for wikipedia function
 
 
 def get_info_phrase(doc):
@@ -216,6 +261,145 @@ def get_info_phrase(doc):
                 phrase = phrase + str(token) + " "
 
     return phrase
+
+
+# Time function
+def dispatchingTime():
+    return strftime("%H:%M")
+
+# Weather function
+def dispatchingWeather(city: str):
+    complete_api_link = "https://api.openweathermap.org/data/2.5/weather?q=" + \
+        city+"&APPID=dbd3b02d8958d62185d02e944cd5f522"
+    api_link = requests.get(complete_api_link)
+    api_data = api_link.json()
+
+    if(api_data['cod'] == '404'):
+        return "I'm sorry, this city doesn't exist"
+    else:
+        temp_city = ((api_data['main']['temp'])-273.15)
+        weather_desc = api_data['weather'][0]['description']
+        return f"{'The weather in ' + city + ' is '+ weather_desc + ' and the temperature is '+ str(round(temp_city,1)) +'°'}"
+
+
+# Ask To-Do function
+def dispatchingAskToDo():
+    composition = ""
+    num_task = len(list(actions.find()))
+    task = actions.find()
+    print(f'Number of actual tasks:{num_task}')
+    i = 0
+    if(num_task == 0):
+        return 'There are not task in the To-Do list, please add one saying \'add X to the list\''
+    for x in task:
+        i = i+1
+        if(i == num_task):
+            single_task = str(i) + ': ' + x['name'] + '.'
+            composition = composition + single_task
+        else:
+            single_task = str(i) + ': ' + x['name'] + ', '
+            composition = composition + single_task
+
+    return f"{'TODO list is: ' + composition }"
+
+
+def dispatchingAddToDo(todo_task):
+    data = {'name': todo_task}
+    print(f'Task to add: {todo_task}')
+    if db.actions.count_documents(data):
+        return f"I have already added this task to your list"
+    else:
+        actions.insert_one(data)
+        return f"I added {todo_task} to your list"
+
+
+def dispatchingCompleteToDo(task):
+    # get the task from the latest message on the tracker
+
+    # initiation of id and list element
+    new_list = []
+    id_list = []
+
+    # initiation of the data json with the task name
+    data = {'name': task}
+
+    # query to find the task name in the list
+    query = actions.find({'name': task})
+
+    # return the elements from the query
+    check = format(query.retrieved)
+    print(f"Check elements retrieved from the query: {check}")
+
+    if int(check) == 1:
+        # if it is equal to 1 element
+        query = actions.delete_one(data)
+        return f"You have completed your task: {task}"
+    else:
+        # if there is 0 or more than 1 element in the list
+        # combination between words of the task, splitting the words, defines the most confidence task and select it
+        li = list(task.split(" "))
+        for L in range(1, len(li)+1):
+            for subset in itertools.combinations(li, L):
+                cont = L
+                string = ' { "$and" : [ { "name": { "$regex" : ".*' + subset[0] + '.*" } } ] }'
+                for X in range(1, L):
+                    string = string.replace(
+                        '] }', ', { "name": { "$regex" : ".*' + subset[X] + '.*" } } ] }')
+
+        data = json.loads(string)
+
+        result = actions.find(data)
+        for x in result:
+            id = x['_id']
+            id_list = []
+            id_list.append(str(L))
+            id_list.append(str(id))
+            new_list.append(id_list)
+
+        res = list(set(tuple(sorted(sub)) for sub in new_list))
+        if len(res) != 0:
+            max_value = max(res)
+        else:
+            max_value = 0
+
+        for i in res:
+            for j in res:
+                if i[1] == j[1] and i[0] !=j[0] and i[0]<j[0]:
+                    try:
+                        res.remove(i)
+                    except:
+                        print('Resource removing failed')
+
+        new_res = []
+        for el in res:
+            if int(el[0]) >= int(max_value[0]):
+                new_res.append(el)
+
+        if len(new_res) == 0:
+            return f"I am sorry, no task found"
+        elif len(new_res) == 1:
+            query = actions.delete_one(data)
+            return f"I have completed your task named {task}"
+        else:
+            similar_task = []
+            for i in range(0, len(new_res)):
+                temporal_task = ""
+                for j in actions.find({"_id": ObjectId(new_res[i][1])}):
+                    temporal_task = temporal_task + f"{ j['name'] }"
+                print(f'Task {i} found is: {temporal_task}')
+                similar_task.append(temporal_task)
+            
+            composition_str = ""
+            if(len(similar_task) > 0):
+                for i in range(0, len(similar_task)- 1):
+                    if(i > 1):
+                        composition_str += f', {similar_task[i]} '
+                    else:
+                        composition_str += f'{similar_task[i]}'
+                composition_str += f' and {similar_task[i + 1]}'
+
+            
+            return f"I found {composition_str} in the list, which one do you want to complete?"
 
 
 app.run(host='0.0.0.0', port=4000)
