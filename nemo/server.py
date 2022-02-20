@@ -286,7 +286,7 @@ def dispatchingTime():
 # Weather function
 def dispatchingWeather(city: str):
     complete_api_link = "https://api.openweathermap.org/data/2.5/weather?q=" + \
-        city+"&APPID=dbd3b02d8958d62185d02e944cd5f522"
+        city + "&APPID=dbd3b02d8958d62185d02e944cd5f522"
     api_link = requests.get(complete_api_link)
     api_data = api_link.json()
 
@@ -432,14 +432,17 @@ def dispatchingUnhappyJoke():
 
 
 def dispatchingMail(mail, content):
+    global mailReceiver
+    global contentBody
     if mail == None:
         return f'I am sorry, I forgot the receiver mail, can you rewrite it?'
     if content == None:
         return f'I did not register the content of the mail, can you please say the content and start with \'write \' word?'
     replacement = ''
-    content = f"Alysia Assistant is an automatic system, the email sent to the owner is:\n {content}".split()
+    content = content.split()
     content[0] = replacement
     content = ' '.join(content)
+    content = f"Alysia Assistant is an automatic system, the email sent to the owner is:\n {content}"
     print(f'Email of receiver: {mail}')
     print(f'Content to send: {content}')
     
@@ -463,9 +466,13 @@ def dispatchingMail(mail, content):
         server.send_message(msg)
         server.quit()
         print("Mail has been sent!")
+        mailReceiver = ""
+        contentBody = ""
         return f'Email sent to {mail} correctly'
     except smtplib.SMTPAuthenticationError:
         print("Unable to sign in")
+        mailReceiver = ""
+        contentBody = ""
         return f'Unable to send an email to {mail}'   
 
 

@@ -18,8 +18,22 @@ var mediaRecorder;
 var audioName = 0;
 var speechName = 0;
 
+var speech = new SpeechSynthesisUtterance()
+
+function initSpeechSyntethize() {
+    speech.lang = "en"
+    speech.volume = 0.8
+    // Setting voices
+    var voices = window.speechSynthesis.getVoices();
+    speech.voice = voices[0]
+}
+
+// Speech Syntethize
+initSpeechSyntethize()
+
+
 // This function send a request with a question to the NLU rasa module and receive his response
-function sendMessage(){
+function sendMessage() {
     // Getting the value from the chat field
     var question = document.getElementById("input-chat").value
     document.getElementById("input-chat").value = null
@@ -27,7 +41,7 @@ function sendMessage(){
     console.log('Question: ' + question)
     insertMessage(question)
     // make an AJAX call to make a response from the NLU rasa module
-    var quest = {'text': question}
+    var quest = { 'text': question }
     $.ajax({
         url: "/intent", // call API
         type: "POST",  // POST method available
@@ -35,9 +49,9 @@ function sendMessage(){
         data: JSON.stringify(quest),
         success: function (data) {
             // the response is the answer of the question based on the most confident intent
-            if(data == "" || data == " " || data == undefined) {
+            if (data == "" || data == " " || data == undefined) {
                 console.log('Not response...') // if the rasa have internal error
-            } 
+            }
             else insertBotMessage("Alysia", data)
         }
     });
@@ -60,11 +74,11 @@ function startRecord() {
 
 
             mediaRecorder.addEventListener("stop", () => {
-                const audioBlob = new Blob(audioChunks, { 
-                    'type': 'audio/wav' 
-                  });
+                const audioBlob = new Blob(audioChunks, {
+                    'type': 'audio/wav'
+                });
                 const audioUrl = URL.createObjectURL(audioBlob);
-                
+
                 const audio = new Audio(audioUrl);
                 // sending the blob to the server
                 sendRecord(audioBlob)
@@ -82,7 +96,7 @@ function stopRecord() {
     }, 1000);
 }
 
-function sendRecord(blob){
+function sendRecord(blob) {
     var filename = audioName + ".wav"
     audioName++;
     var formData = new FormData();
@@ -93,7 +107,7 @@ function sendRecord(blob){
         method: 'POST',
         body: formData,
 
-    }).then(response => response.json().then(data =>{
+    }).then(response => response.json().then(data => {
         const message = data['transcript']
         insertMessage(message)
         getResponse(message)
@@ -101,8 +115,8 @@ function sendRecord(blob){
 }
 
 
-function getResponse(question){
-    var quest = {'text': question}
+function getResponse(question) {
+    var quest = { 'text': question }
     $.ajax({
         url: "/intent", // call API
         type: "POST",  // POST method available
@@ -110,10 +124,10 @@ function getResponse(question){
         data: JSON.stringify(quest),
         success: function (data) {
             // the response is the answer of the question based on the most confident intent
-            if(data == "" || data == " " || data == undefined) {
+            if (data == "" || data == " " || data == undefined) {
                 console.log('Not response...') // if the rasa have internal error
-            } 
-            else{
+            }
+            else {
                 generateAudio(data)
                 // insertBotMessage("Alysia", data)  
             }
@@ -122,23 +136,9 @@ function getResponse(question){
 }
 
 
-function generateAudio(message){
-    const filename = speechName + ""
-    speechName++;
-    const inputText = {'text': message, 'filename' : filename}
-    $.ajax({
-        url: "/tts", // call API
-        type: "POST",  // POST method available
-        contentType: "application/json", // json formatting data
-        data: JSON.stringify(inputText),
-        success: function (data) {
-            // the response is the answer of the question based on the most confident intent
-            if(data == undefined) {
-                console.log('Not audio making...') // if the rasa have internal error
-            } 
-            else{
-                insertBotMessage("Alysia", message)                
-            }
-        }
-    });
+function generateAudio(message) {
+    speech.text = message
+    window.speechSynthesis.speak(speech)
+    insertBotMessage("Alysia", message)
+    
 }
