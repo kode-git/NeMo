@@ -45,7 +45,7 @@ For problems about Docker setting, check the getting started guide on: https://d
 
 ## Environment setup
 
-For an easy setup of the dependencies, build and run the image and servers from the Dockerfile or the respective directories following these steps. You must have 3 terminals to run correctly each component. <br>
+For an easy setup of the dependencies, build and run the image and servers from the Dockerfile or the respective directories following these steps. You must have 2 terminals to run correctly each component. <br>
 
 In the first one, you have to run the django server: <br>
 - <b>Step 1</b>: `python3 -m venv venv` or `python -m venv venv`
@@ -53,12 +53,7 @@ In the first one, you have to run the django server: <br>
 - <b>Step 3</b>: `pip3 install -i requirements.txt`
 - <b>Step 4</b>: `python3 nemo/server.py`
 
-In the third one, you have to download and build some images about Rasa via Docker: <br>
-- <b>Step 0</b>: Type `docker network create jarvis-net`
-- <b>Step 1</b>: Go into the rasa project folder with the Dockerfile and type `sudo docker image build -f Dockerfile_actions.dockerfile -t rasa-actions .`
-- <b>Step 2</b>: Type `sudo docker run -it -p 5055:5055 --network jarvis-net --mount "type=bind,source=$(pwd)/,target=/app" --name action-server rasa-actions `<br>
-
-For the last one, you have to run the Rasa shell:
+For the second one, you have to run the Rasa shell:
 - <b>Step 1</b>: Go into the rasa project folder with the Dockerfile and type `sudo docker image build -f Dockerfile_shell.dockerfile -t rasa-shell .`
 - <b>Step 2</b>: Going in the main directory the third terminal and type `cd rasa && sudo docker run -it -p 5005:5005 --network jarvis-net --mount "type=bind,source=$(pwd)/,target=/app" rasa-shell`
 <br>
