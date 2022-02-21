@@ -19,10 +19,9 @@ Project integrates NeMo framework with the Rasa NLU. Rasa helps you build contex
 
 
 ## Components
-The project is composed by few elements which has some setups before to start the project.
+The project is composed by two elements which has some setups before to start the project.
 <ul>
 <li>Flask Server - for the ASR and TTS invocations</li>
-<li>Rasa Actions Container - a Docker container for the actions element in NLU</li>
 <li>Rasa Shell Container - for the environment on the Rasa Server</li>
 </ul>
 
