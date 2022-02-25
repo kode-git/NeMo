@@ -25,18 +25,6 @@ stories:
   - intent: bot_challenge
   - action: utter_iamabot
 
-# -------- Show time ---------
-- story: interactive_time
-  steps:
-  - intent: give_time
-  - action: action_give_time
-
-- story: interactive_time2
-  steps:
-  - intent: give_time
-  - action: action_give_time
-
-
 # --------- Show Functionalites -----------
 - story: interactive_functionalites
   steps:
@@ -47,63 +35,52 @@ stories:
 - story: add_todo_list story_2
   steps:
   - intent: add_todo
-  - action: action_confirm_add
   - slot_was_set:
     - requested_slot: task
   - slot_was_set:
     - task: buy apple
   - intent: confirm_add
-  - action: action_add_todo
 
 - story: add_todo_list story_3
   steps:
   - intent: add_todo
-  - action: action_confirm_add
   - slot_was_set:
     - requested_slot: task
   - slot_was_set:
     - task: learn geography
   - intent: confirm_add
-  - action: action_add_todo
 
 - story: add_todo_list story_4
   steps:
   - intent: add_todo
-  - action: action_confirm_add
   - slot_was_set:
     - requested_slot: task
   - slot_was_set:
     - task: work project
   - intent: confirm_add
-  - action: action_add_todo
 
 - story: add_todo_list story_5
   steps:
   - intent: add_todo
-  - action: action_confirm_add
   - slot_was_set:
     - requested_slot: task
   - slot_was_set:
     - task: go to market
   - intent: confirm_add
-  - action: action_add_todo
 
 - story: add_todo_list story_6
   steps:
   - intent: add_todo
-  - action: action_confirm_add
   - slot_was_set:
     - requested_slot: task
   - slot_was_set:
     - task: study nlp
   - intent: confirm_add
-  - action: action_add_todo
 
 #--------- Complete To-Do List ------------
 - story: complete_todo_list story_1
   steps:
   - intent: complete_todo
-  - action: action_complete_todo
   - slot_was_set:
     - requested_slot: task
   - slot_was_set:
@@ -113,7 +90,6 @@ stories:
 - story: complete_todo_list story_2
   steps:
   - intent: complete_todo
-  - action: action_complete_todo
   - slot_was_set:
     - requested_slot: task
   - slot_was_set:
@@ -123,7 +99,6 @@ stories:
 - story: complete_todo_list story_3
   steps:
   - intent: complete_todo
-  - action: action_complete_todo
   - slot_was_set:
     - requested_slot: task
   - slot_was_set:
@@ -133,7 +108,6 @@ stories:
 - story: complete_todo_list story_4
   steps:
   - intent: complete_todo
-  - action: action_complete_todo
   - slot_was_set:
     - requested_slot: task
   - slot_was_set:
@@ -143,7 +117,6 @@ stories:
 - story: complete_todo_list story_5
   steps:
   - intent: complete_todo
-  - action: action_complete_todo
   - slot_was_set:
     - requested_slot: task
   - slot_was_set:
@@ -153,7 +126,6 @@ stories:
 - story: complete_todo_list story_6
   steps:
   - intent: complete_todo
-  - action: action_complete_todo
   - slot_was_set:
     - requested_slot: task
   - slot_was_set:
@@ -164,38 +136,32 @@ stories:
 - story: ask_todo_list story_1
   steps:
   - intent: ask_todo
-  - action: action_ask_todo
   - action: action_listen
   
 - story: ask_todo_list story_2
   steps:
   - intent: ask_todo
-  - action: action_ask_todo
   - action: action_listen
   
 - story: ask_todo_list story_3
   steps:
   - intent: ask_todo
-  - action: action_ask_todo
   - action: action_listen
 
 
 - story: ask_todo_list story_4
   steps:
   - intent: ask_todo
-  - action: action_ask_todo
   - action: action_listen
   
 - story: ask_todo_list story_5
   steps:
   - intent: ask_todo
-  - action: action_ask_todo
   - action: action_listen
   
 - story: ask_todo_list story_6
   steps:
   - intent: ask_todo
-  - action: action_ask_todo
   - action: action_listen
 
   # ------------ NLU Fallback -------------
@@ -222,7 +188,6 @@ stories:
     - city: Cattolica
   - slot_was_set:
     - city: Cattolica
-  - action: action_weather
   
 - story: city_test3
   steps:
@@ -231,7 +196,6 @@ stories:
     - city: Pinamar
   - slot_was_set:
     - city: Pinamar
-  - action: action_weather
 
 - story: city_test4
   steps:
@@ -240,7 +204,6 @@ stories:
     - city: Geelong
   - slot_was_set:
     - city: Geelong
-  - action: action_weather
 
 # ----------- Mailing ---------------
 - story: interactive_story_1
@@ -252,17 +215,14 @@ stories:
     - senderemail: giovanni.pietrucci2@gmail.com
   - slot_was_set:
     - senderemail: giovanni.pietrucci2@gmail.com
-  - action: register_form
   - action: utter_ask_mail_content
   - intent: mail_content
     entities:
     - containermail: ironman favorite hero
   - slot_was_set:
     - containermail: ironman favorite hero
-  - action: mail_content_form
   - action: utter_confirm_send
   - intent: confirm_send
-  - action: mail_response
 
 
 - story: interactive_story_2
@@ -274,17 +234,14 @@ stories:
     - senderemail: giovanni@gmail.com
   - slot_was_set:
     - senderemail: giovanni@gmail.com
-  - action: register_form
   - action: utter_ask_mail_content
   - intent: mail_content
     entities:
     - containermail: my phone is broke
   - slot_was_set:
     - containermail: my phone is broke
-  - action: mail_content_form
   - action: utter_confirm_send
   - intent: confirm_send
-  - action: mail_response
 
 
   
@@ -297,17 +254,14 @@ stories:
     - senderemail: pietrucci2@gmail.com
   - slot_was_set:
     - senderemail: pietrucci2@gmail.com
-  - action: register_form
   - action: utter_ask_mail_content
   - intent: mail_content
     entities:
     - containermail: the cat is on the table
   - slot_was_set:
     - containermail: the cat is on the table
-  - action: mail_content_form
   - action: utter_confirm_send
   - intent: confirm_send
-  - action: mail_response
 
   
 - story: interactive_story_4
@@ -319,17 +273,15 @@ stories:
     - senderemail: textrandom@gmail.com
   - slot_was_set:
     - senderemail: textrandom@gmail.com
-  - action: register_form
   - action: utter_ask_mail_content
   - intent: mail_content
     entities:
     - containermail: the template is need to update
   - slot_was_set:
     - containermail: the template is need to update
-  - action: mail_content_form
   - action: utter_confirm_send
   - intent: confirm_send
-  - action: mail_response
+  
 
 - story: interactive_story_1
   steps:
@@ -340,28 +292,13 @@ stories:
     - senderemail: textrandom@gmail.com
   - slot_was_set:
     - senderemail: textrandom@gmail.com
-  - action: register_form
   - action: utter_ask_mail_content
   - intent: mail_content
     entities:
     - containermail: we need finish this project
   - slot_was_set:
     - containermail: we need finish this project
-  - action: mail_content_form
   - action: utter_confirm_send
   - intent: confirm_send
-  - action: mail_response
-
-
-# -------------- Asking Wikipedia ------------------
-
-- story: interactive_wiki
-  steps:
-  - intent: ask_wiki
-  - action: wiki_action
-
   
-- story: interactive_wiki2
-  steps:
-  - intent: ask_wiki
-  - action: wiki_action
+
