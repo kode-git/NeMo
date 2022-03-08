@@ -72,8 +72,6 @@ cover/
 # Translations
 *.mo
 
-# Django stuff:
-
 # Flask stuff:
 instance/
 .webassets-cache
