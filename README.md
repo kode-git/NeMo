@@ -50,7 +50,9 @@ In the first one, you have to run the django server: <br>
 - <b>Step 1</b>: `python3 -m venv venv` or `python -m venv venv`
 - <b>Step 2</b>: `source venv/bin/activate` (Linux/MacOS) or `.\venv\bin\activate` (Windows)
 - <b>Step 3</b>: `pip3 install -i requirements.txt`
-- <b>Step 4</b>: `python3 nemo/server.py`
+- <b>Step 4</b>: `cd nemo && python3 server.py` 
+
+**IMPORTANT:** You must be in the nemo/ directory during the launch of the server to provides good references on the directory system)
 
 For the second one, you have to run the Rasa shell:
 - <b>Step 1</b>: Go into the rasa project folder with the Dockerfile and type `sudo docker image build -f Dockerfile_shell.dockerfile -t rasa-shell .`
