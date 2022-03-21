@@ -142,6 +142,8 @@ def sendIntent():
         contentBody = question
         returnValue = dispatchingMail(mailReceiver, contentBody)
     
+    elif intent_name == "bot_funcionalities":
+        returnValue = "You can ask me the weather, time, todo list management, send a mail and greeting"
     # ------------ Others Default Functions --------------
     else:
         # Other intent different from ask_wiki
@@ -159,6 +161,7 @@ def sendIntent():
         jarvis_response = requests.post(
             url, json=trigger_json, headers=headers)
         jarvis_response = jarvis_response.json()
+        print(jarvis_response)
         client_response = [jarvis_response.get('messages')[0].get('text')]
         print(f"Bot says: {client_response}")
         returnValue = client_response[0]
@@ -175,6 +178,7 @@ def transcribeAudio():
     file = request.files.get('file')
     print('Getting the name of thefile')
     filename = request.form['name']
+    print('Current path', os.getcwd())
     path = "./static/audio/"
     print(f'Saving file...')
     file.save(path + filename)
