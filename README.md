@@ -46,7 +46,7 @@ For problems about Docker setting, check the getting started guide on: https://d
 
 For an easy setup of the dependencies, build and run the image and servers from the Dockerfile or the respective directories following these steps. You must have 2 terminals to run correctly each component. <br>
 
-In the first one, you have to run the django server: <br>
+In the first one, you have to run the Flask server: <br>
 - <b>Step 1</b>: `python3 -m venv venv` or `python -m venv venv`
 - <b>Step 2</b>: `source venv/bin/activate` (Linux/MacOS) or `.\venv\bin\activate` (Windows)
 - <b>Step 3</b>: `pip3 install -i requirements.txt`
