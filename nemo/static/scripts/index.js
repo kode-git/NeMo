@@ -8,6 +8,8 @@ sendButton.addEventListener('click', sendMessage)
 recordButton.addEventListener('click', startRecord)
 stopButton.addEventListener('click', stopRecord)
 
+
+
 // initial state of the stopButton is "none" because the user didn't record by default
 stopButton.style.display = "none"
 

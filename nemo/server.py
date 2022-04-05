@@ -116,11 +116,14 @@ def sendIntent():
     # ------------ Complete To-Do List --------------
     elif intent_name == "complete_todo":
         entities = prediction.get('entities')
-        for element in entities:
-            todo_task = element.get('value')
-            print(f'Possible entity: {todo_task}')
-        print(f'Final entity chosen is: {todo_task}')
-        returnValue = dispatchingCompleteToDo(todo_task)
+        if(not entities or entities == []):
+            returnValue = "Sorry, I can't understand the task"
+        else:
+            for element in entities:
+                todo_task = element.get('value')
+                print(f'Possible entity: {todo_task}')
+            print(f'Final entity chosen is: {todo_task}')
+            returnValue = dispatchingCompleteToDo(todo_task)
    
     # ------------ Mood Unhappy --------------
     elif intent_name == "mood_unhappy":
@@ -143,7 +146,7 @@ def sendIntent():
         returnValue = dispatchingMail(mailReceiver, contentBody)
     
     elif intent_name == "bot_funcionalities":
-        returnValue = "You can ask me the weather, time, todo list management, send a mail and greeting"
+        returnValue = "You can ask me the weather, time, todo list management, send a mail, greeting and search on Wikipedia"
     # ------------ Others Default Functions --------------
     else:
         # Other intent different from ask_wiki
@@ -162,9 +165,12 @@ def sendIntent():
             url, json=trigger_json, headers=headers)
         jarvis_response = jarvis_response.json()
         print(jarvis_response)
-        client_response = [jarvis_response.get('messages')[0].get('text')]
-        print(f"Bot says: {client_response}")
-        returnValue = client_response[0]
+        try:
+            client_response = [jarvis_response.get('messages')[0].get('text')]
+            print(f"Bot says: {client_response}")
+            returnValue = client_response[0]
+        except TypeError:
+            returnValue = "I am sorry, I didn\'t understand"
 
     # return the response to the client in Json format
     print('---------------------------------------------------------------')
@@ -221,6 +227,8 @@ def dispatchingQAModel(text):
     except wikipedia.DisambiguationError as e:
         # Page Semantic Error on the Disambiguation
         result = wikipedia.summary(e.options[0])
+    except:
+        return "I can't find an answer, I am sorry"
 
     title = oblique_phrase
     context = result
