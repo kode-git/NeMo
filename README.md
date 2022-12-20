@@ -1,4 +1,4 @@
-# NeMo - Voice Virtual Assistant
+# Alysia - Voice Virtual Assistant
 <p>
   <img src="https://img.shields.io/badge/build-passed-green" alt="alternatetext">
   <img src="https://img.shields.io/badge/status- dev-yellow" alt="alternatetext">
